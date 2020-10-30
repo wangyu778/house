@@ -1,4 +1,4 @@
-package com.love.house.interceptor;
+package com.love.house.interceptor.idempotency;
 
 import com.love.house.annotation.ApiIdempotent;
 import com.love.house.service.token.TokenService;

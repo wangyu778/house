@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @JsonSerialize 确保序列化JSON时，如果是null对象，其key也会消失。
- * @NoArgsConstructor //生成无参构造，确保在RPC调用时，不会出现反序列失败
  * @Author: wy
  * @Date: 2020/10/26 15:35
+ * @JsonSerialize 确保序列化JSON时，如果是null对象，其key也会消失。
+ * @NoArgsConstructor //生成无参构造，确保在RPC调用时，不会出现反序列失败
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @NoArgsConstructor
