@@ -20,7 +20,6 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String ipAddr = ((WebAuthenticationDetails)(authentication.getDetails())).getRemoteAddress();
         String userName = ((UserDetails) authentication.getPrincipal()).getUsername();
-
         LOG.info("["+userName+"]-["+ipAddr+"]-[注销成功!]");
         response.sendRedirect("/login");
     }

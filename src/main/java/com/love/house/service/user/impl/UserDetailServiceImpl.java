@@ -1,8 +1,7 @@
 package com.love.house.service.user.impl;
 
 import com.love.house.entity.User;
-import com.love.house.mapper.UserMapper;
-import com.love.house.service.user.UserCacheService;
+import com.love.house.mapper.UserMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,21 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private static Logger LOG = LoggerFactory.getLogger(UserDetailServiceImpl.class);
 
     @Autowired
-    private UserCacheService userCacheService;
+    private UserMapping userMapping;
 
+    /**
+     * 实现UserDetailsService接口中的loadUserByUsername方法
+     * 执行登陆，构建Authentication对象必须的信息，
+     * 如果用户不存在，则抛出UsernameNotFoundException异常
+     * @param s 用户名
+     * @return UserDetails
+     * @throws UsernameNotFoundException 未发现用户名
+     */
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = null;
         try {
-            user = userCacheService.selectByUserName(s);
+            user = userMapping.loadUserByUsername(s);
             if(user == null){
                 throw new UsernameNotFoundException("用户名不存在");
             }

@@ -11,12 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 2020/10/26
  */
 @RestController
-@RequestMapping("/index")
 public class TestController {
 
-    @RequestMapping("/login")
+    @RequestMapping("/index")
     public ModelAndView index(){
         return new ModelAndView("index");
+    }
+
+    @RequestMapping("/login")
+    public ModelAndView login(){
+        return new ModelAndView("/login");
+    }
+
+    @RequestMapping("/favicon.ico")
+    public ModelAndView favicon(){
+        return new ModelAndView("favicon.ico");
     }
 
 }

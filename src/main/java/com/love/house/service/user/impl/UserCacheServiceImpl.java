@@ -1,7 +1,6 @@
 package com.love.house.service.user.impl;
 
 import com.love.house.entity.User;
-import com.love.house.mapper.UserMapper;
 import com.love.house.service.user.UserCacheService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +14,8 @@ public class UserCacheServiceImpl implements UserCacheService {
 
     private static Logger LOG = LoggerFactory.getLogger(UserCacheServiceImpl.class);
 
-    @Autowired
-    private UserMapper userMapper;
-
     @Override
     public User selectByUserName(String userName) {
-        return userMapper.selectByPrimaryKey(userName);
+        return null;
     }
 }
