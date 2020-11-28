@@ -1,0 +1,14 @@
+.login-body{
+    background-color: #78562e; color: #666;
+}
+
+.login-div{
+    background-color: rgba(255,255,255,0.9); width: 350px; position: absolute; right: 10%; top: 22%; z-index: 99999; min-height: auto; padding: 10px
+}
+
+.login-fieldset{
+    margin-left: 7px;
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: 300;
+}

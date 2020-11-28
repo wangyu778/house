@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -23,8 +22,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException{
         response.setContentType("application/json;charset=utf-8");
         RespBean respBean;
-        if (exception instanceof BadCredentialsException ||
-                exception instanceof UsernameNotFoundException) {
+        if (exception instanceof BadCredentialsException || exception instanceof UsernameNotFoundException) {
             respBean = RespBean.error("账户名或者密码输入错误!");
         } else if (exception instanceof LockedException) {
             respBean = RespBean.error("账户被锁定，请联系管理员!");
