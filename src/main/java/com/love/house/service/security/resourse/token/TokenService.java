@@ -1,4 +1,4 @@
-package com.love.house.service.token;
+package com.love.house.service.security.resourse.token;
 
 import com.love.house.common.ServerResponse;
 

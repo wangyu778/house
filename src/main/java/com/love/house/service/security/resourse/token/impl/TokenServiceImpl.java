@@ -1,16 +1,15 @@
-package com.love.house.service.token.impl;
+package com.love.house.service.security.resourse.token.impl;
 
 import com.love.house.common.ResponseCode;
 import com.love.house.common.ServerResponse;
 import com.love.house.exception.ServiceException;
-import com.love.house.service.token.TokenService;
+import com.love.house.service.security.resourse.token.TokenService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 

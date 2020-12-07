@@ -1,4 +1,4 @@
-package com.love.house.service.user.impl;
+package com.love.house.service.security.user.impl;
 
 import com.love.house.entity.User;
 import com.love.house.mapper.UserMapping;

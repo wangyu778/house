@@ -3,6 +3,7 @@ package com.love.house.exception;
 /**
  * @Author: wy
  * @Date: 2020/10/26 16:21
+ * @Description: 全局异常处理
  */
 public class ServiceException extends RuntimeException {
     /**

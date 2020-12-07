@@ -6,7 +6,7 @@ import com.love.house.interceptor.handler.MyAccessDeniedHandler;
 import com.love.house.interceptor.handler.MyAuthenticationFailureHandler;
 import com.love.house.interceptor.handler.MyAuthenticationSuccessHandler;
 import com.love.house.interceptor.handler.MyLogoutSuccessHandler;
-import com.love.house.service.user.impl.UserDetailServiceImpl;
+import com.love.house.service.security.user.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
@@ -52,6 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static String[] FreeUrl = new String[]{
           "/login.html",
           "/login",
+          "/index",
+          "/index.html",
           "/static/**",
           "/images/**",
           "/swagger-ui.html",
