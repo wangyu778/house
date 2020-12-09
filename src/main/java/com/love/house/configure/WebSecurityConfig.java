@@ -63,6 +63,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           "/v2/api-docs",
           "/configuration/ui",
           "/configuration/security",
+
+            //overview
+            "/overview/index",
     };
 
     @Bean
@@ -119,7 +122,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                  * loginPage: 用户未登陆时，访问任何资源都要跳到该路径，即登陆页面
                  * loginProcessingUrl：登陆表单form中的action地址，也就是处理认证请求的路径
                  */
-                .formLogin().loginPage("/login").loginProcessingUrl("/user/login")
+                .formLogin().loginPage("/index").loginProcessingUrl("/user/login")
                 /*
                  * 登陆表单form中用户名输入框input的name名，不修改的话默认是username
                  * 登陆表单form中密码输入框input的name名，不修改的话默认是password

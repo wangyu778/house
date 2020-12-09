@@ -2,9 +2,11 @@ package com.love.house.mapper;
 
 import com.love.house.entity.SecuritySysPermission;
 import com.love.house.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description: 用户Dao
@@ -35,7 +37,8 @@ public interface UserMapping {
 
     /**
      * 获取所有的权限菜单
+     * @param filterMap filterMap
      * @return SecuritySysPermission
      */
-    List<SecuritySysPermission> getAllPermission();
+    List<SecuritySysPermission> getPermissionList(@Param("filterMap") Map<String,Object> filterMap);
 }

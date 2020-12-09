@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: wy
@@ -44,7 +46,9 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
         //去数据库查询资源
-        List<SecuritySysPermission> permissionList = userMapping.getAllPermission();
+        Map<String,Object> filterMap = new HashMap<>(2);
+        filterMap.put("enabled",1);
+        List<SecuritySysPermission> permissionList = userMapping.getPermissionList(filterMap);
         for (SecuritySysPermission permission : permissionList) {
             if (antPathMatcher.match(permission.getUrl(), requestUrl)
                     && permission.getRoles().size() > 0) {

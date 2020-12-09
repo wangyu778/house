@@ -31,12 +31,22 @@
     from user user
     where user.userId = #{userId}
   </select>
-  <select id="getAllPermission" resultMap="PermissionResultMap">
+  <select id="getPermissionList" resultMap="PermissionResultMap">
       select  m.*,r.*
       from menu m
       left join menu_role mr on m.id=mr.menuId
       left join role r on mr.roleId=r.id
-      where m.enabled=true
+      <where>
+        <if test="filterMap.enabled != null and filterMap.enabled != ''">
+          and m.enabled = #{filterMap.enabled}
+        </if>
+        <if test="filterMap.roleName != null and filterMap.roleName != ''">
+          and m.roleName = #{filterMap.roleName}
+        </if>
+         <if test="filterMap.url != null and filterMap.url != ''">
+          and m.url = #{filterMap.url}
+        </if>
+      </where>
       order by m.id desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">

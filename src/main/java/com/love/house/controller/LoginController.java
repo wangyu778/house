@@ -6,26 +6,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 /**
- * 测试表现层
- * @author wy
- * @date 2020/10/26
+ * @Author: wy
+ * @Date: 2020/12/7 12:02
+ * @Description: 登陆控制层
  */
 @RestController
-public class TestController {
-
-    @RequestMapping("/index")
-    public ModelAndView index(){
-        return new ModelAndView("index");
-    }
+public class LoginController {
 
     @RequestMapping("/login")
     public ModelAndView login(){
         return new ModelAndView("/login");
-    }
-
-    @RequestMapping("/favicon.ico")
-    public ModelAndView favicon(){
-        return new ModelAndView("favicon.ico");
     }
 
 }

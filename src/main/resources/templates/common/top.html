@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <body th:fragment="top">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-        <a class="navbar-brand" href="#">House</a>
+        <a class="navbar-brand nav-item" id="home" data-to="/overview/index" data-id="1" data-title="首页">House</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,21 +20,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">论坛</a>
                 </li>
-                <li th:if="${@resourceService.isRl('/forum/index')}" class="nav-item">
-                    <a class="nav-link" href="#">公寓管理</a>
-                </li>
-                <li th:if="${@resourceService.isRl('/forum/index')}" class="nav-item">
-                    <a class="nav-link" href="#">保修管理</a>
-                </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" th:if="${@resourceService.isRl('/houseManage')}">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        公寓管理
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">房屋管理</a>
+                        <a class="dropdown-item" href="#">美食管理</a>
+                        <a class="dropdown-item" href="#">报修管理</a>
+                        <a class="dropdown-item" href="#">论坛监测</a>
                     </div>
                 </li>
             </ul>
