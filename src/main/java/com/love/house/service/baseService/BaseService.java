@@ -14,4 +14,5 @@ public interface BaseService {
      * @return userId
      */
     public String getUserId();
+
 }

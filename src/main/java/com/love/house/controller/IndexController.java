@@ -13,12 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = "/index",method = RequestMethod.POST)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index(){
         return new ModelAndView("index");
     }
 
-    @RequestMapping(value = "/favicon.ico", method = RequestMethod.POST)
+    @RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
     public ModelAndView favicon(){
         return new ModelAndView("favicon.ico");
     }

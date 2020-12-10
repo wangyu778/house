@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author: wy
- * @Date: 2020/10/26 16:54
+ * @Date: 2020/10/26 16:54  幂等性
  */
 public class IdempotentTokenInterceptor implements HandlerInterceptor {
 

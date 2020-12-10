@@ -20,6 +20,8 @@ public class User implements UserDetails,Serializable{
 
     private String passWord;
 
+    private List<Role> roleList;
+
     private List<GrantedAuthority> authorities;
 
     private static final long serialVersionUID = 1L;
@@ -87,8 +89,12 @@ public class User implements UserDetails,Serializable{
         this.authorities = authorities;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 
     @Override

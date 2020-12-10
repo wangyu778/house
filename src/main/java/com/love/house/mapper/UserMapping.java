@@ -36,9 +36,18 @@ public interface UserMapping {
     User loadUserByUsername(String userId);
 
     /**
+     * 查询用户权限列表
+     * @param filterMap filterMap
+     * @return 权限列表
+     */
+    User getUserRoleList(@Param("filterMap") Map<String,Object> filterMap);
+
+    /**
      * 获取所有的权限菜单
      * @param filterMap filterMap
-     * @return SecuritySysPermission
+     * @return 权限列表
      */
     List<SecuritySysPermission> getPermissionList(@Param("filterMap") Map<String,Object> filterMap);
+
+
 }

@@ -1,6 +1,8 @@
 package com.love.house.service.security.resourse;
 
+import com.love.house.entity.Role;
 import com.love.house.entity.SecuritySysPermission;
+import com.love.house.entity.User;
 import com.love.house.mapper.UserMapping;
 import com.love.house.service.baseService.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +49,13 @@ public class ResourceService {
      * @return 结果
      */
     public boolean isAuthority(String userId, String url){
+        if(null == userId){
+            return false;
+        }
         Map<String,Object> filterMap = new HashMap<>(2);
-        filterMap.put("enable",1);
+        filterMap.put("enabled",1);
         filterMap.put("url",url.substring(1));
-        List<SecuritySysPermission> allPermission = userMapping.getPermissionList(filterMap);
-        return false;
+        filterMap.put("userId",userId);
+        return null != userMapping.getUserRoleList(filterMap);
     }
 }

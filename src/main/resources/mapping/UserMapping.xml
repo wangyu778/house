@@ -31,23 +31,40 @@
     from user user
     where user.userId = #{userId}
   </select>
+
+  <select id="getUserRoleList" resultType="com.love.house.entity.User">
+    SELECT *
+    FROM user u LEFT JOIN user_role ur on u.userId = ur.userId LEFT JOIN menu_role mr on ur.roleId = mr.roleId LEFT JOIN menu m ON mr.menuId = m.id
+    <where>
+      <if test="filterMap.userId != null and filterMap.userId != ''">
+        and u.userId = #{filterMap.userId}
+      </if>
+      <if test="filterMap.url != null and filterMap.url != ''">
+        and m.url = #{filterMap.url}
+      </if>
+      <if test="filterMap.enabled != null and filterMap.enabled != ''">
+        and m.enabled = #{filterMap.enabled}
+      </if>
+    </where>
+  </select>
+
   <select id="getPermissionList" resultMap="PermissionResultMap">
-      select  m.*,r.*
-      from menu m
-      left join menu_role mr on m.id=mr.menuId
-      left join role r on mr.roleId=r.id
-      <where>
-        <if test="filterMap.enabled != null and filterMap.enabled != ''">
-          and m.enabled = #{filterMap.enabled}
-        </if>
-        <if test="filterMap.roleName != null and filterMap.roleName != ''">
-          and m.roleName = #{filterMap.roleName}
-        </if>
-         <if test="filterMap.url != null and filterMap.url != ''">
-          and m.url = #{filterMap.url}
-        </if>
-      </where>
-      order by m.id desc
+    select  m.*,r.*
+    from menu m
+    left join menu_role mr on m.id=mr.menuId
+    left join role r on mr.roleId=r.id
+    <where>
+      <if test="filterMap.enabled != null and filterMap.enabled != ''">
+        and m.enabled = #{filterMap.enabled}
+      </if>
+      <if test="filterMap.roleName != null and filterMap.roleName != ''">
+        and m.roleName = #{filterMap.roleName}
+      </if>
+       <if test="filterMap.url != null and filterMap.url != ''">
+        and m.url = #{filterMap.url}
+      </if>
+    </where>
+    order by m.id desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
     delete from user
