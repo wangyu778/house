@@ -19,5 +19,33 @@
     padding: 0 10px;
     font-size: 20px;
     font-weight: 300;
-    float: left;
 }
+
+.login-input {
+    padding: 6px 10px 6px 40px;
+}
+
+.login-icon {
+    font-size: 17px;
+    position: absolute;
+    padding: 11px 7px;
+}
+
+#actionBar{
+    margin-top: 10px;
+    padding: 0 85px;
+}
+
+#actionBar button{
+    font-size: 14px;
+    color: #555;
+}
+
+#passAction input{
+    margin-left: 0;position: relative;
+}
+
+#passAction span{
+    padding: 0 5px;font-size: 13px;color: #555;
+}
+

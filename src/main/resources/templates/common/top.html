@@ -36,12 +36,46 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
             </form>
-            <div style="float: left;padding: 0 10px">
-                <button type="button" class="btn btn-outline-secondary">
+            <div style="float: left;padding: 0 10px" th:if="${@baseService.getUserId() != null}">
+                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#logoutModal">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true" style="font-size: 17px"></span>退出登陆
                 </button>
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="logoutModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">您确定要退出登陆吗？</h4>
+                            </div>
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="logout()">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <input type="hidden" id="respStatus" th:value="${ServerResponse.status}">
+            <input type="hidden" id="respMsg" th:value="${ServerResponse.msg}">
+            <div th:replace="common/toast::successToast"></div>
+            <div th:replace="common/toast::errorToast"></div>
         </div>
     </nav>
+    <script type="text/javascript">
+        function logout() {
+            function success() {
+                toastInfo();
+                setTimeout(function () {
+                    location.reload()
+                },1000)
+            }
+            function error() {
+                $('#errorToast').toast('show');
+            }
+            $.baseAjax("/logout","get","",success,error)
+        }
+    </script>
     </body>
+
 </html>

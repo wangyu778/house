@@ -3,6 +3,7 @@ package com.love.house.common;
 /**
  * @Author: wy
  * @Date: 2020/10/26 15:28
+ * @Description: 响应状态码
  */
 public enum ResponseCode {
     

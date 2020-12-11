@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
@@ -64,11 +63,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           "/configuration/ui",
           "/configuration/security",
 
-            //overview
-            "/overview/index",
+          //overview
+          "/overview/index",
 
-            //mine
-            "/mine/index",
+          //mine
+          "/mine/index",
 
     };
 
@@ -76,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailService);
-        daoAuthenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        daoAuthenticationProvider.setPasswordEncoder(new Md5PassWordEncoder());
         daoAuthenticationProvider.setHideUserNotFoundExceptions(false);
         return daoAuthenticationProvider;
     }

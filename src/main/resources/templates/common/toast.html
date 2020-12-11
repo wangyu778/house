@@ -1,0 +1,16 @@
+<!-- bootstrap 提示弹窗 -->
+<div th:fragment="successToast" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div id="successToast" class="toast bsToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1000">
+        <div class="alert alert-success" style="margin: 0">
+            <strong> <span class="glyphicon glyphicon-ok" aria-hidden="true" style="font-size: 17px"></span> <span id="successMsg"> 保存成功</span></strong>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="errorToast" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div id="errorToast" class="toast bsToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1000">
+        <div class="alert alert-danger" style="margin: 0">
+             <strong> <span class="glyphicon glyphicon-remove" aria-hidden="true" style="font-size: 17px"></span><span id="errorMsg"> 请求失败</span></strong>
+        </div>
+    </div>
+</div>

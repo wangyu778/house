@@ -1,30 +1,24 @@
-<!-- 按钮：用于打开模态框 -->
-<button type="button" id="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    打开模态框
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="toast">
+    开始演示模态框
 </button>
 
-<!-- 模态框 -->
-<!-- Flexbox container for aligning the toasts -->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- 模态框头部 -->
-            <div class="modal-header">
-                <h4 class="modal-title">模态框头部</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- 模态框主体 -->
-            <div class="modal-body">
-                模态框内容..
-            </div>
-
-            <!-- 模态框底部 -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            </div>
-
+    <!-- Then put toasts within -->
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width:160px;text-align: center;font-size: 20px;position: fixed;    top: 50%;
+    left: 50%;
+    margin-left: -80px;
+    margin-top: -59px;">
+        <div class="alert alert-success" style="margin: 0">
+             <strong> <span class="glyphicon glyphicon-ok" aria-hidden="true" style="font-size: 17px"></span> 保存成功</strong>
         </div>
+<!--        <div class="alert alert-danger" style="margin: 0">-->
+<!--             <strong> <span class="glyphicon glyphicon-remove" aria-hidden="true" style="font-size: 17px"></span> 保存失败</strong>-->
+<!--        </div>-->
     </div>
-</div>
+
+<script>
+    $(document).ready(function(){
+        $("#toast").click(function(){
+            $('.toast').toast('show');
+        });
+    });
+</script>
