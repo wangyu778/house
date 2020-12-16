@@ -1,6 +1,7 @@
 package com.love.house.interceptor.handler;
 
-import com.love.house.model.RespBean;
+import com.love.house.common.ResponseCode;
+import com.love.house.common.ServerResponse;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,19 +22,19 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException{
         response.setContentType("application/json;charset=utf-8");
-        RespBean respBean;
+        ServerResponse<ResponseCode> respBean;
         if (exception instanceof BadCredentialsException || exception instanceof UsernameNotFoundException) {
-            respBean = RespBean.error("账户名或者密码输入错误!");
+            respBean = ServerResponse.createByErrorMessage("账户名或者密码输入错误!");
         } else if (exception instanceof LockedException) {
-            respBean = RespBean.error("账户被锁定，请联系管理员!");
+            respBean = ServerResponse.createByErrorMessage("账户被锁定，请联系管理员!");
         } else if (exception instanceof CredentialsExpiredException) {
-            respBean = RespBean.error("密码过期，请联系管理员!");
+            respBean = ServerResponse.createByErrorMessage("密码过期，请联系管理员!");
         } else if (exception instanceof AccountExpiredException) {
-            respBean = RespBean.error("账户过期，请联系管理员!");
+            respBean = ServerResponse.createByErrorMessage("账户过期，请联系管理员!");
         } else if (exception instanceof DisabledException) {
-            respBean = RespBean.error("账户被禁用，请联系管理员!");
+            respBean = ServerResponse.createByErrorMessage("账户被禁用，请联系管理员!");
         } else {
-            respBean = RespBean.error("登录失败!");
+            respBean = ServerResponse.createByErrorMessage("登录失败!");
         }
 //        new GalenWebMvcWrite().writeToWeb(response, respBean);
         response.sendRedirect("/index");

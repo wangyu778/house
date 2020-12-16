@@ -18,7 +18,15 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: wy
@@ -34,6 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private UserDetailServiceImpl userDetailService;
+
+    @Autowired
+    private DataSource dataSource;
 
     /**
      * 权限过滤器
@@ -68,6 +79,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
           //mine
           "/mine/index",
+          "/mine/userRegister",
+          "/mine/saveUser",
 
     };
 
@@ -125,24 +138,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                  * loginPage: 用户未登陆时，访问任何资源都要跳到该路径，即登陆页面
                  * loginProcessingUrl：登陆表单form中的action地址，也就是处理认证请求的路径
                  */
-                .formLogin().loginPage("/index")
-                .loginProcessingUrl("/user/login")
-                /*
-                 * 登陆表单form中用户名输入框input的name名，不修改的话默认是username
-                 * 登陆表单form中密码输入框input的name名，不修改的话默认是password
-                 */
-                .usernameParameter("username").passwordParameter("password")
-                //登陆失败后执行
-                .failureHandler(new MyAuthenticationFailureHandler())
-                //登陆成功后执行
-                .successHandler(new MyAuthenticationSuccessHandler())
-                .permitAll()
-
+                .formLogin()
+                    .loginPage("/index")
+                    .loginProcessingUrl("/user/login")
+                    /*
+                     * 登陆表单form中用户名输入框input的name名，不修改的话默认是username
+                     * 登陆表单form中密码输入框input的name名，不修改的话默认是password
+                     */
+                    .usernameParameter("username").passwordParameter("password")
+                    //登陆失败后执行
+                    .failureHandler(new MyAuthenticationFailureHandler())
+                    //登陆成功后执行
+                    .successHandler(new MyAuthenticationSuccessHandler())
+                    .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessHandler(new MyLogoutSuccessHandler())
-                .permitAll()
+                    .logoutUrl("/logout")
+                    .logoutSuccessHandler(new MyLogoutSuccessHandler())
+                    .permitAll()
                 .and().csrf().disable()
                 .exceptionHandling().accessDeniedHandler(new MyAccessDeniedHandler());
     }

@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="/static/css/login/login.css">
+<div style="background-color: #cce5ff; width: 100%; height: 1000px; float: left">
+    <div class="register-div">
+        <fieldset class="layui-elem-field layui-field-title zyl_mar_02 login-fieldset" style="margin-left: 0; padding: 0; text-align: center">
+            <legend >注册账号</legend>
+        </fieldset>
+        <hr>
+        <form novalidate name="registerForm" method="post" action="/mine/saveUser" onsubmit="return checkRegisterForm()">
+            <div class="form-group row" style="margin-top: 20px">
+                <label for="userId" class="col-sm-3 col-form-label">* 用户名</label>
+                <div class="col-sm-9">
+                    <input type="text" name="userId" class="form-control form-control-sm" id="userId" placeholder="请输入用户名" required>
+                    <div class="invalid-feedback">请输入正确的用户名</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="userName" class="col-sm-3 col-form-label">* 姓名</label>
+                <div class="col-sm-9">
+                    <input type="text" name="userName" class="form-control form-control-sm" id="userName" placeholder="请输入姓名" required>
+                    <div class="invalid-feedback">请输入正确的姓名</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">* 性别</label>
+                <div class="col-sm-9">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sex" id="sexBoy" value="1" checked>
+                        <label class="form-check-label" for="sexBoy">男</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sex" id="sexGirl" value="0">
+                        <label class="form-check-label" for="sexGirl">女</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="phone" class="col-sm-3 col-form-label">* 手机号</label>
+                <div class="col-sm-9">
+                    <input type="text" name="phone" class="form-control form-control-sm" id="phone" placeholder="请输入手机号码" required>
+                    <div class="invalid-feedback">请输入正确的手机号</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label">* 电子邮箱</label>
+                <div class="col-sm-9">
+                    <input type="email" name="email" class="form-control form-control-sm" id="email" placeholder="请输入电子邮箱">
+                    <div class="invalid-feedback">请输入正确的电子邮箱</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-3 col-form-label">* 密码</label>
+                <div class="col-sm-9">
+                    <input type="password" name="passWord" class="form-control form-control-sm" id="password" placeholder="请输入密码" required>
+                    <div class="invalid-feedback">请输入正确的密码格式，并确保两次密码一致</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rePassword" class="col-sm-3 col-form-label">* 确认密码</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control form-control-sm" id="rePassword" placeholder="请再次输入密码" required>
+                    <div class="invalid-feedback">请输入正确的密码格式，并确保两次密码一致</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <p style="font-size: 13px">温馨提示：请输入8-20位大、小写字母、数字或特殊字符(!#*_)，必须至少包含其中三种类型。</p>
+                </div>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary" style="float: right; margin-left: 20px">立即注册</button>
+            <button type="button" class="btn btn-secondary" style="float: right">立即登陆</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function checkRegisterForm() {
+        let userId = $("#userId");
+        let userName = $("#userName");
+        let phone = $("#phone");
+        let email = $("#email");
+        let password = $("#password");
+        let rePassword = $("#rePassword");
+        if(userId.val() === "" || userId.val() === undefined){
+            userId.removeClass("is-valid").addClass("is-invalid");
+            return false;
+        }else {
+            userId.addClass("is-valid").removeClass("is-invalid");
+        }
+        if(userName.val() === "" || userName.val() === undefined){
+            userName.removeClass("is-valid").addClass("is-invalid");
+            return false;
+        }else {
+            userName.addClass("is-valid").removeClass("is-invalid");
+        }
+        if(phone.val() === "" || phone.val() === undefined){
+            phone.removeClass("is-valid").addClass("is-invalid");
+            return false;
+        }else {
+            let pattern = /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,7,8]|8[0-9]|9[1,8,9])\d{8}$/;
+            if(!pattern.test(phone.val())){
+                phone.removeClass("is-valid").addClass("is-invalid");
+                return false;
+            }else {
+                phone.addClass("is-valid").removeClass("is-invalid");
+            }
+        }
+        if(email.val() === "" || email.val() === undefined){
+            email.removeClass("is-valid").addClass("is-invalid");
+            return false;
+        }else {
+            let pattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if(!pattern.test(email.val())){
+                email.removeClass("is-valid").addClass("is-invalid");
+                return false;
+            }else {
+                email.addClass("is-valid").removeClass("is-invalid");
+            }
+        }
+        if(password.val() === "" || password.val() === undefined || rePassword.val() === "" || rePassword.val() === undefined || password.val() !== rePassword.val()){
+            password.removeClass("is-valid").addClass("is-invalid");
+            rePassword.removeClass("is-valid").addClass("is-invalid");
+            return false;
+        }else {
+            let pattern = new RegExp("^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)^[a-zA-Z0-9!#*_]{8,20}$");
+            if(!pattern.test(password.val())){
+                password.removeClass("is-valid").addClass("is-invalid");
+                rePassword.removeClass("is-valid").addClass("is-invalid");
+                return false;
+            }else {
+                password.addClass("is-valid").removeClass("is-invalid");
+                rePassword.addClass("is-valid").removeClass("is-invalid");
+            }
+        }
+        return true;
+    }
+</script>

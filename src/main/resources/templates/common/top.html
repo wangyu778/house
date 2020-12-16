@@ -36,9 +36,10 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
             </form>
+            <!--登陆成功-->
             <div style="float: left;padding: 0 10px" th:if="${@baseService.getUserId() != null}">
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#logoutModal">
-                    <span class="glyphicon glyphicon-log-out" aria-hidden="true" style="font-size: 17px"></span>退出登陆
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true" style="font-size: 17px"></span> 退出登陆
                 </button>
                 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="logoutModal">
                     <div class="modal-dialog modal-dialog-centered">
@@ -56,8 +57,14 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" id="respStatus" th:value="${ServerResponse.status}">
-            <input type="hidden" id="respMsg" th:value="${ServerResponse.msg}">
+            <!--未登陆-->
+            <div style="float: left;padding: 0 10px" th:if="${@baseService.getUserId() == null}">
+                <button type="button" class="btn btn-outline-primary nav-item" data-to="/mine/index">
+                    <span class="glyphicon glyphicon-log-in" style="font-size: 17px"></span> 立即登陆
+                </button>
+            </div>
+            <input type="hidden" id="respStatus" th:if="${ServerResponse != null}" th:value="${ServerResponse.status}">
+            <input type="hidden" id="respMsg" th:if="${ServerResponse != null}" th:value="${ServerResponse.msg}">
             <div th:replace="common/toast::successToast"></div>
             <div th:replace="common/toast::errorToast"></div>
         </div>
@@ -65,7 +72,9 @@
     <script type="text/javascript">
         function logout() {
             function success() {
-                toastInfo();
+                let status = '200';
+                let msg =  '退出登陆成功';
+                toastInfo(status,msg);
                 setTimeout(function () {
                     location.reload()
                 },1000)
@@ -75,6 +84,14 @@
             }
             $.baseAjax("/logout","get","",success,error)
         }
+
+        $().ready(function () {
+            let status = $("#respStatus").val();
+            let msg = $('#respMsg').val();
+            if(status !== '' && status !== undefined && msg !== '' && msg !== undefined){
+                toastInfo(status,msg);
+            }
+        })
     </script>
     </body>
 

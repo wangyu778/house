@@ -1,9 +1,6 @@
 package com.love.house.interceptor.handler;
 
-import com.love.house.entity.User;
 import com.love.house.model.Constant;
-import com.love.house.model.RespBean;
-import com.love.house.utils.SecurityUserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -20,7 +17,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * @Author: wy

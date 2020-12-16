@@ -14,6 +14,17 @@
     float: left;
 }
 
+.register-div{
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 600px;
+    margin-left: 33%;
+    margin-top: 7%;
+    z-index: 99999;
+    min-height: auto;
+    padding: 10px 50px;
+    float: left;
+}
+
 .login-fieldset {
     margin-left: 7px;
     padding: 0 10px;

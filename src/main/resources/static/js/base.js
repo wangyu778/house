@@ -19,9 +19,11 @@ function navBinding() {
 /**
  * 后端后返的结果信息展示
  */
-function toastInfo() {
-    let status = $("#respStatus").val();
-    let msg =  $("#respMsg").val();
+function toastInfo(status, msg) {
+    if(status === undefined && msg === undefined){
+        status = $("#respStatus").val();
+        msg =  $("#respMsg").val();
+    }
     if(status === '200'){
         $("#successMsg").html(msg);
         $('#successToast').toast('show');
@@ -29,4 +31,15 @@ function toastInfo() {
         $("#errorMsg").html(msg);
         $('#errorToast').toast('show');
     }
+}
+
+/**
+ * 注册用户
+ */
+function userRegister() {
+    function success(o) {
+        $("#content").html(o);
+    }
+    function error() {}
+    $.baseAjax("/mine/userRegister","get","",success,error)
 }
