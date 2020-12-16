@@ -1,5 +1,6 @@
 package com.love.house.service.baseService;
 
+import com.love.house.entity.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,5 +15,12 @@ public interface BaseService {
      * @return userId
      */
     public String getUserId();
+
+    /**
+     * 获取用户信息
+     * @param userId userId
+     * @return User
+     */
+    public User getUser(String userId);
 
 }

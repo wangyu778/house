@@ -21,6 +21,13 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="headImg" class="col-sm-3 col-form-label">* 头像</label>
+                <div class="col-sm-9">
+                    <input type="file" class="form-control-file form-control-sm" name="headImg" id="headImg" style="padding: 0.25rem 0" required>
+                    <div class="invalid-feedback">头像格式不正确</div>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-3 col-form-label">* 性别</label>
                 <div class="col-sm-9">
                     <div class="form-check form-check-inline">
@@ -31,6 +38,13 @@
                         <input class="form-check-input" type="radio" name="sex" id="sexGirl" value="0">
                         <label class="form-check-label" for="sexGirl">女</label>
                     </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="idCardNumber" class="col-sm-3 col-form-label">* 身份证号</label>
+                <div class="col-sm-9">
+                    <input type="text" name="idCardNumber" class="form-control form-control-sm" id="idCardNumber" placeholder="请输入身份证号码" required>
+                    <div class="invalid-feedback">请输入正确的身份证号码</div>
                 </div>
             </div>
             <div class="form-group row">
@@ -67,21 +81,34 @@
                     <p style="font-size: 13px">温馨提示：请输入8-20位大、小写字母、数字或特殊字符(!#*_)，必须至少包含其中三种类型。</p>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="personSign" class="col-sm-3 col-form-label">* 个人简介</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control form-control-sm" name="personSign" id="personSign" placeholder="个人简介不得超过100字"></textarea>
+                </div>
+            </div>
             <hr>
             <button type="submit" class="btn btn-primary" style="float: right; margin-left: 20px">立即注册</button>
-            <button type="button" class="btn btn-secondary" style="float: right">立即登陆</button>
+            <button type="button" class="btn btn-secondary" style="float: right" onclick="fff()">立即登陆</button>
         </form>
     </div>
 </div>
 
 <script>
+    function fff() {
+        const headImg = $("#headImg").files[0];
+        console.log(headImg)
+    }
+
     function checkRegisterForm() {
         let userId = $("#userId");
         let userName = $("#userName");
+        let idCardNumber = $("#idCardNumber");
         let phone = $("#phone");
         let email = $("#email");
         let password = $("#password");
         let rePassword = $("#rePassword");
+        let personSign = $("#personSign");
         if(userId.val() === "" || userId.val() === undefined){
             userId.removeClass("is-valid").addClass("is-invalid");
             return false;
@@ -93,6 +120,17 @@
             return false;
         }else {
             userName.addClass("is-valid").removeClass("is-invalid");
+        }
+        if(idCardNumber.val() === "" || idCardNumber.val() === undefined){
+            let pattern = /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+            if(!pattern.test(idCardNumber.val())){
+                idCardNumber.removeClass("is-valid").addClass("is-invalid");
+                return false;
+            }else {
+                idCardNumber.addClass("is-valid").removeClass("is-invalid");
+            }
+        }else {
+            idCardNumber.addClass("is-valid").removeClass("is-invalid");
         }
         if(phone.val() === "" || phone.val() === undefined){
             phone.removeClass("is-valid").addClass("is-invalid");
@@ -133,6 +171,13 @@
                 rePassword.addClass("is-valid").removeClass("is-invalid");
             }
         }
+        if(personSign.val().length > 100){
+            personSign.removeClass("is-valid").addClass("is-invalid");
+        }else {
+            personSign.addClass("is-valid").removeClass("is-invalid");
+        }
+
+
         return true;
     }
 </script>

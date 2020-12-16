@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Author: wy
  * @Date: 2020/10/30 16:21
@@ -38,7 +41,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = null;
         try {
-            user = userMapping.loadUserByUsername(s);
+            user = userMapping.getUser(s);
             if(user == null){
                 throw new UsernameNotFoundException("用户名不存在");
             }

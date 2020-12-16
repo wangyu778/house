@@ -9,6 +9,10 @@
     <result column="user_phone" jdbcType="VARCHAR" property="phone" />
     <result column="user_email" jdbcType="VARCHAR" property="email" />
     <result column="user_createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="user_idCardNumber" jdbcType="VARCHAR" property="idCardNumber" />
+    <result column="user_personSign" jdbcType="VARCHAR" property="personSign" />
+    <result column="user_isLock" jdbcType="INTEGER" property="isLock" />
+    <result column="user_lockTime" jdbcType="TIMESTAMP" property="lockTime" />
   </resultMap>
 
   <resultMap id="PermissionResultMap" type="com.love.house.entity.SecuritySysPermission">
@@ -30,7 +34,7 @@
     from user user
     where user.id = #{id,jdbcType=TINYINT}
   </select>
-  <select id="loadUserByUsername" resultType="com.love.house.entity.User">
+  <select id="getUser" resultType="com.love.house.entity.User">
     select *
     from user user
     where user.userId = #{userId}
@@ -102,6 +106,12 @@
       <if test="createDate != null">
         `createDate`,
       </if>
+      <if test="idCardNumber != null">
+        `idCardNumber`,
+      </if>
+      <if test="personSign != null">
+        `personSign`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -124,6 +134,12 @@
       </if>
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idCardNumber != null">
+        #{idCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="personSign != null">
+        #{personSign,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

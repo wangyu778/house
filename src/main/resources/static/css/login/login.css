@@ -6,8 +6,8 @@
 .login-div {
     background-color: rgba(255, 255, 255, 0.9);
     width: 350px;
-    margin-left: 40%;
-    margin-top: 20%;
+    margin-left: 35%;
+    margin-top: 23%;
     z-index: 99999;
     min-height: auto;
     padding: 10px;
@@ -17,8 +17,8 @@
 .register-div{
     background-color: rgba(255, 255, 255, 0.9);
     width: 600px;
-    margin-left: 33%;
-    margin-top: 7%;
+    margin-left: 26%;
+    margin-top: 5%;
     z-index: 99999;
     min-height: auto;
     padding: 10px 50px;

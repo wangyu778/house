@@ -20,6 +20,11 @@ public interface UserMapping {
 
     int insert(User record);
 
+    /**
+     * 新建用户
+     * @param record user
+     * @return int
+     */
     int insertSelective(User record);
 
     User selectByPrimaryKey(int id);
@@ -33,7 +38,9 @@ public interface UserMapping {
      * @param userId 用户Id
      * @return 用户
      */
-    User loadUserByUsername(String userId);
+    User getUser(String userId);
+
+
 
     /**
      * 查询用户权限列表

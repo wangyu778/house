@@ -32,7 +32,7 @@ public class MineController {
         if(null == baseService.getUserId()){
             return new ModelAndView("login");
         }
-        return new ModelAndView("mine/index");
+        return new ModelAndView("mine/index").addObject("user",baseService.getUser(baseService.getUserId()));
     }
 
     @RequestMapping(value = "/userRegister",method = RequestMethod.GET)
@@ -48,6 +48,11 @@ public class MineController {
         }else {
             return new ModelAndView("mine/user-register").addObject("ServerResponse",responseCodeServerResponse);
         }
+    }
+
+    @RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
+    public ModelAndView getUserInfo(){
+        return new ModelAndView("mine/mine-userInfo");
     }
 
 }

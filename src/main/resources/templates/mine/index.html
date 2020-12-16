@@ -1,34 +1,19 @@
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal">
-    开始演示模态框
-</button>
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">
-                    模态框（Modal）标题
-                </h4>
-            </div>
-            <div class="modal-body">
-                点击关闭按钮检查事件功能。
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    关闭
-                </button>
-                <button type="button" class="btn btn-primary">
-                    提交更改
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<script>
-    $(function () { $('#myModal').modal('hide')});
-</script>
-<script>
-    $(function () { $('#myModal').on('show.bs.modal', function () {
-        alert('嘿，我听说您喜欢模态框...');})
-    });
-</script>
+<link rel="stylesheet" href="/static/css/mine/mine.css">
+<div id="mine" class="mine" xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" th:value="${user.userId}">
+    <div id="userInfo" class="userInfo">
+        <div th:replace="mine/mine-userInfo::userInfo"></div>
+    </div>
+    <div id="mineTab" class="mineTab">
+        <ul class="list-group list-group-flush" style="text-align: center">
+            <li class="list-group-item"><span id="rentingInfo" class="badge badge-pill badge-secondary mine-active" onclick="changeActive(this.id)">租房详情</span></li>
+            <li class="list-group-item"><span id="rePairInfo" onclick="changeActive(this.id)">报修信息</span></li>
+            <li class="list-group-item"><span id="foodOrder" onclick="changeActive(this.id)">美食订单</span></li>
+            <li class="list-group-item"><span id="myCollection" onclick="changeActive(this.id)">我的收藏</span></li>
+        </ul>
+    </div>
+    <div id="activePage" class="activePage">
+
+    </div>
+</div>
+<script src="/static/js/mine/mine-support.js"></script>

@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           "/mine/index",
           "/mine/userRegister",
           "/mine/saveUser",
-
+          "/mine/getUserInfo",
     };
 
     @Bean

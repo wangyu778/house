@@ -1,0 +1,20 @@
+<div id="user" class="user" th:fragment="userInfo" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="headImg">
+        <img src="/static/image/headImg.jpg" alt="头像" class="rounded-circle" style="width: 100%">
+    </div>
+    <div class="personInfo">
+        <div class="userName">
+            <span style="font-weight: bolder" th:text="${user.userName}"></span>
+            <span class="badge badge-pill badge-info" style="margin-left: 15px">修改个人信息</span>
+        </div>
+        <div class="userPhone">
+            手机号：<span th:text="${user.phone}"/>
+            <span class="marLeaf">身份证号：</span><span th:text="${user.idCardNumber}"></span>
+            <span class="marLeaf">创建日期：</span><span th:text="${#dates.format(user.createDate,'yyyy-MM-dd HH:mm:ss')}"></span>
+            <span class="marLeaf">电子邮箱：</span><span th:text="${user.email}"></span>
+        </div>
+        <div class="personSign">
+            简介：<span th:text="${user.personSign}"></span>
+        </div>
+    </div>
+</div>

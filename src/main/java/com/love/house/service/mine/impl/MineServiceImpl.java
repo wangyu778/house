@@ -28,6 +28,7 @@ public class MineServiceImpl implements MineService {
             Md5.stringToMd51(user.getPassword());
             user.setPassWord(Md5.stringToMd51(user.getPassword()));
             user.setCreateDate(new Date());
+            user.setIsLock(0);
             userMapping.insertSelective(user);
             return ServerResponse.createBySuccessMessage("新建用户成功");
         } catch (Exception e) {

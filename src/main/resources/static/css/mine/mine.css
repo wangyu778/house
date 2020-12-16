@@ -1,0 +1,72 @@
+.mine {
+    width: 100%;
+    height: 900px;
+    background-color: #f8f9fa;
+    float: left;
+}
+
+.mine .userInfo {
+    width: 100%;
+    height: 150px;
+    background-color: white;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.mine .mineTab {
+    height: 84%;
+    width: 12%;
+    background-color: white;
+    float: left;
+    padding: 10px 1%;
+}
+
+.mine .mineTab span{
+    cursor: pointer;
+}
+
+.mine .activePage {
+    width: 87%;
+    height: 84%;
+    margin-left: 1%;
+    background-color: white;
+    float: left;
+}
+
+#mine div{
+    float: left;
+}
+
+.mine-active{
+    font-size: 100%;
+    font-weight: 300;
+    background-color: #007bff;
+}
+
+.mine .user{
+    height: 100%; width: 100%; float: left;
+}
+
+.mine .headImg{
+    width: 10%; padding: 0 1%; line-height: 150px;
+}
+
+.mine .personInfo{
+    width: 88%; padding: 25px 0 10px 30px;
+}
+
+.mine .userName{
+    height: 25px; width: 100%; font-size: 20px;
+}
+
+.mine .userPhone{
+    height: 20px; width: 100%; font-size: 14px;margin-top: 20px;
+}
+
+.mine .marLeaf{
+    margin-left: 15px;
+}
+
+.mine .personSign{
+    height: 20px; width: 100%; font-size: 14px;margin-top: 20px;
+}

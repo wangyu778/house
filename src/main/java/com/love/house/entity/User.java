@@ -29,6 +29,14 @@ public class User implements UserDetails,Serializable{
 
     private Date createDate;
 
+    private String idCardNumber;
+
+    private String personSign;
+
+    private int isLock;
+
+    private Date lockTime;
+
     private List<Role> roleList;
 
     private List<GrantedAuthority> authorities;
@@ -141,6 +149,38 @@ public class User implements UserDetails,Serializable{
 
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
+    }
+
+    public String getIdCardNumber() {
+        return idCardNumber;
+    }
+
+    public void setIdCardNumber(String idCardNumber) {
+        this.idCardNumber = idCardNumber;
+    }
+
+    public String getPersonSign() {
+        return personSign;
+    }
+
+    public void setPersonSign(String personSign) {
+        this.personSign = personSign;
+    }
+
+    public int getIsLock() {
+        return isLock;
+    }
+
+    public void setIsLock(int isLock) {
+        this.isLock = isLock;
+    }
+
+    public Date getLockTime() {
+        return lockTime;
+    }
+
+    public void setLockTime(Date lockTime) {
+        this.lockTime = lockTime;
     }
 
     @Override
