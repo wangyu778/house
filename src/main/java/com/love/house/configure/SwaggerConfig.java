@@ -2,9 +2,6 @@ package com.love.house.configure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -18,9 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Date: 2021/1/21 11:17
  * @Description: swagger配置
  */
-//@Configuration
+@Configuration
 @EnableSwagger2
-public class SwaggerConfig extends WebMvcConfigurationSupport {
+public class SwaggerConfig{
 
     @Bean
     public Docket createRestApi() {
@@ -37,13 +34,5 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                         .license("许可证")
                         .licenseUrl("https://blog.csdn.net/weixin_44335049?t=1")
                         .build());
-    }
-
-    @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-        super.addResourceHandlers(registry);
     }
 }

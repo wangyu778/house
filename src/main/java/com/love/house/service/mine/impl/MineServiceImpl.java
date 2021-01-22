@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: wy
@@ -52,4 +53,5 @@ public class MineServiceImpl implements MineService {
         filterMap.put("userId",baseService.getUserId());
         return houseRoomMapper.getHouseRoom(filterMap);
     }
+
 }

@@ -29,7 +29,7 @@ public class User implements UserDetails,Serializable{
     @ApiModelProperty(value = "用户密码")
     private String passWord;
 
-    @ApiModelProperty(value = "性别")
+    @ApiModelProperty(value = "性别", example = "1")
     private int sex;
 
     @ApiModelProperty(value = "手机号")
@@ -47,10 +47,10 @@ public class User implements UserDetails,Serializable{
     @ApiModelProperty(value = "个性签名")
     private String personSign;
 
-    @ApiModelProperty(value = "是否租房：0否，1是 ")
+    @ApiModelProperty(value = "是否租房：0否，1是 ", example = "1")
     private int isRental;
 
-    @ApiModelProperty(value = "是否锁定账号： 0否，1是")
+    @ApiModelProperty(value = "是否锁定账号： 0否，1是", example = "1")
     private int isLock;
 
     @ApiModelProperty(value = "账号锁定时间")
