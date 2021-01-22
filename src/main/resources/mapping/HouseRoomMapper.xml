@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.love.house.mapper.HouseRoomMapper">
+  <resultMap id="BaseResultMap" type="com.love.house.entity.HouseRoom">
+    <id column="house_room_roomId" jdbcType="INTEGER" property="roomId" />
+    <result column="house_room_roomNumber" jdbcType="INTEGER" property="roomNumber" />
+    <result column="house_room_roomImage" jdbcType="VARCHAR" property="roomImage" />
+    <result column="house_room_roomPrice" jdbcType="INTEGER" property="roomPrice" />
+    <result column="house_room_roomType" jdbcType="INTEGER" property="roomType" />
+    <result column="house_room_isLease" jdbcType="INTEGER" property="isLease" />
+    <result column="house_room_isRepair" jdbcType="INTEGER" property="isRepair" />
+    <result column="house_room_leaseDate" jdbcType="TIMESTAMP" property="leaseDate" />
+    <result column="house_room_toLeaseDate" jdbcType="TIMESTAMP" property="toLeaseDate" />
+    <result column="house_room_repairDate" jdbcType="TIMESTAMP" property="repairDate" />
+    <result column="house_room_createUser" jdbcType="VARCHAR" property="createUser" />
+    <result column="house_room_createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="house_room_updateUser" jdbcType="VARCHAR" property="updateUser" />
+    <result column="house_room_updateDate" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    house_room.roomId as house_room_roomId, house_room.roomNumber as house_room_roomNumber, 
+    house_room.roomImage as house_room_roomImage, house_room.roomPrice as house_room_roomPrice, 
+    house_room.roomType as house_room_roomType, house_room.isLease as house_room_isLease, 
+    house_room.isRepair as house_room_isRepair, house_room.leaseDate as house_room_leaseDate, 
+    house_room.toLeaseDate as house_room_toLeaseDate, house_room.repairDate as house_room_repairDate, 
+    house_room.`createUser` as `house_room_createUser`, house_room.createDate as house_room_createDate, 
+    house_room.updateUser as house_room_updateUser, house_room.updateDate as house_room_updateDate
+  </sql>
+  <select id="getHouseRoom" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from house_room house_room
+    <if test="filterMap.userId != null and filterMap.userId != ''">
+      left join house_room_user house_room_user on house_room.roomId = house_room_user.roomId
+    </if>
+    <where>
+      <if test="filterMap.roomId != null and filterMap.roomId != ''">
+        and house_room.roomId = #{filterMap.roomId,jdbcType=INTEGER}
+      </if>
+      <if test="filterMap.userId != null and filterMap.userId != ''">
+        and house_room_user.userId = #{filterMap.userId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house_room
+    where roomId = #{roomId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" keyColumn="roomId" keyProperty="roomId" parameterType="com.love.house.entity.HouseRoom" useGeneratedKeys="true">
+    insert into house_room
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roomNumber != null">
+        roomNumber,
+      </if>
+      <if test="roomImage != null">
+        roomImage,
+      </if>
+      <if test="roomPrice != null">
+        roomPrice,
+      </if>
+      <if test="roomType != null">
+        roomType,
+      </if>
+      <if test="isLease != null">
+        isLease,
+      </if>
+      <if test="isRepair != null">
+        isRepair,
+      </if>
+      <if test="leaseDate != null">
+        leaseDate,
+      </if>
+      <if test="toLeaseDate != null">
+        toLeaseDate,
+      </if>
+      <if test="repairDate != null">
+        repairDate,
+      </if>
+      <if test="createUser != null">
+        `createUser`,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="updateUser != null">
+        updateUser,
+      </if>
+      <if test="updateDate != null">
+        updateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roomNumber != null">
+        #{roomNumber,jdbcType=INTEGER},
+      </if>
+      <if test="roomImage != null">
+        #{roomImage,jdbcType=VARCHAR},
+      </if>
+      <if test="roomPrice != null">
+        #{roomPrice,jdbcType=INTEGER},
+      </if>
+      <if test="roomType != null">
+        #{roomType,jdbcType=INTEGER},
+      </if>
+      <if test="isLease != null">
+        #{isLease,jdbcType=INTEGER},
+      </if>
+      <if test="isRepair != null">
+        #{isRepair,jdbcType=INTEGER},
+      </if>
+      <if test="leaseDate != null">
+        #{leaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toLeaseDate != null">
+        #{toLeaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repairDate != null">
+        #{repairDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.love.house.entity.HouseRoom">
+    update house_room
+    <set>
+      <if test="roomNumber != null">
+        roomNumber = #{roomNumber,jdbcType=INTEGER},
+      </if>
+      <if test="roomImage != null">
+        roomImage = #{roomImage,jdbcType=VARCHAR},
+      </if>
+      <if test="roomPrice != null">
+        roomPrice = #{roomPrice,jdbcType=INTEGER},
+      </if>
+      <if test="roomType != null">
+        roomType = #{roomType,jdbcType=INTEGER},
+      </if>
+      <if test="isLease != null">
+        isLease = #{isLease,jdbcType=INTEGER},
+      </if>
+      <if test="isRepair != null">
+        isRepair = #{isRepair,jdbcType=INTEGER},
+      </if>
+      <if test="leaseDate != null">
+        leaseDate = #{leaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toLeaseDate != null">
+        toLeaseDate = #{toLeaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repairDate != null">
+        repairDate = #{repairDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        `createUser` = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        updateUser = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        updateDate = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where roomId = #{roomId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -11,6 +11,7 @@
     <result column="user_createDate" jdbcType="TIMESTAMP" property="createDate" />
     <result column="user_idCardNumber" jdbcType="VARCHAR" property="idCardNumber" />
     <result column="user_personSign" jdbcType="VARCHAR" property="personSign" />
+    <result column="user_isRental" jdbcType="INTEGER" property="isRental" />
     <result column="user_isLock" jdbcType="INTEGER" property="isLock" />
     <result column="user_lockTime" jdbcType="TIMESTAMP" property="lockTime" />
   </resultMap>
@@ -112,6 +113,9 @@
       <if test="personSign != null">
         `personSign`,
       </if>
+      <if test="isRental != null">
+        `isRental`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -140,6 +144,9 @@
       </if>
       <if test="personSign != null">
         #{personSign,jdbcType=VARCHAR},
+      </if>
+      <if test="isRental != null">
+        #{isRental,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

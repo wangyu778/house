@@ -1,6 +1,7 @@
 package com.love.house.service.baseService.impl;
 
 import com.love.house.entity.User;
+import com.love.house.mapper.HouseRoomMapper;
 import com.love.house.mapper.UserMapping;
 import com.love.house.model.Constant;
 import com.love.house.service.baseService.BaseService;

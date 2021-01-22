@@ -5,43 +5,82 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * sys_user
  * @author wy
  */
 @Data
+@ApiModel
 public class User implements UserDetails,Serializable{
+
+    @ApiModelProperty(value = "用户Id")
     private String userId;
 
+    @ApiModelProperty(value = "用户名")
     private String userName;
 
+    @ApiModelProperty(value = "用户密码")
     private String passWord;
 
+    @ApiModelProperty(value = "性别")
     private int sex;
 
+    @ApiModelProperty(value = "手机号")
     private String phone;
 
+    @ApiModelProperty(value = "电子邮箱")
     private String email;
 
+    @ApiModelProperty(value = "账号创建时间")
     private Date createDate;
 
+    @ApiModelProperty(value = "身份证号")
     private String idCardNumber;
 
+    @ApiModelProperty(value = "个性签名")
     private String personSign;
 
+    @ApiModelProperty(value = "是否租房：0否，1是 ")
+    private int isRental;
+
+    @ApiModelProperty(value = "是否锁定账号： 0否，1是")
     private int isLock;
 
+    @ApiModelProperty(value = "账号锁定时间")
     private Date lockTime;
 
+    @ApiModelProperty(value = "头像")
+    private MultipartFile headImg;
+
+    @ApiModelProperty(value = "角色列表")
     private List<Role> roleList;
 
     private List<GrantedAuthority> authorities;
 
     private static final long serialVersionUID = 1L;
+
+    public int getIsRental() {
+        return isRental;
+    }
+
+    public void setIsRental(int isRental) {
+        this.isRental = isRental;
+    }
+
+    public MultipartFile getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(MultipartFile headImg) {
+        this.headImg = headImg;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -181,15 +220,5 @@ public class User implements UserDetails,Serializable{
 
     public void setLockTime(Date lockTime) {
         this.lockTime = lockTime;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
-                ", authorities=" + authorities +
-                '}';
     }
 }

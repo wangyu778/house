@@ -24,6 +24,7 @@ import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import javax.sql.DataSource;
 import java.util.concurrent.TimeUnit;
@@ -60,6 +61,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static String[] FreeUrl = new String[]{
           "/login.html",
+          "/swagger-ui.html",
+          "/v2/**",
+          "/swagger-resources/**",
           "/login",
           "/index",
           "/index.html",
@@ -82,7 +86,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           "/mine/userRegister",
           "/mine/saveUser",
           "/mine/getUserInfo",
+          "/mine/rentalDetails",
+          "/mine/repairInfo",
+          "/mine/foodOrder",
+          "/mine/collection",
     };
+
+
 
     @Bean
     public AuthenticationProvider daoAuthenticationProvider() {

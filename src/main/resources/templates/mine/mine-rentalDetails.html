@@ -1,0 +1,30 @@
+<div id="rentalDetails" class="ContainerCss" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-8" style=" padding: 0 30px 20px 30px">
+            <div class="row" style=" font-size: 20px; font-weight: bolder;">
+                整租~2013 2室一厅 南/北
+            </div>
+            <div class="row">
+                房屋维护时间: 202-01-19
+            </div>
+        </div>
+        <div class="col-md-4">
+            投诉电话 ： 10109666
+        </div>
+    </div>
+    <div class="row" style="width: 100%;">
+        <div class="col-md-6">
+            <img src="/static/image/James404.jpg" alt="房间图片" style="width: 100%">
+        </div>
+        <div class="col-md-6" style="border: solid 1px #f2f2f2"></div>
+    </div>
+<!--    <div style="padding: 15px 10%; width: 100%; height: 50px">-->
+<!--        头像-->
+<!--    </div>-->
+<!--    <div th:if="${HouseRoom == null}" th:include="common/tips::tips"></div>-->
+</div>
+<script>
+    $().ready(function () {
+        $("#infoText").text("您暂时还未租房！")
+    })
+</script>
