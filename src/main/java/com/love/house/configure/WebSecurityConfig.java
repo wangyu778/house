@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static String[] FreeUrl = new String[]{
           "/login.html",
+          "/ws",
           "/swagger-ui.html",
           "/v2/**",
           "/swagger-resources/**",
