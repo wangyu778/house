@@ -1,7 +1,8 @@
-package com.love.house.mapper;
+package com.love.house.mapper.mysqlMapper;
 
 import com.love.house.entity.HouseRoom;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import java.util.Map;
  * @author wy
  * @date 2021/1/19 18:49
  */
+@Repository
 public interface HouseRoomMapper {
 
     /**

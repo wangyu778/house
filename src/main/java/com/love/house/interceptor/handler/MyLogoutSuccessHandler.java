@@ -1,5 +1,6 @@
 package com.love.house.interceptor.handler;
 
+import com.love.house.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -24,7 +25,7 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String ipAddr = ((WebAuthenticationDetails)(authentication.getDetails())).getRemoteAddress();
-        String userName = ((UserDetails) authentication.getPrincipal()).getUsername();
+        String userName = ((User) authentication.getPrincipal()).getUserId();
         LOG.info("["+userName+"]-["+ipAddr+"]-[注销成功!]");
         response.sendRedirect("/index");
     }

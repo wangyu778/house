@@ -1,4 +1,4 @@
-<div id="rentalDetails" class="ContainerCss" xmlns:th="http://www.w3.org/1999/xhtml">
+<div id="rentalDetails" class="ContainerCss bageColor" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="row" style="margin-top: 30px">
         <div class="col-md-8" style=" padding: 0 30px 20px 30px">
             <div class="row" style=" font-size: 20px; font-weight: bolder;">
@@ -14,16 +14,35 @@
     </div>
     <div class="row" style="width: 100%;">
         <div class="col-md-6">
-            <img src="/static/image/James404.jpg" alt="房间图片" style="width: 100%">
+            <img src="/static/image/house001.jpg" alt="房间图片" style="width: 100%; height: 300px">
         </div>
-        <div class="col-md-6" style="border: solid 1px #f2f2f2"></div>
-    </div>
+        <div class="col-md-6" style="border: solid 1px #f2f2f2; padding: 5px 10px">
+            <div>
+                <span style="margin-left: 15px; color: red; font-weight: bolder; font-size: 35px"> 2000 </span>
+                <span style="margin-left: 5px;color: red; font-size: 15px; margin-top: 20px">元/月(季付价)</span>
+            </div>
+            <div>
+                <span class="badge badge-danger" style="margin-left: 15px;">优先好房</span>
+                <span class="badge badge-info" style="margin-left: 5px;">集中供暖</span>
+                <span class="badge badge-info" style="margin-left: 5px;">优先看房</span>
+            </div>
+            <div><hr></div>
+            <div style="float: left; margin-left: 15px; width: 60%">
+                <span style="color: #95999c">租赁方式:</span><span style="margin-left: 10px">租赁方式</span><br>
+                <span style="color: #95999c">房屋类型:</span><span style="margin-left: 5px">2室一厅一卫/57平方米</span><br>
+                <span style="color: #95999c">朝向楼层:</span><span style="margin-left: 5px">南/北 6层</span>
+            </div>
+            <div style="float: left;width: 30%">
+                123
+            </div>
+        </div>
 <!--    <div style="padding: 15px 10%; width: 100%; height: 50px">-->
 <!--        头像-->
 <!--    </div>-->
 <!--    <div th:if="${HouseRoom == null}" th:include="common/tips::tips"></div>-->
+    </div>
 </div>
-<script>
+<script type="text/javascript">
     $().ready(function () {
         $("#infoText").text("您暂时还未租房！")
     })

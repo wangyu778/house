@@ -1,7 +1,9 @@
-package com.love.house.mapper;
+package com.love.house.mapper.mysqlMapper;
 
 import com.love.house.entity.Role;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RoleMapping {
     int deleteByPrimaryKey(Integer id);
 

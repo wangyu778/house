@@ -4,8 +4,8 @@ import com.love.house.common.ResponseCode;
 import com.love.house.common.ServerResponse;
 import com.love.house.entity.HouseRoom;
 import com.love.house.entity.User;
-import com.love.house.mapper.HouseRoomMapper;
-import com.love.house.mapper.UserMapping;
+import com.love.house.mapper.mysqlMapper.HouseRoomMapper;
+import com.love.house.mapper.mysqlMapper.UserMapping;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.mine.MineService;
 import com.love.house.utils.Md5;
@@ -15,7 +15,6 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: wy

@@ -1,15 +1,11 @@
 package com.love.house.service.security.resourse;
 
-import com.love.house.entity.Role;
-import com.love.house.entity.SecuritySysPermission;
-import com.love.house.entity.User;
-import com.love.house.mapper.UserMapping;
+import com.love.house.mapper.mysqlMapper.UserMapping;
 import com.love.house.service.baseService.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -31,7 +31,7 @@ public class MineController {
     private MineService mineService;
 
     @ApiOperation("返回-我的-主界面")
-    @GetMapping(value = "/index")
+    @PostMapping(value = "/index")
     public ModelAndView index(){
         if(null == baseService.getUserId()){
             return new ModelAndView("login");

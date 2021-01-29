@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.love.house.mapper.HouseRoomMapper">
+<mapper namespace="com.love.house.mapper.mysqlMapper.HouseRoomMapper">
   <resultMap id="BaseResultMap" type="com.love.house.entity.HouseRoom">
     <id column="house_room_roomId" jdbcType="INTEGER" property="roomId" />
     <result column="house_room_roomNumber" jdbcType="INTEGER" property="roomNumber" />

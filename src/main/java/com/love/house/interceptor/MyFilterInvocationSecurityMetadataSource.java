@@ -2,7 +2,7 @@ package com.love.house.interceptor;
 
 import com.love.house.entity.Role;
 import com.love.house.entity.SecuritySysPermission;
-import com.love.house.mapper.UserMapping;
+import com.love.house.mapper.mysqlMapper.UserMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

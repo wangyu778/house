@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.love.house.mapper.UserMapping">
+<mapper namespace="com.love.house.mapper.mysqlMapper.UserMapping">
   <resultMap id="BaseResultMap" type="com.love.house.entity.User">
     <id column="user_userId" jdbcType="TINYINT" property="userId" />
     <result column="user_userName" jdbcType="VARCHAR" property="userName" />

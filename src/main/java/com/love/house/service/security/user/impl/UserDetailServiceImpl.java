@@ -1,18 +1,16 @@
 package com.love.house.service.security.user.impl;
 
 import com.love.house.entity.User;
-import com.love.house.mapper.UserMapping;
+import com.love.house.mapper.mysqlMapper.UserMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Resource;
 
 /**
  * @Author: wy
@@ -26,7 +24,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     private static Logger LOG = LoggerFactory.getLogger(UserDetailServiceImpl.class);
 
-    @Autowired
+    @Resource
     private UserMapping userMapping;
 
     /**
