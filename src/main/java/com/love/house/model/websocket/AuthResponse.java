@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
  * @Date: 2021/1/29 16:16
  * @Description: 响应体
  */
-@Component
 public class AuthResponse implements Message {
 
     public static final String TYPE = "AUTH_RESPONSE";

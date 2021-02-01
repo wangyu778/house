@@ -89,6 +89,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           "/mine/repairInfo",
           "/mine/foodOrder",
           "/mine/collection",
+
+            //forum
+          "/forum/index",
     };
 
 

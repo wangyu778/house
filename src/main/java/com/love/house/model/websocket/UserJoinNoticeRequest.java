@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
  * @Date: 2021/1/29 16:19
  * @Description: 用户认证成功, 会广播用户加入群聊的通知 Message
  */
-@Component
 public class UserJoinNoticeRequest implements Message{
 
     public static final String TYPE = "USER_JOIN_NOTICE_REQUEST";

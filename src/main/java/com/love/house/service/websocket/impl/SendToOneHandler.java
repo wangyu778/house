@@ -5,6 +5,7 @@ import com.love.house.model.websocket.SendToOneRequest;
 import com.love.house.model.websocket.SendToUserRequest;
 import com.love.house.service.websocket.MessageHandler;
 import com.love.house.utils.WebSocketUtil;
+import org.springframework.stereotype.Component;
 
 import javax.websocket.Session;
 
@@ -13,6 +14,7 @@ import javax.websocket.Session;
  * @Date: 2021/1/29 16:45
  * @Description:
  */
+@Component
 public class SendToOneHandler implements MessageHandler<SendToOneRequest> {
 
     @Override

@@ -6,6 +6,7 @@ import com.love.house.model.websocket.UserJoinNoticeRequest;
 import com.love.house.service.websocket.MessageHandler;
 
 import com.love.house.utils.WebSocketUtil;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.websocket.Session;
@@ -14,6 +15,7 @@ import javax.websocket.Session;
  * @Date: 2021/1/29 16:32
  * @Description:
  */
+@Component
 public class AuthMessageHandler implements MessageHandler<AuthRequest> {
 
     @Override

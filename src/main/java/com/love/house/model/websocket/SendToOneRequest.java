@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
  * @Date: 2021/1/29 16:23
  * @Description: 发送给指定人的私聊消息的Message
  */
-@Component
 public class SendToOneRequest implements Message {
 
     public static final String TYPE = "SEND_TO_ONE_REQUEST";

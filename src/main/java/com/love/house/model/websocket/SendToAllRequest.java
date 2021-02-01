@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
  * @Date: 2021/1/29 16:24
  * @Description: 发送给所有人的群聊消息
  */
-@Component
 public class SendToAllRequest implements Message {
 
     public static final String TYPE = "SEND_TO_ALL_REQUEST";

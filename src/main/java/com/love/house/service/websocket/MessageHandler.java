@@ -10,8 +10,7 @@ import javax.websocket.Session;
  * @Date: 2021/1/29 16:29
  * @Description: websocket消息处理器接口
  */
-@Service
-public interface MessageHandler <T extends Message> {
+public interface MessageHandler <T extends Message > {
 
     /**
      * 执行处理消息
