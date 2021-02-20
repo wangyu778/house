@@ -1,3 +1,5 @@
+var lockReconnect=true;//避免ws重复连接
+
 $().ready(function () {
     navBinding();
 });

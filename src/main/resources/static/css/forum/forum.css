@@ -1,0 +1,32 @@
+.forum {
+    width: 100%;
+    height: 900px;
+    background-color: #ffffff;
+    float: left;
+}
+
+#forum .head{
+    width: 100%;
+    height: 40px;
+    background-color: #e2e3e5;
+    text-align: center;
+    line-height: 40px;
+    font-size: larger;
+    color: black;
+}
+
+#forum .messContent{
+    width: 100%; height: 600px; overflow-y: scroll; overflow-x: hidden;
+}
+
+#forum .sendMess{
+    border: 0; height: 55%; font-size: larger;background-color: #e2e3e5;
+}
+
+#forum .sendButtom{
+    float: right; margin-right: 30px; width: 100px; " onclick="sendMess()
+}
+
+#forum .sendDiv{
+    width: 100%; height: 230px; background-color: #e2e3e5;
+}

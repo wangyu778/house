@@ -16,11 +16,21 @@ public class UserJoinNoticeRequest implements Message{
      */
     private String nickname;
 
+    private int onlineCount;
+
     public String getNickname() {
         return nickname;
     }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public int getOnlineCount() {
+        return onlineCount;
+    }
+
+    public void setOnlineCount(int onlineCount) {
+        this.onlineCount = onlineCount;
     }
 }

@@ -1,11 +1,15 @@
 package com.love.house.controller.forum;
 
+import com.love.house.model.Constant;
+import com.love.house.service.baseService.BaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
 
 /**
  * @Author: wy
@@ -17,10 +21,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/forum")
 public class ForumController {
 
-    @ApiOperation("返回-我的-主界面")
+    @Resource
+    private BaseService baseService;
+
+    @ApiOperation("返回-论坛-主界面")
     @PostMapping(value = "/index")
     public ModelAndView index(){
-        return new ModelAndView("forum/forum-index");
+        if(null == baseService.getUserId()){
+            return new ModelAndView("login");
+        }
+        return new ModelAndView("forum/forum-index").addObject("onlineCount", Constant.onlineCount);
     }
 
 }

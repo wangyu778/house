@@ -2,24 +2,32 @@ package com.love.house.controller.websocket;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.love.house.model.Constant;
 import com.love.house.model.websocket.AuthRequest;
 import com.love.house.model.websocket.Message;
+import com.love.house.service.baseService.BaseService;
 import com.love.house.service.websocket.MessageHandler;
 import com.love.house.utils.WebSocketUtil;
+import com.love.house.utils.random.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.Inet4Address;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * @Author: wy
@@ -56,6 +64,7 @@ public class WebSocketServerEndpoint implements InitializingBean {
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) {
         logger.info("[onOpen][session({}) 接入]", session);
+        addOnlineCount();
         // 1、解析 accessToken
         List<String> accessTokenValues = session.getRequestParameterMap().get("accessToken");
         String accessToken = !CollectionUtils.isEmpty(accessTokenValues) ? accessTokenValues.get(0) : null;
@@ -77,9 +86,18 @@ public class WebSocketServerEndpoint implements InitializingBean {
         logger.info("[onOpen][session({}) 接收到一条消息({})]", session, message);
         try {
             // 获得消息类型
-            System.out.println(message);
-            JSONObject jsonMessage = JSON.parseObject(message);
+            JSONObject jsonMessage = new JSONObject();
+            jsonMessage.put("type","SEND_TO_ALL_REQUEST");
+            JSONObject messageJson = new JSONObject(2);
+            // 1、解析 accessToken
+            List<String> accessTokenValues = session.getRequestParameterMap().get("accessToken");
+            String accessToken = !CollectionUtils.isEmpty(accessTokenValues) ? accessTokenValues.get(0) : null;
+            messageJson.put("msgId", accessToken);
+            messageJson.put("content", message);
+            jsonMessage.put("body", messageJson.toString());
+//            JSONObject jsonMessage = JSON.parseObject(message);
             String messageType = jsonMessage.getString("type");
+
             // 获得消息处理器
             MessageHandler messageHandler = HANDLERS.get(messageType);
             if (messageHandler == null) {
@@ -99,6 +117,7 @@ public class WebSocketServerEndpoint implements InitializingBean {
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
         logger.info("[onClose][session({}) 连接关闭。关闭原因是({})}]", session, closeReason);
+        subOnlineCount();
         WebSocketUtil.removeSession(session);
     }
 
@@ -139,4 +158,20 @@ public class WebSocketServerEndpoint implements InitializingBean {
         }
         throw new IllegalStateException(String.format("类型(%s) 获得不到消息类型", handler));
     }
+
+
+    public static synchronized int getOnlineCount() {
+        return Constant.onlineCount;
+    }
+
+    public static synchronized void addOnlineCount() {
+        Constant.onlineCount = WebSocketServerEndpoint.getOnlineCount();
+        Constant.onlineCount++;
+    }
+
+    public static synchronized void subOnlineCount() {
+        Constant.onlineCount = WebSocketServerEndpoint.getOnlineCount();
+        Constant.onlineCount--;
+    }
+
 }

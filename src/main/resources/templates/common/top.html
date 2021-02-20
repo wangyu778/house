@@ -17,7 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">美食</a>
                 </li>
-                <li class="nav-item" id="forum" data-to="/forum/index" data-id="5" data-title="我的">
+                <li class="nav-item" id="forum" data-to="/forum/index" data-id="5" data-title="论坛">
                     <a class="nav-link" href="#">论坛</a>
                 </li>
                 <li class="nav-item dropdown" th:if="${@resourceService.isRl('/houseManage')}">
@@ -38,8 +38,9 @@
             </form>
             <!--登陆成功-->
             <div style="float: left;padding: 0 10px" th:if="${@baseService.getUserId() != null}">
+                <input type="hidden" id="userId" th:value="${@baseService.getUserId()}">
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#logoutModal">
-                    <span class="glyphicon glyphicon-log-out" aria-hidden="true" style="font-size: 17px"></span> 退出登陆
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true" style="font-size: 17px"/> 退出登陆
                 </button>
                 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="logoutModal">
                     <div class="modal-dialog modal-dialog-centered">

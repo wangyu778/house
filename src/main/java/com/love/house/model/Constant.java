@@ -14,4 +14,9 @@ public class Constant {
     public static final String SESSION_LOGINIP = "LoginIp";
     public static final String SESSION_LOGINDATE = "LoginDate";
 
+    /**
+     * 聊天室，当前在线人数
+     */
+    public static int onlineCount = 0;
+
 }

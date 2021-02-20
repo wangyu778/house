@@ -1,5 +1,6 @@
 package com.love.house.service.websocket.impl;
 
+import com.love.house.model.Constant;
 import com.love.house.model.websocket.AuthRequest;
 import com.love.house.model.websocket.AuthResponse;
 import com.love.house.model.websocket.UserJoinNoticeRequest;
@@ -34,14 +35,15 @@ public class AuthMessageHandler implements MessageHandler<AuthRequest> {
         WebSocketUtil.addSession(session, message.getAccessToken());
 
         // 判断是否认证成功。这里，假装直接成功
-        AuthResponse authResponseFail = new AuthResponse();
-        authResponseFail.setCode(0);
-        WebSocketUtil.send(session, AuthResponse.TYPE, authResponseFail);
+//        AuthResponse authResponseFail = new AuthResponse();
+//        authResponseFail.setCode(0);
+//        WebSocketUtil.send(session, AuthResponse.TYPE, authResponseFail);
 
         // 通知所有人，某个人加入了。这个是可选逻辑，仅仅是为了演示
         // 考虑到代码简化，我们先直接使用 accessToken 作为 User
         UserJoinNoticeRequest userJoinNoticeRequest = new UserJoinNoticeRequest();
         userJoinNoticeRequest.setNickname(message.getAccessToken());
+        userJoinNoticeRequest.setOnlineCount(Constant.onlineCount);
         WebSocketUtil.broadcast(UserJoinNoticeRequest.TYPE, userJoinNoticeRequest);
     }
 

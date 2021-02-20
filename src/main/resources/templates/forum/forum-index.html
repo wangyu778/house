@@ -1,65 +1,113 @@
-<body>
-<body onload="disconnect()">
-<noscript><h2 style="color: #e80b0a;">Sorry，浏览器不支持WebSocket</h2></noscript>
-<div>
-    <div>
-        <button id="connect" onclick="connect();">连接</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">断开连接</button>
+<link rel="stylesheet" href="/static/css/forum/forum.css">
+<div id="forum" class="forum" xmlns:th="http://www.w3.org/1999/xhtml">
+    <input type="hidden" id="count" th:value="${onlineCount}">
+    <div id="head" class="head">
+        ~聊天室 ( <span id="onlineCount">0</span> )
     </div>
 
-    <div id="conversationDiv">
-        <label>输入你的名字</label><input type="text" id="name"/>
-        <button id="sendName" onclick="sendName();">发送</button>
-        <p id="response"></p>
-        <p id="callback"></p>
+    <div id="messContent" class="messContent">
+
+    </div>
+    <hr style="margin-bottom: 0">
+    <div id="sendContent" class="sendDiv">
+        <textarea class="form-control sendMess" id="sendMess" rows="3"/>
+        <button type="button" class="btn btn-secondary sendButtom" onclick="sendMess()">发送</button>
     </div>
 </div>
 <script type="text/javascript">
-    var stompClient = null;
 
-    function setConnected(connected) {
-        document.getElementById("connect").disabled = connected;
-        document.getElementById("disconnect").disabled = !connected;
-        document.getElementById("conversationDiv").style.visibility = connected ? 'visible' : 'hidden';
-        $("#response").html();
-        $("#callback").html();
-    }
+    var webSocketConn;
 
-    function connect() {
-        var socket = new SockJS('ws://localhost:8081/ws');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            setConnected(true);
-            console.log('Connected:' + frame);
-            stompClient.subscribe('/topic/say', function (response) {
-                showResponse(JSON.parse(response.body).responseMessage);
-            });
-            // 另外再注册一下定时任务接受
-            stompClient.subscribe('/topic/callback', function (response) {
-                showCallback(response.body);
-            });
+    $().ready(function () {
+        $('#forum #sendMess').bind('keypress', function (event) {
+            if (event.keyCode === 13) {
+                sendMess();
+                return false;
+            }
         });
-    }
 
-    function disconnect() {
-        if (stompClient != null) {
-            stompClient.disconnect();
+        $("#onlineCount").text($("#count").val());
+        if(lockReconnect){
+            onOpen();
+            lockReconnect = false;
         }
-        setConnected(false);
-        console.log('Disconnected');
+    });
+
+    function onOpen(){
+        if("WebSocket" in window){　　　　
+            webSocketConn = new WebSocket('ws://127.0.0.1:8081/ws?accessToken='+$("#userId").val());
+        }else{
+            alert("您的浏览器不支持WebSocket");　　
+        }
+
+        webSocketConn.onmessage = function(e){
+            $("#messContent").append("");
+            let jsonStr = JSON.parse(e.data);
+            appendHtml(jsonStr);
+            var el_height = $("#messContent")[0].scrollHeight;
+            $("#messContent").scrollTop(el_height);
+        };
+
+        webSocketConn.onclose = function (e) {
+            console.log("close");
+        };
+
+        webSocketConn.onerror = function(e){
+            //如果出现连接、处理、接收、发送数据失败的时候触发onerror事件
+            console.log(e);
+        }
     }
 
-    function sendName() {
-        var name = $('#name').val();
-        console.log('name:' + name);
-        stompClient.send("/welcome", {}, JSON.stringify({'name': name}));
+    function sendMess() {
+        let message = $('#sendMess').val();
+        if(message === '' || message == null){
+            return false;
+        }
+        webSocketConn.send(message);
+        $("#sendMess").val("");
     }
 
-    function showResponse(message) {
-        $("#response").html(message);
-    }
-    function showCallback(message) {
-        $("#callback").html(message);
+
+
+
+    /**
+     * 添加信息
+     * @param jsonStr
+     */
+    function appendHtml(jsonStr) {
+        let messType = jsonStr.type;
+        if(messType === "SEND_TO_USER_REQUEST"){
+            let content = jsonStr.body.content;
+            let msgId = jsonStr.body.msgId;
+            if(msgId === $("#userId").val()){
+                $("#messContent").append("<div class=\"messInfo\" style=\"width: 99%; min-height: 70px; margin: 10px\">\n" +
+                    "            <div class=\"headImg\" style=\"width: 50px; height: 50px;text-align: center; line-height: 50px; float: right\">\n" +
+                    "                <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\" style=\"font-size: 22px\"/>\n" +
+                    "            </div>\n" +
+                    "            <div class=\"alert alert-success\" style=\"float: right\">\n" +
+                    content +
+                    "            </div>\n" +
+                    "        </div>");
+            }else {
+                $("#messContent").append(" <div class=\"messInfo\" style=\"width: 99%; min-height: 82px; margin: 10px\">\n" +
+                    "            <div class=\"headImg\" style=\"width: 3%; height: 95px;text-align: center; line-height: 95px; float: left\">\n" +
+                    "                <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\" style=\"font-size: 24px\"/>\n" +
+                    "            </div>\n" +
+                    "            <div style=\"float: left; width: 96%; margin-left: 1%\">\n" +
+                    "                <div style=\"float: left; width: 100%; font-size: 14px; padding: 4px; color: darkgray;\">\n" +
+                    msgId +
+                    "                </div>\n" +
+                    "                <div class=\"alert alert-primary\" style=\"float: left\">\n" +
+                    content +
+                    "                </div>\n" +
+                    "            </div>\n" +
+                    "        </div>");
+            }
+        }else if(messType === "USER_JOIN_NOTICE_REQUEST"){
+            $("#onlineCount").text(jsonStr.body.onlineCount);
+            $("#messContent").append(" <div class=\"alert alert-light\" style=\"text-align: center; font-size: revert\">\n" +
+                "            欢迎"+jsonStr.body.nickname+"加入群聊\n" +
+                "        </div>")
+        }
     }
 </script>
-</body>

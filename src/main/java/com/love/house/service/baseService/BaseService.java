@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2020/12/4 14:06
  * @Description: 获取通用的数据库数据
  */
+@Service
 public interface BaseService {
 
     /**
