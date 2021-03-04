@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.love.house.mapper.mysqlMapper.HouseFoodMapper">
+  <resultMap id="BaseResultMap" type="com.love.house.entity.HouseFood">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="businessName" jdbcType="VARCHAR" property="businessName" />
+    <result column="businessImg" jdbcType="VARCHAR" property="businessImg" />
+    <result column="businessLocation" jdbcType="VARCHAR" property="businessLocation" />
+    <result column="businessDistance" jdbcType="INTEGER" property="businessDistance" />
+    <result column="businessScore" jdbcType="DECIMAL" property="businessScore" />
+    <result column="businessType" jdbcType="INTEGER" property="businessType" />
+    <result column="saleCount" jdbcType="INTEGER" property="saleCount" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="createUser" jdbcType="VARCHAR" property="createUser" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="updateUser" jdbcType="VARCHAR" property="updateUser" />
+    <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, businessName, businessImg, businessLocation, businessDistance, businessScore, businessType,
+    saleCount, introduction, createUser, createDate, updateUser, updateDate
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house_food
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseFood" useGeneratedKeys="true">
+    insert into house_food
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessName != null">
+        businessName,
+      </if>
+      <if test="businessLocation != null">
+        businessLocation,
+      </if>
+      <if test="businessDistance != null">
+        businessDistance,
+      </if>
+      <if test="businessScore != null">
+        businessScore,
+      </if>
+      <if test="businessType != null">
+        businessType,
+      </if>
+      <if test="saleCount != null">
+        saleCount,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="createUser != null">
+        createUser,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="updateUser != null">
+        updateUser,
+      </if>
+      <if test="updateDate != null">
+        updateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessName != null">
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLocation != null">
+        #{businessLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="businessDistance != null">
+        #{businessDistance,jdbcType=INTEGER},
+      </if>
+      <if test="businessScore != null">
+        #{businessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="businessType != null">
+        #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="saleCount != null">
+        #{saleCount,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.love.house.entity.HouseFood">
+    update house_food
+    <set>
+      <if test="businessName != null">
+        businessName = #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLocation != null">
+        businessLocation = #{businessLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="businessDistance != null">
+        businessDistance = #{businessDistance,jdbcType=INTEGER},
+      </if>
+      <if test="businessScore != null">
+        businessScore = #{businessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="businessType != null">
+        businessType = #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="saleCount != null">
+        saleCount = #{saleCount,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        createUser = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        updateUser = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        updateDate = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="getList" resultType="com.love.house.entity.HouseFood">
+    select <include refid="Base_Column_List"/>
+    from house_food
+    <where>
+      <if test="filterMap.id != null and filterMap.id != ''">
+        id = #{filterMap.id}
+      </if>
+      <if test="filterMap.businessType != null and filterMap.businessType != '' and filterMap.businessType > 0">
+        businessType = #{filterMap.businessType}
+      </if>
+    </where>
+    <if test="filterMap.sortField != null and filterMap.sortField != ''">
+      order by ${filterMap.sortField}
+      <if test="filterMap.sortField == 'businessDistance'">
+        asc
+      </if>
+    </if>
+  </select>
+
+</mapper>

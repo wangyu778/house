@@ -12,9 +12,8 @@ import com.love.house.utils.Md5;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * @Author: wy
@@ -52,5 +51,21 @@ public class MineServiceImpl implements MineService {
         filterMap.put("userId",baseService.getUserId());
         return houseRoomMapper.getHouseRoom(filterMap);
     }
+//
+//    public static void main(String[] args) {
+//        List<Integer> list = new ArrayList<>(5);
+//        Collections.addAll(list,1,6,3,4,5);
+//        list.sort((o1, o2) -> o1 - o2);
+//        System.out.println(list);
+//
+//        int num = 10;
+//
+//        Consumer<String> consumer = ele -> {
+//            System.out.println(num);
+//        };
+//
+////        num = num + 2;
+//        consumer.accept("hello");
+//    }
 
 }

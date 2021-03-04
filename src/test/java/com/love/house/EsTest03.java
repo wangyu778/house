@@ -34,13 +34,13 @@ public class EsTest03 {
     @Test
     public void testSearch() {
         // 查找分类为 1 + 指定关键字，并且按照 id 升序
-        Page<ESProductDO> page = productRepository.search(1, "技术",
-                PageRequest.of(0, 5, Sort.Direction.ASC, "id"));
-        System.out.println(page.getTotalPages());
-
-        // 查找分类为 1 ，并且按照 id 升序
-        page = productRepository.search(1, null,
-                PageRequest.of(0, 5, Sort.Direction.ASC, "id"));
-        System.out.println(page.getTotalPages());
+//        Page<ESProductDO> page = productRepository.search(1, "技术",
+//                PageRequest.of(0, 5, Sort.Direction.ASC, "id"));
+//        System.out.println(page.getTotalPages());
+//
+//        // 查找分类为 1 ，并且按照 id 升序
+//        page = productRepository.search(1, null,
+//                PageRequest.of(0, 5, Sort.Direction.ASC, "id"));
+//        System.out.println(page.getTotalPages());
     }
 }

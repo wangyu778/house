@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.love.house.mapper.mysqlMapper.HouseFoodDiscountMapper">
+  <resultMap id="BaseResultMap" type="com.love.house.entity.HouseFoodDiscount">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="foodId" jdbcType="INTEGER" property="foodId" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+    <result column="foodName" jdbcType="VARCHAR" property="foodName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,foodId,money,foodName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from house_food_discount house_food_discount
+    where house_food_discount.id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="getList" resultType="com.love.house.entity.HouseFoodDiscount">
+      select <include refid="Base_Column_List" />
+      from house_food_discount
+      <where>
+        <if test="filterMap.foodId != null and filterMap.foodId != ''">
+            foodId = #{filterMap.foodId}
+        </if>
+      </where>
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house_food_discount
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseFoodDiscount" useGeneratedKeys="true">
+    insert into house_food_discount (foodId, money, foodName
+      )
+    values (#{foodid,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, #{foodname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseFoodDiscount" useGeneratedKeys="true">
+    insert into house_food_discount
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="foodid != null">
+        foodId,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="foodname != null">
+        foodName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="foodid != null">
+        #{foodid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="foodname != null">
+        #{foodname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.love.house.entity.HouseFoodDiscount">
+    update house_food_discount
+    <set>
+      <if test="foodid != null">
+        foodId = #{foodid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="foodname != null">
+        foodName = #{foodname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.love.house.entity.HouseFoodDiscount">
+    update house_food_discount
+    set foodId = #{foodid,jdbcType=INTEGER},
+      money = #{money,jdbcType=INTEGER},
+      foodName = #{foodname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,9 +1,11 @@
 package com.love.house.mapper.elasticsearchDao;
 
+import com.love.house.entity.elasticsearchDo.ESMessDO;
 import com.love.house.entity.elasticsearchDo.ESProductDO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -11,10 +13,10 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @Date: 2021/1/26 14:30
  * @Description:
  */
-public interface ProductRepository02 extends ElasticsearchRepository<ESProductDO,Integer> {
+public interface ProductRepository02 extends ElasticsearchRepository<ESMessDO,Integer> {
 
-    ESProductDO findByName(String name);
+    ESMessDO findByName(String name);
 
-    Page<ESProductDO> findByNameLike(String name, Pageable pageable);
+    Page<ESMessDO> findByNameLike(String name, Pageable pageable);
 
 }

@@ -2,6 +2,11 @@ package com.love.house.controller.websocket;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.love.house.entity.elasticsearchDo.ESMessDO;
+import com.love.house.entity.elasticsearchDo.ESProductDO;
+import com.love.house.mapper.elasticsearchDao.ProductRepository;
+import com.love.house.mapper.elasticsearchDao.ProductRepository02;
+import com.love.house.mapper.elasticsearchDao.ProductRepository03;
 import com.love.house.model.Constant;
 import com.love.house.model.websocket.AuthRequest;
 import com.love.house.model.websocket.Message;
@@ -9,16 +14,26 @@ import com.love.house.service.baseService.BaseService;
 import com.love.house.service.websocket.MessageHandler;
 import com.love.house.utils.WebSocketUtil;
 import com.love.house.utils.random.RandomUtil;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -49,6 +64,13 @@ public class WebSocketServerEndpoint implements InitializingBean {
 
     @Autowired
     private ApplicationContext applicationContext;
+
+    @Autowired
+    private ProductRepository productRepository = SpringUtil.getBean(ProductRepository.class);
+    @Autowired
+    private ProductRepository02 productRepository2 = SpringUtil.getBean(ProductRepository02.class);
+    @Autowired
+    private ProductRepository03 productRepository3 = SpringUtil.getBean(ProductRepository03.class);
 
     @Override
     public void afterPropertiesSet(){
@@ -95,9 +117,7 @@ public class WebSocketServerEndpoint implements InitializingBean {
             messageJson.put("msgId", accessToken);
             messageJson.put("content", message);
             jsonMessage.put("body", messageJson.toString());
-//            JSONObject jsonMessage = JSON.parseObject(message);
             String messageType = jsonMessage.getString("type");
-
             // 获得消息处理器
             MessageHandler messageHandler = HANDLERS.get(messageType);
             if (messageHandler == null) {
@@ -108,6 +128,13 @@ public class WebSocketServerEndpoint implements InitializingBean {
             Class<? extends Message> messageClass = this.getMessageClass(messageHandler);
             // 处理消息
             Message messageObj = JSON.parseObject(jsonMessage.getString("body"), messageClass);
+            //将消息存入es中
+            ESMessDO esMessDO = new ESMessDO();
+            esMessDO.setId(Integer.parseInt(RandomUtil.generateDigitalStr(8)));
+            esMessDO.setMessage(message);
+            esMessDO.setSpeakTime(Long.toString(System.currentTimeMillis()));
+            esMessDO.setName(accessToken);
+            productRepository.save(esMessDO);
             messageHandler.execute(session, messageObj);
         } catch (Throwable throwable) {
             logger.info("[onMessage][session({}) message({}) 发生异常]", session, throwable);

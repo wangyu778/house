@@ -12,13 +12,13 @@
                     <a class="nav-link" href="#">我的</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">转租</a>
+                    <a class="nav-link" href="#">租房</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">美食</a>
+                <li class="nav-item" id="deliciousFood" data-to="/deliciousFood/index" data-id="4" data-title="周边美食">
+                    <a class="nav-link" href="#">周边美食</a>
                 </li>
                 <li class="nav-item" id="forum" data-to="/forum/index" data-id="5" data-title="论坛">
-                    <a class="nav-link" href="#">论坛</a>
+                    <a class="nav-link" href="#">聊天室</a>
                 </li>
                 <li class="nav-item dropdown" th:if="${@resourceService.isRl('/houseManage')}">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -1,0 +1,55 @@
+.h-300 {
+    height: 300px !important;
+}
+
+.deliciousFood {
+    width: 100%;
+    background-color: #f8f9fa;
+    float: left;
+}
+
+#foodList .foodList {
+    width: 48%;
+    height: 270px;
+    margin: 0 1%;
+    float: left;
+}
+
+#foodList .divRight{
+    float: left; width: 69%; margin-left: 1%
+}
+
+#foodList .divRight .businessName{
+    width: 100%; font-size: 22px; font-weight: bolder
+}
+
+#foodList .divRight .star{
+    width: 100%; font-size: 18px; float: left; margin-top: 8px;
+}
+
+#foodList .divRight .star .score{
+    font-size: 15px; margin-left: 3px;color: #FF5722
+}
+
+#foodList .divRight .star .distance{
+    font-size: 15px; float: right;
+}
+
+#foodList .divRight .address{
+    width: 100%; font-size: 16px; float: left; margin-top: 8px;
+}
+#foodList .divRight .address .saleCount{
+    float: right; color: #FF5722; font-weight: bolder
+}
+
+#foodList .divRight .discount{
+    width: 100%; font-size: 16px; margin-top: 12px; float: left;
+}
+
+#foodList .divRight .discount .loge{
+    float: left; font-size: 6px; width: 18px; height: 18px; background-color: #FF5722; color: white; text-align: center; line-height: 18px
+}
+
+#foodList .divRight .collection{
+    width: 100%; margin-top: 10px; float: left;
+}

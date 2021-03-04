@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EsTest04 {
-
+//
 //    @Resource
 //    private ElasticsearchTemplate elasticsearchTemplate;
 //

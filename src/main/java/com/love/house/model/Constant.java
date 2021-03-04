@@ -19,4 +19,7 @@ public class Constant {
      */
     public static int onlineCount = 0;
 
+    public static int foodCollectionType = 1;
+    public static int houseCollectionType = 2;
+
 }

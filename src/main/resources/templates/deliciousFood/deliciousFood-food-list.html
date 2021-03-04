@@ -1,0 +1,39 @@
+<div th:each="foodList:${properties.list}" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="shadow p-3 mb-5 bg-white rounded foodList">
+        <div style="float: left; width: 30%">
+            <img th:src="${foodList.businessImg}" class="rounded" onerror="this.src='/static/image/food1.jpg'" style="width: 90%;" alt="商家图片"/>
+        </div>
+        <div class="divRight">
+            <div class="businessName">
+                <span th:text="${foodList.businessName}"/>
+            </div>
+            <div class="star">
+                <span class="glyphicon glyphicon-star" th:if="${foodList.businessScore >= 1}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star-empty" th:if="${foodList.businessScore < 1}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star" th:if="${foodList.businessScore >= 2}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star-empty" th:if="${foodList.businessScore < 2}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star" th:if="${foodList.businessScore >= 3}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star-empty" th:if="${foodList.businessScore < 3}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star" th:if="${foodList.businessScore >= 4}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star-empty" th:if="${foodList.businessScore < 4}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star" th:if="${foodList.businessScore >= 5}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="glyphicon glyphicon-star-empty" th:if="${foodList.businessScore < 5}" aria-hidden="true" style="color: #FF5722"/>
+                <span class="score" th:text="${foodList.businessScore}"/>
+                <span class="distance" th:text="${foodList.businessDistance}+m"/>
+            </div>
+            <div class="address">
+                <span th:text="${foodList.businessLocation}"/>
+                <span class="saleCount">销量<span style="font-size: 18px" th:text="${foodList.saleCount}"/></span>
+            </div>
+            <div class="discount" th:each="foodDiscounts:${foodList.foodDiscounts}">
+                <div class="loge">惠</div>
+                <span style="margin-left: 7px" th:text="${foodDiscounts.money}"/>
+                <span style="margin-left: 10px" th:text="${foodDiscounts.foodName}"/>
+            </div>
+            <div class="collection">
+                <button type="button" th:if="${foodList.isCollection == 0}" th:id="'collectionButton_'+ ${foodList.id}" class="btn btn-warning" style="float: right" th:onclick="'collectionFood(\'' + ${foodList.id}+ '\');'"><span th:id="'collectionSpan_'+ ${foodList.id}">收藏</span></button>
+                <button type="button" th:if="${foodList.isCollection == 1}" th:id="'collectionButton_'+ ${foodList.id}" class="btn btn-secondary" style="float: right" th:onclick="'collectionFood(\'' + ${foodList.id}+ '\');'" disabled><span th:id="'collectionSpan_'+ ${foodList.id}">已收藏</span></button>
+            </div>
+        </div>
+    </div>
+</div>

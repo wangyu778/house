@@ -26,7 +26,7 @@ function toastInfo(status, msg) {
         status = $("#respStatus").val();
         msg =  $("#respMsg").val();
     }
-    if(status === '200'){
+    if(status === '200' || status === 200){
         $("#successMsg").html(msg);
         $('#successToast').toast('show');
     }else {

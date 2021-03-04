@@ -92,6 +92,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             //forum
           "/forum/index",
+
+
+            //deliciousFood
+            "/deliciousFood/index",
+            "/deliciousFood/getFoodList",
+            "/deliciousFood/collectionFood"
     };
 
 

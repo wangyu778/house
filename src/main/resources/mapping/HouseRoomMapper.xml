@@ -21,8 +21,8 @@
     house_room.roomId as house_room_roomId, house_room.roomNumber as house_room_roomNumber, 
     house_room.roomImage as house_room_roomImage, house_room.roomPrice as house_room_roomPrice, 
     house_room.roomType as house_room_roomType, house_room.isLease as house_room_isLease, 
-    house_room.isRepair as house_room_isRepair, house_room.leaseDate as house_room_leaseDate, 
-    house_room.toLeaseDate as house_room_toLeaseDate, house_room.repairDate as house_room_repairDate, 
+    house_room.isRepair as house_room_isRepair, house_room.leaseDate as house_room_leaseDate,
+    house_room.repairDate as house_room_repairDate,
     house_room.`createUser` as `house_room_createUser`, house_room.createDate as house_room_createDate, 
     house_room.updateUser as house_room_updateUser, house_room.updateDate as house_room_updateDate
   </sql>

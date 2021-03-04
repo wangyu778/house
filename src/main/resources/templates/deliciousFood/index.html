@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/static/css/mine/mine.css">
+<link rel="stylesheet" href="/static/css/deliciousFood/deliciousFood.css">
+<div id="deliciousFood" class="deliciousFood" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div th:replace="deliciousFood/deliciousFood-carousel::carousel"></div>
+    <div style="width: 100%; height: 80px; margin-top: 10px">
+        <div style="width: 100%; height: 50%; text-align: center; font-size: 23px">
+            附近商家
+        </div>
+        <div style="width: 100%; height: 50%">
+            <div style="width: 50%; height: 100%; float: left">
+                <div class="dropdown btn-group" style="width: 100%;height: 100%;">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="sortValue" data-value="1">综合排序</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dLabel" style=" width: 100%;text-align: center;">
+                        <a class="dropdown-item" data-title="1" data-value="综合排序" onclick="getFoodList(this.getAttribute('data-title'),this.getAttribute('data-value'))">综合排序</a>
+                        <a class="dropdown-item" data-title="2" data-value="销量优先" onclick="getFoodList(this.getAttribute('data-title'),this.getAttribute('data-value'))">销量优先</a>
+                        <a class="dropdown-item" data-title="3" data-value="距离优先" onclick="getFoodList(this.getAttribute('data-title'),this.getAttribute('data-value'))">距离优先</a>
+                        <a class="dropdown-item" data-title="4" data-value="评分优先" onclick="getFoodList(this.getAttribute('data-title'),this.getAttribute('data-value'))">评分优先</a>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 50%; height: 100%; float: left">
+                <div class="btn-group" style="width: 100%;height: 100%;">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="businessTypeValue" data-value="0">品类</span>
+                    </button>
+                    <div class="dropdown-menu" style=" width: 100%;text-align: center;">
+                        <a class="dropdown-item" data-title="1" data-value="美食" onclick="getFoodList(undefined,undefined,this.getAttribute('data-title'),this.getAttribute('data-value'))">美食</a>
+                        <a class="dropdown-item" data-title="2" data-value="甜品" onclick="getFoodList(undefined,undefined,this.getAttribute('data-title'),this.getAttribute('data-value'))">甜品</a>
+                        <a class="dropdown-item" data-title="3" data-value="超市便利" onclick="getFoodList(undefined,undefined,this.getAttribute('data-title'),this.getAttribute('data-value'))">超市便利</a>
+                        <a class="dropdown-item" data-title="4" data-value="生鲜果蔬" onclick="getFoodList(undefined,undefined,this.getAttribute('data-title'),this.getAttribute('data-value'))">生鲜果蔬</a>
+                        <a class="dropdown-item" data-title="5" data-value="药品" onclick="getFoodList(undefined,undefined,this.getAttribute('data-title'),this.getAttribute('data-value'))">药品</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="foodList" style="width: 100%; margin-top: 20px"></div>
+    </div>
+</div>
+<script>
+    $('.carousel').carousel({
+        interval: 3000
+    })
+</script>
+<script src="/static/js/deliciousfood/js-deliciousFood-support.js"></script>

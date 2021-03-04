@@ -1,5 +1,6 @@
 package com.love.house.mapper.elasticsearchDao;
 
+import com.love.house.entity.elasticsearchDo.ESMessDO;
 import com.love.house.entity.elasticsearchDo.ESProductDO;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
@@ -9,5 +10,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @Date: 2021/1/26 14:30
  * @Description:
  */
-public interface ProductRepository extends ElasticsearchRepository<ESProductDO,Integer> {
+public interface ProductRepository extends ElasticsearchRepository<ESMessDO,Integer> {
 }

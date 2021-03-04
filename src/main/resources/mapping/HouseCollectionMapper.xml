@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.love.house.mapper.HouseCollectionMapper">
+  <resultMap id="BaseResultMap" type="com.love.house.entity.HouseCollection">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="collectionId" jdbcType="INTEGER" property="collectionId" />
+    <result column="collectionType" jdbcType="INTEGER" property="collectionType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, collectionId, collectionType
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house_collection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getCollection" resultType="com.love.house.entity.HouseCollection">
+    select <include refid="Base_Column_List"/>
+    from house_collection
+    <where>
+      <if test="filterMap.userId != null and filterMap.userId != ''">
+        and userId = #{filterMap.userId}
+      </if>
+      <if test="filterMap.collectionId != null and filterMap.collectionId != ''">
+        and collectionId = #{filterMap.collectionId}
+      </if>
+      <if test="filterMap.collectionType != null and filterMap.collectionType != ''">
+        and collectionType = #{filterMap.collectionType}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house_collection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseCollection" useGeneratedKeys="true">
+    insert into house_collection (userId, collectionId, collectionType
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{collectionId,jdbcType=INTEGER}, #{collectionType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseCollection" useGeneratedKeys="true">
+    insert into house_collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="collectionId != null">
+        collectionId,
+      </if>
+      <if test="collectionType != null">
+        collectionType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionId != null">
+        #{collectionId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionType != null">
+        #{collectionType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.love.house.entity.HouseCollection">
+    update house_collection
+    <set>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionId != null">
+        collectionId = #{collectionId,jdbcType=INTEGER},
+      </if>
+      <if test="collectionType != null">
+        collectionType = #{collectionType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.love.house.entity.HouseCollection">
+    update house_collection
+    set userId = #{userId,jdbcType=VARCHAR},
+      collectionId = #{collectionId,jdbcType=INTEGER},
+      collectionType = #{collectionType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
