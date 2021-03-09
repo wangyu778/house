@@ -1,18 +1,17 @@
-package com.love.house.service.deliciousFoodService.impl;
+package com.love.house.service.deliciousFood.impl;
 
 import com.love.house.common.ServerResponse;
 import com.love.house.entity.HouseCollection;
 import com.love.house.entity.HouseFood;
 import com.love.house.entity.HouseFoodDiscount;
-import com.love.house.mapper.HouseCollectionMapper;
+import com.love.house.mapper.mysqlMapper.HouseCollectionMapper;
 import com.love.house.mapper.mysqlMapper.HouseFoodDiscountMapper;
 import com.love.house.mapper.mysqlMapper.HouseFoodMapper;
 import com.love.house.model.Constant;
 import com.love.house.model.PageProperties;
 import com.love.house.service.baseService.BaseService;
-import com.love.house.service.deliciousFoodService.DeliciousFoodService;
+import com.love.house.service.deliciousFood.DeliciousFoodService;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

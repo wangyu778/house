@@ -1,0 +1,42 @@
+<div class="house" th:each="houseList : ${properties.list}"  xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="col-xl-3 img">
+            <img src="/static/image/house001.jpg" class="rounded" alt="图片">
+        </div>
+        <div class="col-xl-9 row" style="height: 100%">
+            <div class="col-xl-8 houseInfo">
+                <span th:if="${houseList.roomType == 1}">普通房型</span>
+                <span th:if="${houseList.roomType == 2}">豪华精装</span>
+                <span th:if="${houseList.roomType == 3}">家庭套房</span> &nbsp;
+                <span th:if="${houseList.roomDirection == 1}">朝东</span>
+                <span th:if="${houseList.roomDirection == 2}">朝西</span>
+                <span th:if="${houseList.roomDirection == 3}">朝南</span>
+                <span th:if="${houseList.roomDirection == 4}">朝北</span>
+            </div>
+            <div class="col-xl-4 price">
+                <span th:text="${houseList.roomPrice}"/>元/月（季付价）
+            </div>
+            <div class="col-xl-8" style="padding: 10px 15px">
+                <span th:text="房间号：+${houseList.roomNumber}"/>&emsp;/&emsp;
+                <span th:text="${houseList.roomLocation}+单元"/>&emsp;/&emsp;
+                <span th:text="${houseList.roomSize}"/>m<sup>2</sup>&emsp;/&emsp;
+                <span th:if="${houseList.roomDirection == 1}">朝东</span>
+                <span th:if="${houseList.roomDirection == 2}">朝西</span>
+                <span th:if="${houseList.roomDirection == 3}">朝南</span>
+                <span th:if="${houseList.roomDirection == 4}">朝北</span>
+                &emsp;/&emsp;
+                <span th:if="${houseList.roomType == 1}">普通房型</span>
+                <span th:if="${houseList.roomType == 2}">豪华精装</span>
+                <span th:if="${houseList.roomType == 3}">家庭套房</span>
+            </div>
+            <div class="col-xl-8">
+                <span class="badge badge-info tag">优选</span>
+                <span class="badge badge-info tag">精装</span>
+                <span class="badge badge-info tag">性价比高</span>
+            </div>
+            <div class="col-xl-11">
+                <button type="button"  class="btn btn-warning" style="float: right"><span>收藏</span></button>
+            </div>
+        </div>
+    </div>
+</div>

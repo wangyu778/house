@@ -2,42 +2,32 @@ package com.love.house.mapper.mysqlMapper;
 
 import com.love.house.entity.HouseRoom;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
- * @author wy
- * @date 2021/1/19 18:49
+ * @Author: wy
+ * @Date: 2021/3/9
  */
-@Repository
 public interface HouseRoomMapper {
-
-    /**
-     * 删除房间
-     * @param roomId id
-     * @return 结果
-     */
     int deleteByPrimaryKey(Integer roomId);
 
-    /**
-     * 新建房间
-     * @param record room
-     * @return 结果
-     */
+    int insert(HouseRoom record);
+
     int insertSelective(HouseRoom record);
 
-    /**
-     * 获取房间信息
-     * @param filterMap map
-     * @return HouseRoom
-     */
-    HouseRoom getHouseRoom(@Param(value = "filterMap") Map<String,Object> filterMap);
+    HouseRoom selectByPrimaryKey(Integer roomId);
+
+    int updateByPrimaryKeySelective(HouseRoom record);
+
+    int updateByPrimaryKey(HouseRoom record);
 
     /**
-     * 更新房间信息
-     * @param record room
-     * @return 更新结果
+     * 获取房屋list
+     * @param filterMap 条件
+     * @return list
      */
-    int updateByPrimaryKeySelective(HouseRoom record);
+    List<HouseRoom> getHouseList(@Param(value = "filterMap") Map<String, Object> filterMap);
+
 }

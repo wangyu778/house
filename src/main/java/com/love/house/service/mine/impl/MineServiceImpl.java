@@ -4,7 +4,6 @@ import com.love.house.common.ResponseCode;
 import com.love.house.common.ServerResponse;
 import com.love.house.entity.HouseRoom;
 import com.love.house.entity.User;
-import com.love.house.mapper.mysqlMapper.HouseRoomMapper;
 import com.love.house.mapper.mysqlMapper.UserMapping;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.mine.MineService;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.function.Consumer;
 
 /**
  * @Author: wy
@@ -27,8 +25,6 @@ public class MineServiceImpl implements MineService {
     private UserMapping userMapping;
     @Resource
     private BaseService baseService;
-    @Resource
-    private HouseRoomMapper houseRoomMapper;
 
     @Override
     public ServerResponse<ResponseCode> saveUser(User user) {
@@ -47,9 +43,10 @@ public class MineServiceImpl implements MineService {
 
     @Override
     public HouseRoom getRentalDetails() {
-        Map<String,Object> filterMap = new HashMap<>(2);
-        filterMap.put("userId",baseService.getUserId());
-        return houseRoomMapper.getHouseRoom(filterMap);
+//        Map<String,Object> filterMap = new HashMap<>(2);
+//        filterMap.put("userId",baseService.getUserId());
+//        return houseRoomMapper.getHouseRoom(filterMap);
+        return new HouseRoom();
     }
 //
 //    public static void main(String[] args) {

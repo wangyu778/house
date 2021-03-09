@@ -3,7 +3,7 @@ package com.love.house.controller.deliciousFood;
 import com.love.house.common.ServerResponse;
 import com.love.house.model.PageProperties;
 import com.love.house.service.baseService.BaseService;
-import com.love.house.service.deliciousFoodService.DeliciousFoodService;
+import com.love.house.service.deliciousFood.DeliciousFoodService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;

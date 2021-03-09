@@ -4,14 +4,14 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 10px 15.5%">
         <a class="navbar-brand nav-item" id="home" data-to="/overview/index" data-id="1" data-title="首页">House</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"/>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" >
             <ul class="navbar-nav mr-auto">
                 <li  class="nav-item" id="mine" data-to="/mine/index" data-id="2" data-title="我的">
                     <a class="nav-link" href="#">我的</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="renting" data-to="/renting/index" data-id="3" data-title="租房">
                     <a class="nav-link" href="#">租房</a>
                 </li>
                 <li class="nav-item" id="deliciousFood" data-to="/deliciousFood/index" data-id="4" data-title="周边美食">
@@ -61,7 +61,7 @@
             <!--未登陆-->
             <div style="float: left;padding: 0 10px" th:if="${@baseService.getUserId() == null}">
                 <button type="button" class="btn btn-outline-primary nav-item" data-to="/mine/index">
-                    <span class="glyphicon glyphicon-log-in" style="font-size: 17px"></span> 立即登陆
+                    <span class="glyphicon glyphicon-log-in" style="font-size: 17px"/> 立即登陆
                 </button>
             </div>
             <input type="hidden" id="respStatus" th:if="${ServerResponse != null}" th:value="${ServerResponse.status}">

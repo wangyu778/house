@@ -97,7 +97,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             //deliciousFood
             "/deliciousFood/index",
             "/deliciousFood/getFoodList",
-            "/deliciousFood/collectionFood"
+            "/deliciousFood/collectionFood",
+
+
+            //renting
+            "/renting/index",
+            "/renting/getHouseList",
     };
 
 

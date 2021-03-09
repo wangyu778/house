@@ -1,11 +1,8 @@
-package com.love.house.service.deliciousFoodService;
+package com.love.house.service.deliciousFood;
 
 import com.love.house.common.ServerResponse;
-import com.love.house.entity.HouseFood;
 import com.love.house.model.PageProperties;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @Author: wy

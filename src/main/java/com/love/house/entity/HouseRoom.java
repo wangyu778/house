@@ -1,14 +1,19 @@
 package com.love.house.entity;
 
+import org.springframework.stereotype.Repository;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * house_room
- * @author wy
- * @date 2021/1/19 18:47
+ * @author 
  */
+@Repository
 public class HouseRoom implements Serializable {
+    /**
+     * 主键
+     */
     private Integer roomId;
 
     /**
@@ -17,27 +22,42 @@ public class HouseRoom implements Serializable {
     private Integer roomNumber;
 
     /**
+     * 房间大小
+     */
+    private Integer roomSize;
+
+    /**
      * 房间图片
      */
     private String roomImage;
 
     /**
-     * 价格/月
+     * 房间价格/月
      */
     private Integer roomPrice;
 
     /**
-     * 房屋类型 1、普通房；2、豪华精装；3、家庭套房
+     * 房屋朝向 1：东，2：南，3：西，4：北
+     */
+    private Integer roomDirection;
+
+    /**
+     * 几单元
+     */
+    private Integer roomLocation;
+
+    /**
+     * 房间类型 1、普通房型；2、豪华精装；3、家庭套房
      */
     private Integer roomType;
 
     /**
-     * 是否出租 0：否、1：是
+     * 是否出租 0、否；1、是
      */
     private Integer isLease;
 
     /**
-     * 是否维修中 0：否，1、是
+     * 是否报修 0、否；1、是
      */
     private Integer isRepair;
 
@@ -47,15 +67,13 @@ public class HouseRoom implements Serializable {
     private Date leaseDate;
 
     /**
-     * 截至租房日期
-     */
-    private Date toLeaseDate;
-
-    /**
-     * 抱修日期
+     * 报修日期
      */
     private Date repairDate;
 
+    /**
+     * 创建人
+     */
     private String createUser;
 
     /**
@@ -63,8 +81,14 @@ public class HouseRoom implements Serializable {
      */
     private Date createDate;
 
+    /**
+     * 更新人
+     */
     private String updateUser;
 
+    /**
+     * 更新时间
+     */
     private Date updateDate;
 
     private static final long serialVersionUID = 1L;
@@ -89,6 +113,14 @@ public class HouseRoom implements Serializable {
         return roomImage;
     }
 
+    public Integer getRoomSize() {
+        return roomSize;
+    }
+
+    public void setRoomSize(Integer roomSize) {
+        this.roomSize = roomSize;
+    }
+
     public void setRoomImage(String roomImage) {
         this.roomImage = roomImage;
     }
@@ -99,6 +131,22 @@ public class HouseRoom implements Serializable {
 
     public void setRoomPrice(Integer roomPrice) {
         this.roomPrice = roomPrice;
+    }
+
+    public Integer getRoomDirection() {
+        return roomDirection;
+    }
+
+    public void setRoomDirection(Integer roomDirection) {
+        this.roomDirection = roomDirection;
+    }
+
+    public Integer getRoomLocation() {
+        return roomLocation;
+    }
+
+    public void setRoomLocation(Integer roomLocation) {
+        this.roomLocation = roomLocation;
     }
 
     public Integer getRoomType() {
@@ -131,14 +179,6 @@ public class HouseRoom implements Serializable {
 
     public void setLeaseDate(Date leaseDate) {
         this.leaseDate = leaseDate;
-    }
-
-    public Date getToLeaseDate() {
-        return toLeaseDate;
-    }
-
-    public void setToLeaseDate(Date toLeaseDate) {
-        this.toLeaseDate = toLeaseDate;
     }
 
     public Date getRepairDate() {
@@ -180,4 +220,6 @@ public class HouseRoom implements Serializable {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+
 }
