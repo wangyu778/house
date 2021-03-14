@@ -156,5 +156,8 @@
       </if>
     </if>
   </select>
+  <select id="getHouseFood" resultType="com.love.house.entity.HouseFood">
+    select * from house_food where id = #{id,jdbcType=INTEGER}
+  </select>
 
 </mapper>

@@ -1,14 +1,13 @@
 package com.love.house.controller.renting;
 
+import com.love.house.common.ServerResponse;
 import com.love.house.model.PageProperties;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.renting.RentingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -41,5 +40,13 @@ public class RentingController {
     @PostMapping(value = "/getHouseList")
     public ModelAndView getHouseList(@RequestBody PageProperties properties){
         return new ModelAndView("renting/renting-house-list").addObject("properties", rentingService.getHouseList(properties));
+    }
+
+
+    @ApiOperation("收藏美食")
+    @PostMapping(value = "/collectionHouse")
+    @ResponseBody
+    public ServerResponse<String> collectionHouse(@RequestParam("roomId") int roomId){
+        return rentingService.collectionHouse(roomId);
     }
 }

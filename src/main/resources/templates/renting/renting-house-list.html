@@ -35,7 +35,9 @@
                 <span class="badge badge-info tag">性价比高</span>
             </div>
             <div class="col-xl-11">
-                <button type="button"  class="btn btn-warning" style="float: right"><span>收藏</span></button>
+                <button type="button" th:if="${houseList.isCollection == 0}" th:id="'collectionButton_'+ ${houseList.roomId}" class="btn btn-warning" style="float: right; margin: 0 10px" th:onclick="'collectionHouse(\'' + ${houseList.roomId}+ '\');'"><span th:id="'collectionSpan_'+ ${houseList.roomId}">收藏</span></button>
+                <button type="button" th:if="${houseList.isCollection == 1}" th:id="'collectionButton_'+ ${houseList.roomId}" class="btn btn-secondary" style="float: right; margin: 0 10px" th:onclick="'collectionHouse(\'' + ${houseList.roomId}+ '\');'"><span th:id="'collectionSpan_'+ ${houseList.roomId}">已收藏</span></button>
+                <button type="button"  class="btn btn-info" style="float: right; margin: 0 10px"><span>申请看房</span></button>
             </div>
         </div>
     </div>

@@ -103,6 +103,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             //renting
             "/renting/index",
             "/renting/getHouseList",
+
+            //manage
+            "/manage/houseManageIndex",
+            "/manage/newHouse",
+            "/manage/newHouseWin",
+            "/manage/forumManageIndex",
+
     };
 
 

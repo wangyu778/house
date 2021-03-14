@@ -2,12 +2,19 @@ package com.love.house.service.mine.impl;
 
 import com.love.house.common.ResponseCode;
 import com.love.house.common.ServerResponse;
+import com.love.house.entity.HouseCollection;
+import com.love.house.entity.HouseFood;
 import com.love.house.entity.HouseRoom;
 import com.love.house.entity.User;
+import com.love.house.mapper.mysqlMapper.HouseCollectionMapper;
+import com.love.house.mapper.mysqlMapper.HouseFoodMapper;
+import com.love.house.mapper.mysqlMapper.HouseRoomMapper;
 import com.love.house.mapper.mysqlMapper.UserMapping;
+import com.love.house.model.Constant;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.mine.MineService;
 import com.love.house.utils.Md5;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +32,12 @@ public class MineServiceImpl implements MineService {
     private UserMapping userMapping;
     @Resource
     private BaseService baseService;
+    @Resource
+    private HouseCollectionMapper collectionMapper;
+    @Resource
+    private HouseFoodMapper houseFoodMapper;
+    @Resource
+    private HouseRoomMapper houseRoomMapper;
 
     @Override
     public ServerResponse<ResponseCode> saveUser(User user) {
@@ -43,26 +56,27 @@ public class MineServiceImpl implements MineService {
 
     @Override
     public HouseRoom getRentalDetails() {
-//        Map<String,Object> filterMap = new HashMap<>(2);
-//        filterMap.put("userId",baseService.getUserId());
-//        return houseRoomMapper.getHouseRoom(filterMap);
         return new HouseRoom();
     }
-//
-//    public static void main(String[] args) {
-//        List<Integer> list = new ArrayList<>(5);
-//        Collections.addAll(list,1,6,3,4,5);
-//        list.sort((o1, o2) -> o1 - o2);
-//        System.out.println(list);
-//
-//        int num = 10;
-//
-//        Consumer<String> consumer = ele -> {
-//            System.out.println(num);
-//        };
-//
-////        num = num + 2;
-//        consumer.accept("hello");
-//    }
+
+    @Override
+    public List<HouseCollection> getCollectionList() {
+        List<HouseCollection> collectionList = collectionMapper.getCollectionList(baseService.getUserId());
+        for (HouseCollection collection : collectionList) {
+            if(collection.getCollectionType().equals(Constant.foodCollectionType)){
+                HouseFood houseFood = houseFoodMapper.getHouseFood(collection.getCollectionId());
+                if(ObjectUtils.isNotEmpty(houseFood)){
+                    collection.setHouseFood(houseFood);
+                }
+            }
+            if(collection.getCollectionType().equals(Constant.houseCollectionType)){
+                HouseRoom houseRoom = houseRoomMapper.selectByPrimaryKey(collection.getCollectionId());
+                if(ObjectUtils.isNotEmpty(houseRoom)){
+                    collection.setHouseRoom(houseRoom);
+                }
+            }
+        }
+        return collectionList;
+    }
 
 }

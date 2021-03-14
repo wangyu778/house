@@ -21,6 +21,8 @@ public interface HouseFoodMapper {
      */
     int deleteByPrimaryKey(Integer id);
 
+    HouseFood getHouseFood(Integer id);
+
     /**
      * 新增
      * @param record 新增内容

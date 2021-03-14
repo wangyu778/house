@@ -20,15 +20,14 @@
                 <li class="nav-item" id="forum" data-to="/forum/index" data-id="5" data-title="论坛">
                     <a class="nav-link" href="#">聊天室</a>
                 </li>
-                <li class="nav-item dropdown" th:if="${@resourceService.isRl('/houseManage')}">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <li class="dropdown" th:if="${@resourceService.isRl('/houseManage')}">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         公寓管理
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">房屋管理</a>
-                        <a class="dropdown-item" href="#">美食管理</a>
-                        <a class="dropdown-item" href="#">报修管理</a>
-                        <a class="dropdown-item" href="#">论坛监测</a>
+                        <a class="nav-item dropdown-item"  id="houseManage" data-to="/manage/houseManageIndex" data-id="6" data-title="房屋管理">房屋管理</a>
+                        <a class="nav-item dropdown-item" href="#">美食管理</a>
+                        <a class="nav-item dropdown-item" id="forumManage" data-to="/manage/forumManageIndex" data-id="6" data-title="系统监测">系统监测</a>
                     </div>
                 </li>
             </ul>

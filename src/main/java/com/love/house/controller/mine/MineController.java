@@ -78,7 +78,7 @@ public class MineController {
     @ApiOperation("返回我的收藏界面")
     @GetMapping(value = "/collection")
     public ModelAndView getCollection(){
-        return new ModelAndView("mine/mine-collection");
+        return new ModelAndView("mine/mine-collection").addObject("collectionList",mineService.getCollectionList());
     }
 
 }

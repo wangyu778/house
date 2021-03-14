@@ -1,6 +1,7 @@
 package com.love.house.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * house_collection
@@ -26,6 +27,10 @@ public class HouseCollection implements Serializable {
      * 收藏类型 1、美食，2、房屋
      */
     private Integer collectionType;
+
+    private HouseRoom houseRoom;
+
+    private HouseFood houseFood;
 
     private static final long serialVersionUID = 1L;
 
@@ -59,5 +64,21 @@ public class HouseCollection implements Serializable {
 
     public void setCollectionType(Integer collectionType) {
         this.collectionType = collectionType;
+    }
+
+    public HouseRoom getHouseRoom() {
+        return houseRoom;
+    }
+
+    public void setHouseRoom(HouseRoom houseRoom) {
+        this.houseRoom = houseRoom;
+    }
+
+    public HouseFood getHouseFood() {
+        return houseFood;
+    }
+
+    public void setHouseFood(HouseFood houseFood) {
+        this.houseFood = houseFood;
     }
 }

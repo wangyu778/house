@@ -1,10 +1,19 @@
 package com.love.house.service.renting.impl;
 
+import com.love.house.common.ServerResponse;
+import com.love.house.entity.HouseCollection;
+import com.love.house.entity.HouseFood;
+import com.love.house.entity.HouseFoodDiscount;
 import com.love.house.entity.HouseRoom;
+import com.love.house.mapper.mysqlMapper.HouseCollectionMapper;
 import com.love.house.mapper.mysqlMapper.HouseRoomMapper;
+import com.love.house.model.Constant;
 import com.love.house.model.PageProperties;
+import com.love.house.service.baseService.BaseService;
 import com.love.house.service.renting.RentingService;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,8 +29,14 @@ import java.util.Map;
 @Service
 public class RentingServiceImpl implements RentingService {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Resource
     private HouseRoomMapper houseRoomMapper;
+    @Resource
+    private HouseCollectionMapper houseCollectionMapper;
+    @Resource
+    private BaseService baseService;
 
     @Override
     public PageProperties getHouseList(PageProperties properties) {
@@ -56,8 +71,30 @@ public class RentingServiceImpl implements RentingService {
             }
         }
         List<HouseRoom> houseList = houseRoomMapper.getHouseList(filterMap);
+        filterMap.put("collectionType", Constant.houseCollectionType);
+        for (HouseRoom houseRoom : houseList) {
+            filterMap.put("collectionId", houseRoom.getRoomId());
+            if(ObjectUtils.isNotEmpty(houseCollectionMapper.getCollection(filterMap))){
+                houseRoom.setIsCollection(1);
+            }
+        }
         properties.setList(houseList);
         return properties;
+    }
+
+    @Override
+    public ServerResponse<String> collectionHouse(int roomId) {
+        try {
+            HouseCollection collection = new HouseCollection();
+            collection.setUserId(baseService.getUserId());
+            collection.setCollectionId(roomId);
+            collection.setCollectionType(Constant.houseCollectionType);
+            houseCollectionMapper.insert(collection);
+            return ServerResponse.createBySuccessMessage("保存成功");
+        } catch (Exception e) {
+            log.error("[租房-加入收藏]-将"+roomId+"加入收藏失败",e);
+            return ServerResponse.createByErrorMessage("保存失败");
+        }
     }
 
 }

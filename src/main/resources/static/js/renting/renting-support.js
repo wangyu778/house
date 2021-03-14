@@ -22,3 +22,15 @@ $("#renting #navigation .row div").on("click", function () {
     $(this).css("color","#00ae66").siblings().css("color","black");
     getHouseList($("#roomLocation").val(),$("#roomPrice").val(),$("#roomType").val(),$("#roomDirection").val())
 });
+
+function collectionHouse(roomId) {
+    function success(o) {
+        toastInfo(o.status,o.msg);
+        if(o.status === 200){
+            $("#renting #collectionSpan_"+roomId).text('已收藏');
+            $("#renting #collectionButton_"+roomId).removeClass('btn-warning').addClass('btn-secondary').attr('disabled','disabled');
+        }
+    }
+    function error() {}
+    $.baseAjax("/renting/collectionHouse","POST",{roomId: roomId},success,error);
+}

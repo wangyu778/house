@@ -91,6 +91,11 @@ public class HouseRoom implements Serializable {
      */
     private Date updateDate;
 
+    /**
+     * 是否被该用户收藏 0、否，1、是
+     */
+    private int isCollection;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getRoomId() {
@@ -221,5 +226,11 @@ public class HouseRoom implements Serializable {
         this.updateDate = updateDate;
     }
 
+    public int getIsCollection() {
+        return isCollection;
+    }
 
+    public void setIsCollection(int isCollection) {
+        this.isCollection = isCollection;
+    }
 }

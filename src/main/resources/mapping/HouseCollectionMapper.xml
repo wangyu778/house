@@ -31,6 +31,13 @@
       </if>
     </where>
   </select>
+
+  <select id="getCollectionList" resultType="com.love.house.entity.HouseCollection">
+    select <include refid="Base_Column_List"/>
+    from  house_collection
+    where userId = #{userId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from house_collection
     where id = #{id,jdbcType=INTEGER}

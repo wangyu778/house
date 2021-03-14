@@ -45,3 +45,11 @@ function userRegister() {
     function error() {}
     $.baseAjax("/mine/userRegister","get","",success,error)
 }
+
+function manageIndex() {
+    function success(o) {
+        $("#content").html(o);
+    }
+    function error() {}
+    $.baseAjax("/manage/houseManageIndex","post","",success,error)
+}

@@ -1,5 +1,6 @@
 package com.love.house.service.renting;
 
+import com.love.house.common.ServerResponse;
 import com.love.house.model.PageProperties;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,12 @@ public interface RentingService {
      * @return 结果list
      */
     public PageProperties getHouseList(PageProperties properties);
+
+    /**
+     * 加入收藏
+     * @param roomId 房间Id
+     * @return 结果
+     */
+    public ServerResponse<String> collectionHouse(int roomId);
 
 }

@@ -1,0 +1,128 @@
+<div style="width: 100%; height: 920px;">
+<!--<div style="width: 100%; height: 920px; background: url(/static/image/bigScreen.png) no-repeat; background-size: 100% 100%">-->
+<!--<div style="width: 100%; height: 900px; background-color: #4281ff">-->
+    <div id="wordCloud" style="width: 100%; padding: 10px 20%; height: 450px"></div>
+    <div id="histogram" style="width: 33%; padding: 0 15px; height: 450px; float: left; margin-top: 20px"></div>
+    <div id="pieChart" style="width: 33%; padding: 0 15px; height: 450px; float: left; margin-top: 20px"></div>
+    <div id="lineChart" style="width: 33%; padding: 0 15px; height: 450px; float: left; margin-top: 20px"></div>
+</div>
+<script>
+    var text = '你好.租房.你好.租房.你好.租房.你好.租房.向阳.有阳光.宽敞.干净.喜欢.你好.租房.向阳.有阳光.宽敞.干净.喜欢.平方米.平方米.平方米.平方米' +
+        '.平方米.多少价位.多少价位.多少价位.多少价位.多少价位.豪华精装.豪华精装.豪华精装.豪华精装.附近小吃.附近小吃.附近小吃.House.House.House.House' +
+        '.朝向.朝向.朝向.朝向.朝向.打折.打折.打折.租期.租期.租期.房租.房租.房租.房租';
+    var data = text.split(/[,\. ]+/g)
+        .reduce(function (arr, word) {
+            var obj = arr.find(function (obj) {
+                return obj.name === word;
+            });
+            if (obj) {
+                obj.weight += 1;
+            } else {
+                obj = {
+                    name: word,
+                    weight: 1
+                };
+                arr.push(obj);
+            }
+            return arr;
+        }, []);
+    Highcharts.chart('wordCloud', {
+        series: [{
+            type: 'wordcloud',
+            data: data
+        }],
+        title: {
+            text: '聊天室热词图'
+        }
+    });
+</script>
+<script>
+    var chartDom = document.getElementById('histogram');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        title:{
+            show:true,
+            text:"系统七日访客量柱状图",
+            left: 'center'
+        },
+        color: '#2f4554',
+        xAxis: {
+            type: 'category',
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [120, 200, 150, 80, 70, 110, 130],
+            type: 'bar'
+        }]
+    };
+
+    option && myChart.setOption(option);
+
+</script>
+<script>
+
+    var chartDom = document.getElementById('pieChart');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        title: {
+            text: '各类型房屋成交量',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '50%',
+                data: [
+                    {value: 1048, name: '普通类型'},
+                    {value: 735, name: '豪华精装'},
+                    {value: 580, name: '家庭套房'},
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+</script>
+<script>
+    var chartDom = document.getElementById('lineChart');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        title: {
+            text: '七日租赁成交量',
+            left: 'center'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'line'
+        }]
+    };
+
+    option && myChart.setOption(option);
+</script>
