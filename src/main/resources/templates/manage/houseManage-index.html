@@ -1,61 +1,61 @@
 <link rel="stylesheet" href="/static/css/renting/renting.css">
 <div id="houseManage" style="width: 100%; min-height: 900px">
-    <form style="margin-top: 10px">
+    <form id="searchForm" style="margin-top: 10px">
         <span>房间类型：</span>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1">
-            <label class="form-check-label" for="inlineCheckbox1">普通房型</label>
+            <input class="form-check-input" type="radio" name="roomType" id="roomType1" value="1">
+            <label class="form-check-label" for="roomType1">普通房型</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2">
-            <label class="form-check-label" for="inlineCheckbox2">豪华精装</label>
+            <input class="form-check-input" type="radio" name="roomType" id="roomType2" value="2">
+            <label class="form-check-label" for="roomType2">豪华精装</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="3">
-            <label class="form-check-label" for="inlineCheckbox3">家庭套房</label>
+            <input class="form-check-input" type="radio" name="roomType" id="roomType3" value="3">
+            <label class="form-check-label" for="roomType3">家庭套房</label>
         </div>
 
         <span style="margin-left: 10%">房屋朝向：</span>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="1">
-            <label class="form-check-label" for="inlineCheckbox4">东</label>
+            <input class="form-check-input" type="radio" name="roomDirection" id="roomDirection1" value="1">
+            <label class="form-check-label" for="roomDirection1">东</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="2">
-            <label class="form-check-label" for="inlineCheckbox5">南</label>
+            <input class="form-check-input" type="radio" name="roomDirection" id="roomDirection2" value="2">
+            <label class="form-check-label" for="roomDirection2">南</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="3">
-            <label class="form-check-label" for="inlineCheckbox6">西</label>
+            <input class="form-check-input" type="radio" name="roomDirection" id="roomDirection3" value="3">
+            <label class="form-check-label" for="roomDirection3">西</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="3">
-            <label class="form-check-label" for="inlineCheckbox7">北</label>
+            <input class="form-check-input" type="radio" name="roomDirection" id="roomDirection4" value="4">
+            <label class="form-check-label" for="roomDirection4">北</label>
         </div><br>
 
         <span>房间号 :   </span>
-        <label for="inputPassword2" class="sr-only">请您输入房间号</label>
-        <input type="password" class="form-control" id="inputPassword2" placeholder="请您输入房间号" style="margin: 15px 0; width: auto; display: initial">
+        <label for="roomNumber" class="sr-only">请您输入房间号</label>
+        <input type="text" class="form-control" id="roomNumber" name="roomNumber" placeholder="请您输入房间号" style="margin: 15px 0; width: auto; display: initial">
 
         <span style="margin-left: 5%">租金(月) :&emsp;</span>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">0-1000</label>
+            <input class="form-check-input" type="radio" name="roomPrice" id="roomPrice1" value="1">
+            <label class="form-check-label" for="roomPrice1">0-1000</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">1000-2000</label>
+            <input class="form-check-input" type="radio" name="roomPrice" id="roomPrice2" value="2">
+            <label class="form-check-label" for="roomPrice2">1000-2000</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-            <label class="form-check-label" for="inlineRadio3">2000-5000</label>
+            <input class="form-check-input" type="radio" name="roomPrice" id="roomPrice3" value="3">
+            <label class="form-check-label" for="roomPrice3">2000-5000</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option3">
-            <label class="form-check-label" for="inlineRadio4">5000~</label>
+            <input class="form-check-input" type="radio" name="roomPrice" id="roomPrice4" value="4">
+            <label class="form-check-label" for="roomPrice4">5000~</label>
         </div>
 
-        <button type="button" class="btn btn-primary mb-2" style="margin-left: 20px">搜索</button>
+        <button type="button" class="btn btn-primary mb-2" style="margin-left: 20px" onclick="getHouseList()">搜索</button>
         <button type="button" class="btn btn-info mb-2" style="margin-left: 20px" onclick="newHouseWin()">新建房屋</button>
     </form>
 
@@ -69,11 +69,18 @@
     });
 
     function getHouseList() {
+        let fromJson = $('#searchForm').serializeArray();
+        let dataJson = {};
+        $.each(fromJson, function(index, field) {
+            if(field.value !== '' && field.value !== undefined){
+                dataJson[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+            }
+        });
         function success(o) {
             $("#houseManage #houseList").html(o);
         }
         function error() {}
-        $.baseJsonAjax("/manage/getHouseList","POST",{},success,error);
+        $.baseJsonAjax("/manage/getHouseList","POST",dataJson,success,error);
     }
 
     function newHouseWin() {
@@ -84,4 +91,20 @@
         $.baseAjax("/manage/newHouseWin","get",{},success,error);
     }
 
+    function updateHouseWin(roomId) {
+        function success(o) {
+            $("#content").html(o);
+        }
+        function error() {}
+        $.baseAjax("/manage/updateHouseWin","post",{roomId:roomId},success,error);
+    }
+
+    function deleteHouse(roomId) {
+        function success(o) {
+            toastInfo(o.status,o.msg);
+            manageHouseIndex();
+        }
+        function error() {}
+        $.baseAjax("/manage/deleteHouse","post",{roomId:roomId},success,error);
+    }
 </script>

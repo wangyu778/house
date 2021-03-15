@@ -129,12 +129,12 @@ public class WebSocketServerEndpoint implements InitializingBean {
             // 处理消息
             Message messageObj = JSON.parseObject(jsonMessage.getString("body"), messageClass);
             //将消息存入es中
-            ESMessDO esMessDO = new ESMessDO();
-            esMessDO.setId(Integer.parseInt(RandomUtil.generateDigitalStr(8)));
-            esMessDO.setMessage(message);
-            esMessDO.setSpeakTime(Long.toString(System.currentTimeMillis()));
-            esMessDO.setName(accessToken);
-            productRepository.save(esMessDO);
+//            ESMessDO esMessDO = new ESMessDO();
+//            esMessDO.setId(Integer.parseInt(RandomUtil.generateDigitalStr(8)));
+//            esMessDO.setMessage(message);
+//            esMessDO.setSpeakTime(Long.toString(System.currentTimeMillis()));
+//            esMessDO.setName(accessToken);
+//            productRepository.save(esMessDO);
             messageHandler.execute(session, messageObj);
         } catch (Throwable throwable) {
             logger.info("[onMessage][session({}) message({}) 发生异常]", session, throwable);

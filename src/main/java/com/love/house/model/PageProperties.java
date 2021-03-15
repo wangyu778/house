@@ -22,10 +22,17 @@ public class PageProperties implements Serializable {
      */
     private int sortType;
 
+
     /**
      * 品类
      */
     private int businessType;
+
+
+    /**
+     * 房间价格/月
+     */
+    private Integer roomNumber;
 
     /**
      * 房间价格/月
@@ -101,5 +108,13 @@ public class PageProperties implements Serializable {
 
     public void setRoomType(Integer roomType) {
         this.roomType = roomType;
+    }
+
+    public Integer getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
     }
 }

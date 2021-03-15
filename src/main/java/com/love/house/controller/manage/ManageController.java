@@ -1,8 +1,10 @@
 package com.love.house.controller.manage;
 
 import com.love.house.common.ServerResponse;
+import com.love.house.entity.HouseFood;
 import com.love.house.entity.HouseRoom;
 import com.love.house.model.PageProperties;
+import com.love.house.service.deliciousFood.DeliciousFoodService;
 import com.love.house.service.manage.ManageService;
 import com.love.house.service.renting.RentingService;
 import io.swagger.annotations.Api;
@@ -27,6 +29,8 @@ public class ManageController {
     private RentingService rentingService;
     @Resource
     private ManageService manageService;
+    @Resource
+    private DeliciousFoodService foodService;
 
     @ApiOperation("返回-公寓管理-主界面")
     @PostMapping(value = "/houseManageIndex")
@@ -58,5 +62,70 @@ public class ManageController {
     @ResponseBody
     public ServerResponse<String> newHouse(@RequestBody HouseRoom houseRoom){
         return manageService.newHouse(houseRoom);
+    }
+
+    @ApiOperation("返回-住房管理")
+    @PostMapping(value = "/updateHouseWin")
+    public ModelAndView updateHouseWin(@RequestParam Integer roomId){
+        return new ModelAndView("manage/manage-update-house").addObject("houseRoom",manageService.getHouse(roomId));
+    }
+
+    @ApiOperation("返回-新增House-房屋列表")
+    @PostMapping(value = "/deleteHouse")
+    @ResponseBody
+    public ServerResponse<String> deleteHouse(@RequestParam Integer roomId){
+        return manageService.deleteHouse(roomId);
+    }
+
+    @ApiOperation("修改房屋")
+    @PostMapping(value = "/updateHouse")
+    @ResponseBody
+    public ServerResponse<String> updateHouse(@RequestBody HouseRoom houseRoom){
+        return manageService.updateHouse(houseRoom);
+    }
+
+    @ApiOperation("返回-美食管理-主界面")
+    @PostMapping(value = "/foodManageIndex")
+    public ModelAndView foodManageIndex(){
+        return new ModelAndView("manage/manage-food-index");
+    }
+
+    @ApiOperation("返回-美食管理-美食列表")
+    @PostMapping(value = "/getFoodList")
+    public ModelAndView getFoodList(@RequestBody PageProperties properties){
+        return new ModelAndView("manage/manage-food-list").addObject("properties", foodService.getFoodList(properties));
+    }
+
+    @ApiOperation("删除商家")
+    @PostMapping(value = "/deleteFood")
+    @ResponseBody
+    public ServerResponse<String> deleteFood(@RequestParam Integer foodId){
+        return manageService.deleteFood(foodId);
+    }
+
+    @ApiOperation("返回-新建商家页面")
+    @PostMapping(value = "/newFoodWin")
+    public ModelAndView newFoodWin(){
+        return new ModelAndView("manage/manage-food-new");
+    }
+
+    @ApiOperation("返回-新增House-房屋列表")
+    @PostMapping(value = "/newFood")
+    @ResponseBody
+    public ServerResponse<String> newFood(@RequestBody HouseFood houseFood){
+        return manageService.newFood(houseFood);
+    }
+
+    @ApiOperation("返回-新建商家页面")
+    @PostMapping(value = "/updateFoodWin")
+    public ModelAndView updateFoodWin(@RequestParam Integer foodId){
+        return new ModelAndView("manage/manage-food-update").addObject("houseFood",manageService.getFood(foodId));
+    }
+
+    @ApiOperation("删除商家")
+    @PostMapping(value = "/deleteDiscount")
+    @ResponseBody
+    public ServerResponse<String> deleteDiscount(@RequestParam Integer id){
+        return manageService.deleteDiscount(id);
     }
 }

@@ -25,8 +25,12 @@
       </where>
     </select>
 
+  <delete id="deleteByFoodId" parameterType="java.lang.Integer">
+    delete from house_food_discount
+    where foodId = #{id,jdbcType=INTEGER}
+  </delete>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByKey" parameterType="java.lang.Integer">
     delete from house_food_discount
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -39,25 +43,25 @@
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseFoodDiscount" useGeneratedKeys="true">
     insert into house_food_discount
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="foodid != null">
+      <if test="foodId != null">
         foodId,
       </if>
       <if test="money != null">
         money,
       </if>
-      <if test="foodname != null">
+      <if test="foodName != null">
         foodName,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="foodid != null">
-        #{foodid,jdbcType=INTEGER},
+      <if test="foodId != null">
+        #{foodId,jdbcType=INTEGER},
       </if>
       <if test="money != null">
         #{money,jdbcType=INTEGER},
       </if>
-      <if test="foodname != null">
-        #{foodname,jdbcType=VARCHAR},
+      <if test="foodName != null">
+        #{foodName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

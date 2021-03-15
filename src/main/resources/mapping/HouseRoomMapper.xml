@@ -216,6 +216,9 @@
       <if test="filterMap.roomDirection != '' and filterMap.roomDirection != null">
         and roomDirection = #{filterMap.roomDirection}
       </if>
+      <if test="filterMap.roomNumber != '' and filterMap.roomNumber != null">
+        and roomNumber = #{filterMap.roomNumber}
+      </if>
       <if test="filterMap.roomLocation != '' and filterMap.roomLocation != null">
         and roomLocation = #{filterMap.roomLocation}
       </if>

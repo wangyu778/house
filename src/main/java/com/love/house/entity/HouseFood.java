@@ -85,6 +85,16 @@ public class HouseFood implements Serializable {
      */
     private List<HouseFoodDiscount> foodDiscounts;
 
+    /**
+     * 价格 没事价格
+     */
+    private Integer money;
+
+    /**
+     * 美食名称 美食名称
+     */
+    private String foodName;
+
     private static final long serialVersionUID = 1L;
 
     public int getIsCollection() {
@@ -209,5 +219,21 @@ public class HouseFood implements Serializable {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 }

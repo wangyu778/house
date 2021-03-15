@@ -109,6 +109,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/manage/newHouse",
             "/manage/newHouseWin",
             "/manage/forumManageIndex",
+            "/manage/updateHouseWin",
+            "/manage/deleteHouse",
+            "/manage/updateHouse",
+            "/manage/foodManageIndex",
+            "/manage/getFoodList",
+            "/manage/deleteFood",
+            "/manage/updateFoodWin",
+            "/manage/updateFood",
+            "/manage/newFoodWin",
+            "/manage/newFood",
+            "/manage/deleteDiscount",
 
     };
 

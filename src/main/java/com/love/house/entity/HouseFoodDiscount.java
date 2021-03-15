@@ -65,4 +65,6 @@ public class HouseFoodDiscount implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
+
 }

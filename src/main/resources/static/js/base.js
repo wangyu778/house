@@ -46,10 +46,18 @@ function userRegister() {
     $.baseAjax("/mine/userRegister","get","",success,error)
 }
 
-function manageIndex() {
+function manageHouseIndex() {
     function success(o) {
         $("#content").html(o);
     }
     function error() {}
     $.baseAjax("/manage/houseManageIndex","post","",success,error)
+}
+
+function manageFoodIndex() {
+    function success(o) {
+        $("#content").html(o);
+    }
+    function error() {}
+    $.baseAjax("/manage/foodManageIndex","post","",success,error)
 }

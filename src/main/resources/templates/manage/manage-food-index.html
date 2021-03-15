@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/static/css/deliciousFood/deliciousFood.css">
+<div id="foodManage" style="width: 100%; height: 100%; margin-top: 10px; min-height: 900px">
+    <form id="foodSearchForm">
+        <div class="form-group" style="width: 10%; float: left">
+            <label  for="sortType">排序类型 :</label>
+            <select class="form-control" id="sortType" name="sortType">
+                <option value="1" selected>综合排序</option>
+                <option value="2">销量优先</option>
+                <option value="3">距离优先</option>
+                <option value="4">评分优先</option>
+            </select>
+        </div>
+        <div class="form-group" style="width: 10%; float: left; margin-left: 30px">
+            <label for="businessType">品类 :</label>
+            <select class="form-control" id="businessType" name="businessType">
+                <option value="1" selected>美食</option>
+                <option value="2">甜品</option>
+                <option value="3">超市便利</option>
+                <option value="4">生鲜果蔬</option>
+                <option value="5">药品</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary mb-2" style="margin-left: 20px; margin-top: 32px" onclick="getFoodList(true)">搜索</button>
+        <button type="button" class="btn btn-info mb-2" style="margin-left: 20px; margin-top: 32px" onclick="newFoodWin()">新建商家</button>
+    </form>
+    <div id="foodList" style="width: 100%; margin-top: 20px"></div>
+</div>
+<script>
+    $().ready(function () {
+        getFoodList(false);
+    });
+
+    function getFoodList(isAll) {
+        let dataJson = {};
+        if(isAll){
+            let fromJson = $('#foodSearchForm').serializeArray();
+            $.each(fromJson, function(index, field) {
+                if(field.value !== '' && field.value !== undefined){
+                    dataJson[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+                }
+            });
+        }
+        function success(o) {
+            $("#foodManage #foodList").html(o);
+        }
+        function error() {}
+        $.baseJsonAjax("/manage/getFoodList","POST",dataJson,success,error);
+    }
+
+    function newFoodWin() {
+        function success(o) {
+            $("#content").html(o);
+        }
+        function error() {}
+        $.baseAjax("/manage/newFoodWin","POST",{},success,error);
+    }
+</script>

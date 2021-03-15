@@ -1,16 +1,23 @@
 package com.love.house.service.manage.impl;
 
 import com.love.house.common.ServerResponse;
+import com.love.house.entity.HouseFood;
+import com.love.house.entity.HouseFoodDiscount;
 import com.love.house.entity.HouseRoom;
+import com.love.house.mapper.mysqlMapper.HouseFoodDiscountMapper;
+import com.love.house.mapper.mysqlMapper.HouseFoodMapper;
 import com.love.house.mapper.mysqlMapper.HouseRoomMapper;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.manage.ManageService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: wy
@@ -26,7 +33,10 @@ public class ManageServiceImpl implements ManageService {
     private BaseService baseService;
     @Resource
     private HouseRoomMapper houseRoomMapper;
-
+    @Resource
+    private HouseFoodMapper foodMapper;
+    @Resource
+    private HouseFoodDiscountMapper discountMapper;
     @Override
     public ServerResponse<String> newHouse(HouseRoom houseRoom) {
         try {
@@ -45,5 +55,84 @@ public class ManageServiceImpl implements ManageService {
         }
 
     }
+
+    @Override
+    public HouseRoom getHouse(Integer roomId) {
+        return houseRoomMapper.selectByPrimaryKey(roomId);
+    }
+
+    @Override
+    public ServerResponse<String> deleteHouse(Integer roomId) {
+        try {
+            houseRoomMapper.deleteByPrimaryKey(roomId);
+            return ServerResponse.createBySuccessMessage("删除成功");
+        } catch (Exception e) {
+            return ServerResponse.createByErrorMessage("删除失败");
+        }
+    }
+
+    @Override
+    public ServerResponse<String> updateHouse(HouseRoom houseRoom) {
+        try {
+            houseRoom.setUpdateUser(baseService.getUserId());
+            houseRoom.setUpdateDate(new Date());
+            houseRoomMapper.updateByPrimaryKeySelective(houseRoom);
+            return ServerResponse.createBySuccessMessage("修改成功");
+        } catch (Exception e) {
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+    }
+
+    @Override
+    public ServerResponse<String> deleteFood(Integer foodId) {
+        try {
+            foodMapper.deleteByPrimaryKey(foodId);
+            discountMapper.deleteByFoodId(foodId);
+            return ServerResponse.createBySuccessMessage("删除成功");
+        } catch (Exception e) {
+            return ServerResponse.createByErrorMessage("删除失败");
+        }
+    }
+
+    @Override
+    public ServerResponse<String> newFood(HouseFood houseFood) {
+        try {
+            houseFood.setCreateUser(baseService.getUserId());
+            houseFood.setCreateDate(new Date());
+            foodMapper.insertSelective(houseFood);
+            if(ObjectUtils.isNotEmpty(houseFood.getId()) && ObjectUtils.isNotEmpty(houseFood.getFoodName())){
+                HouseFoodDiscount foodDiscount = new HouseFoodDiscount();
+                foodDiscount.setFoodId(houseFood.getId());
+                foodDiscount.setMoney(houseFood.getMoney());
+                foodDiscount.setFoodName(houseFood.getFoodName());
+                discountMapper.insertSelective(foodDiscount);
+            }
+            return ServerResponse.createBySuccessMessage("新建商家成功");
+        } catch (Exception e) {
+            LOG.error("新建商家失败",e);
+            return ServerResponse.createByErrorMessage("新建商家失败");
+        }
+    }
+
+    @Override
+    public HouseFood getFood(Integer foodId) {
+        HouseFood houseFood = foodMapper.getHouseFood(foodId);
+        Map<String, Object> filterMap = new HashMap<String, Object>(2);
+        filterMap.put("foodId",foodId);
+        houseFood.setFoodDiscounts(discountMapper.getList(filterMap));
+        return houseFood;
+    }
+
+    @Override
+    public ServerResponse<String> deleteDiscount(Integer id) {
+        try {
+            discountMapper.deleteByKey(id);
+            return ServerResponse.createBySuccessMessage("删除优惠信息成功");
+        } catch (Exception e) {
+            LOG.error("删除优惠信息失败",e);
+            return ServerResponse.createByErrorMessage("删除优惠信息失败");
+        }
+    }
+
 
 }

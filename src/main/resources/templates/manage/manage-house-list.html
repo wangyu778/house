@@ -35,8 +35,8 @@
                 <span class="badge badge-info tag">性价比高</span>
             </div>
             <div class="col-xl-11">
-              <button type="button"  class="btn btn-info" style="float: right; margin: 0 10px"><span>住房管理</span></button>
-              <button type="button"  class="btn btn-warning" style="float: right; margin: 0 10px"><span>删除此房</span></button>
+              <button type="button"  class="btn btn-info" style="float: right; margin: 0 10px"  th:onclick="'updateHouseWin(\'' + ${houseList.roomId}+ '\');'"><span>住房管理</span></button>
+              <button type="button"  class="btn btn-warning" style="float: right; margin: 0 10px" th:onclick="'deleteHouse(\'' + ${houseList.roomId}+ '\');'"><span>删除此房</span></button>
             </div>
         </div>
     </div>

@@ -11,7 +11,9 @@ import java.util.Map;
  * @date 2021/3/3
  */
 public interface HouseFoodDiscountMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByFoodId(Integer id);
+
+    int deleteByKey(Integer id);
 
     int insert(HouseFoodDiscount record);
 

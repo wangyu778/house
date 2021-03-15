@@ -44,6 +44,9 @@ public class RentingServiceImpl implements RentingService {
         if(ObjectUtils.isNotEmpty(properties.getRoomDirection())){
             filterMap.put("roomDirection", properties.getRoomDirection());
         }
+        if(ObjectUtils.isNotEmpty(properties.getRoomNumber())){
+            filterMap.put("roomNumber", properties.getRoomNumber());
+        }
         if(ObjectUtils.isNotEmpty(properties.getRoomLocation())){
             filterMap.put("roomLocation", properties.getRoomLocation());
         }
