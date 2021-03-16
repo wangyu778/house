@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.love.house.mapper.mysqlMapper.HouseApplyUserMapper">
+  <resultMap id="BaseResultMap" type="com.love.house.entity.HouseApplyUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="roomId" jdbcType="INTEGER" property="roomId" />
+    <result column="applyDate" jdbcType="DATE" property="applyDate" />
+    <result column="isSolve" jdbcType="INTEGER" property="isSolve" />
+    <result column="solveDate" jdbcType="DATE" property="solveDate" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, roomId, applyDate, isSolve, solveDate, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house_apply_user
+    where userId = #{userId} and isSolve = 1
+  </select>
+    <select id="getApplyList" resultType="com.love.house.entity.HouseApplyUser">
+      select *
+      from house_apply_user
+      where isSolve = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house_apply_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseApplyUser" useGeneratedKeys="true">
+    insert into house_apply_user (roomId, applyDate, isSolve, 
+      solveDate, userId)
+    values (#{roomId,jdbcType=INTEGER}, #{applyDate,jdbcType=DATE}, #{isSolve,jdbcType=INTEGER}, 
+      #{solveDate,jdbcType=DATE}, #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseApplyUser" useGeneratedKeys="true">
+    insert into house_apply_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roomId != null">
+        roomId,
+      </if>
+      <if test="applyDate != null">
+        applyDate,
+      </if>
+      <if test="isSolve != null">
+        isSolve,
+      </if>
+      <if test="solveDate != null">
+        solveDate,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roomId != null">
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="isSolve != null">
+        #{isSolve,jdbcType=INTEGER},
+      </if>
+      <if test="solveDate != null">
+        #{solveDate,jdbcType=DATE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.love.house.entity.HouseApplyUser">
+    update house_apply_user
+    <set>
+      <if test="roomId != null">
+        roomId = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="applyDate != null">
+        applyDate = #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="isSolve != null">
+        isSolve = #{isSolve,jdbcType=INTEGER},
+      </if>
+      <if test="solveDate != null">
+        solveDate = #{solveDate,jdbcType=DATE},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.love.house.entity.HouseApplyUser">
+    update house_apply_user
+    set roomId = #{roomId,jdbcType=INTEGER},
+      applyDate = #{applyDate,jdbcType=DATE},
+      isSolve = #{isSolve,jdbcType=INTEGER},
+      solveDate = #{solveDate,jdbcType=DATE},
+      userId = #{userId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

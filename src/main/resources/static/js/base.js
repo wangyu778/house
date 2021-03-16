@@ -61,3 +61,19 @@ function manageFoodIndex() {
     function error() {}
     $.baseAjax("/manage/foodManageIndex","post","",success,error)
 }
+
+function repairIndex() {
+    function success(o) {
+        $("#content").html(o);
+    }
+    function error() {}
+    $.baseAjax("/mine/index","post","",success,error)
+}
+
+function rentingIndex() {
+    function success(o) {
+        $("#content").html(o);
+    }
+    function error() {}
+    $.baseAjax("/renting/index","post","",success,error)
+}

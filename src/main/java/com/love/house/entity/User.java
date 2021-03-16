@@ -62,6 +62,8 @@ public class User implements UserDetails,Serializable{
     @ApiModelProperty(value = "角色列表")
     private List<Role> roleList;
 
+    private HouseApplyUser applyUser;
+
     private List<GrantedAuthority> authorities;
 
     private static final long serialVersionUID = 1L;
@@ -220,5 +222,13 @@ public class User implements UserDetails,Serializable{
 
     public void setLockTime(Date lockTime) {
         this.lockTime = lockTime;
+    }
+
+    public HouseApplyUser getApplyUser() {
+        return applyUser;
+    }
+
+    public void setApplyUser(HouseApplyUser applyUser) {
+        this.applyUser = applyUser;
     }
 }

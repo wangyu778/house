@@ -57,6 +57,8 @@
 
         <button type="button" class="btn btn-primary mb-2" style="margin-left: 20px" onclick="getHouseList()">搜索</button>
         <button type="button" class="btn btn-info mb-2" style="margin-left: 20px" onclick="newHouseWin()">新建房屋</button>
+        <button type="button" class="btn btn-success mb-2" style="margin-left: 20px" onclick="getRepairList()">报修管理</button>
+        <button type="button" class="btn btn-danger mb-2" style="margin-left: 20px" onclick="getApplyHouse()">看房管理</button>
     </form>
 
     <div id="houseList">
@@ -106,5 +108,22 @@
         }
         function error() {}
         $.baseAjax("/manage/deleteHouse","post",{roomId:roomId},success,error);
+    }
+
+
+    function getRepairList() {
+        function success(o) {
+            $("#content").html(o);
+        }
+        function error() {}
+        $.baseAjax("/manage/getRepairList","post",{},success,error);
+    }
+    
+    function getApplyHouse() {
+        function success(o) {
+            $("#content").html(o);
+        }
+        function error() {}
+        $.baseAjax("/manage/getApplyHouse","post",{},success,error);
     }
 </script>

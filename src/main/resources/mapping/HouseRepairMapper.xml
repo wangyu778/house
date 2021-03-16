@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.love.house.mapper.mysqlMapper.HouseRepairMapper">
+  <resultMap id="BaseResultMap" type="com.love.house.entity.HouseRepair">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="repairName" jdbcType="VARCHAR" property="repairName" />
+    <result column="repairType" jdbcType="INTEGER" property="repairType" />
+    <result column="repairInfo" jdbcType="VARCHAR" property="repairInfo" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="repairDate" jdbcType="DATE" property="repairDate" />
+    <result column="isSolve" jdbcType="INTEGER" property="isSolve" />
+    <result column="solveDate" jdbcType="DATE" property="solveDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, repairName, repairType, repairInfo, repairDate, isSolve, solveDate, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house_repair
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="getListByUserId" resultType="com.love.house.entity.HouseRepair">
+      select <include refid="Base_Column_List"/>
+      from house_repair
+      where userId = #{userId}
+    </select>
+  <select id="getList" resultType="com.love.house.entity.HouseRepair">
+    select <include refid="Base_Column_List"/>
+    from house_repair
+    where isSolve = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house_repair
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseRepair" useGeneratedKeys="true">
+    insert into house_repair (repairName, repairType, repairInfo, 
+      repairDate, isSolve, solveDate
+      )
+    values (#{repairName,jdbcType=VARCHAR}, #{repairType,jdbcType=INTEGER}, #{repairInfo,jdbcType=VARCHAR}, 
+      #{repairDate,jdbcType=DATE}, #{isSolve,jdbcType=INTEGER}, #{solveDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseRepair" useGeneratedKeys="true">
+    insert into house_repair
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="repairName != null">
+        repairName,
+      </if>
+      <if test="repairType != null">
+        repairType,
+      </if>
+      <if test="repairInfo != null">
+        repairInfo,
+      </if>
+      <if test="repairDate != null">
+        repairDate,
+      </if>
+      <if test="isSolve != null">
+        isSolve,
+      </if>
+      <if test="solveDate != null">
+        solveDate,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="repairName != null">
+        #{repairName,jdbcType=VARCHAR},
+      </if>
+      <if test="repairType != null">
+        #{repairType,jdbcType=INTEGER},
+      </if>
+      <if test="repairInfo != null">
+        #{repairInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="repairDate != null">
+        #{repairDate,jdbcType=DATE},
+      </if>
+      <if test="isSolve != null">
+        #{isSolve,jdbcType=INTEGER},
+      </if>
+      <if test="solveDate != null">
+        #{solveDate,jdbcType=DATE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.love.house.entity.HouseRepair">
+    update house_repair
+    <set>
+      <if test="repairName != null">
+        repairName = #{repairName,jdbcType=VARCHAR},
+      </if>
+      <if test="repairType != null">
+        repairType = #{repairType,jdbcType=INTEGER},
+      </if>
+      <if test="repairInfo != null">
+        repairInfo = #{repairInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="repairDate != null">
+        repairDate = #{repairDate,jdbcType=DATE},
+      </if>
+      <if test="isSolve != null">
+        isSolve = #{isSolve,jdbcType=INTEGER},
+      </if>
+      <if test="solveDate != null">
+        solveDate = #{solveDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.love.house.entity.HouseRepair">
+    update house_repair
+    set isSolve = 1,
+        solveDate = #{solveDate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

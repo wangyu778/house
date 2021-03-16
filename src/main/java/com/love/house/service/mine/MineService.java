@@ -3,6 +3,7 @@ package com.love.house.service.mine;
 import com.love.house.common.ResponseCode;
 import com.love.house.common.ServerResponse;
 import com.love.house.entity.HouseCollection;
+import com.love.house.entity.HouseRepair;
 import com.love.house.entity.HouseRoom;
 import com.love.house.entity.User;
 import org.springframework.stereotype.Service;
@@ -36,4 +37,16 @@ public interface MineService {
      */
     public List<HouseCollection> getCollectionList();
 
+    /**
+     * 新建报修信息
+     * @param repairInfo repairInfo
+     * @return 结果
+     */
+    public ServerResponse<String> newRepair(HouseRepair repairInfo);
+
+    /**
+     * 获取报修历史列表
+     * @return list
+     */
+    public List<HouseRepair> getRepairList();
 }

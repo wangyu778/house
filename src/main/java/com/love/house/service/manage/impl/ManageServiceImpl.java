@@ -1,12 +1,8 @@
 package com.love.house.service.manage.impl;
 
 import com.love.house.common.ServerResponse;
-import com.love.house.entity.HouseFood;
-import com.love.house.entity.HouseFoodDiscount;
-import com.love.house.entity.HouseRoom;
-import com.love.house.mapper.mysqlMapper.HouseFoodDiscountMapper;
-import com.love.house.mapper.mysqlMapper.HouseFoodMapper;
-import com.love.house.mapper.mysqlMapper.HouseRoomMapper;
+import com.love.house.entity.*;
+import com.love.house.mapper.mysqlMapper.*;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.manage.ManageService;
 import org.apache.commons.lang3.ObjectUtils;
@@ -17,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +34,13 @@ public class ManageServiceImpl implements ManageService {
     private HouseFoodMapper foodMapper;
     @Resource
     private HouseFoodDiscountMapper discountMapper;
+    @Resource
+    private HouseRepairMapper repairMapper;
+    @Resource
+    private HouseApplyUserMapper applyUserMapper;
+    @Resource
+    private UserMapping userMapper;
+
     @Override
     public ServerResponse<String> newHouse(HouseRoom houseRoom) {
         try {
@@ -117,7 +121,7 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public HouseFood getFood(Integer foodId) {
         HouseFood houseFood = foodMapper.getHouseFood(foodId);
-        Map<String, Object> filterMap = new HashMap<String, Object>(2);
+        Map<String, Object> filterMap = new HashMap<>(2);
         filterMap.put("foodId",foodId);
         houseFood.setFoodDiscounts(discountMapper.getList(filterMap));
         return houseFood;
@@ -131,6 +135,63 @@ public class ManageServiceImpl implements ManageService {
         } catch (Exception e) {
             LOG.error("删除优惠信息失败",e);
             return ServerResponse.createByErrorMessage("删除优惠信息失败");
+        }
+    }
+
+    @Override
+    public List<HouseRepair> getRepairList() {
+        return repairMapper.getList();
+    }
+
+    @Override
+    public ServerResponse<String> updateRepair(Integer id) {
+         try {
+            repairMapper.updateByPrimaryKey(id, new Date());
+            return ServerResponse.createBySuccessMessage("修改报修信息成功");
+         } catch (Exception e) {
+            LOG.error("修改报修信息失败",e);
+            return ServerResponse.createByErrorMessage("修改报修信息失败");
+         }
+    }
+
+    @Override
+    public ServerResponse<String> applyHouse(Integer roomId) {
+        try {
+            HouseApplyUser houseApplyUser = new HouseApplyUser();
+            houseApplyUser.setApplyDate(new Date());
+            houseApplyUser.setIsSolve(0);
+            houseApplyUser.setRoomId(roomId);
+            houseApplyUser.setUserId(baseService.getUserId());
+            applyUserMapper.insertSelective(houseApplyUser);
+            return ServerResponse.createBySuccessMessage("申请成功");
+        } catch (Exception e) {
+            LOG.error("申请失败",e);
+            return ServerResponse.createByErrorMessage("申请失败");
+        }
+    }
+
+    @Override
+    public List<HouseApplyUser> getApplyList() {
+        List<HouseApplyUser> applyList = applyUserMapper.getApplyList();
+        for (HouseApplyUser houseApplyUser : applyList) {
+            houseApplyUser.setUser(userMapper.getUser(houseApplyUser.getUserId()));
+            houseApplyUser.setHouseRoom(houseRoomMapper.selectByPrimaryKey(houseApplyUser.getRoomId()));
+        }
+        return applyList;
+    }
+
+    @Override
+    public ServerResponse<String> updateApply(Integer id) {
+        try {
+            HouseApplyUser houseApplyUser = new HouseApplyUser();
+            houseApplyUser.setId(id);
+            houseApplyUser.setIsSolve(1);
+            houseApplyUser.setSolveDate(new Date());
+            applyUserMapper.updateByPrimaryKeySelective(houseApplyUser);
+            return ServerResponse.createBySuccessMessage("修改成功");
+        } catch (Exception e) {
+            LOG.error("修改失败",e);
+            return ServerResponse.createByErrorMessage("修改失败");
         }
     }
 

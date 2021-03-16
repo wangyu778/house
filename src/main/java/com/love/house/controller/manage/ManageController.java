@@ -128,4 +128,37 @@ public class ManageController {
     public ServerResponse<String> deleteDiscount(@RequestParam Integer id){
         return manageService.deleteDiscount(id);
     }
+
+    @ApiOperation("返回-报修列表页面")
+    @PostMapping(value = "/getRepairList")
+    public ModelAndView getRepairList(){
+        return new ModelAndView("manage/manage-house-repair-list").addObject("repairList",manageService.getRepairList());
+    }
+
+    @ApiOperation("修改报修信息")
+    @PostMapping(value = "/updateRepair")
+    @ResponseBody
+    public ServerResponse<String> updateRepair(@RequestParam Integer id){
+        return manageService.updateRepair(id);
+    }
+
+    @ApiOperation("申请看房")
+    @PostMapping(value = "/applyHouse")
+    @ResponseBody
+    public ServerResponse<String> applyHouse(@RequestParam Integer roomId){
+        return manageService.applyHouse(roomId);
+    }
+
+    @ApiOperation("返回-申请看房页面")
+    @PostMapping(value = "/getApplyHouse")
+    public ModelAndView getApplyHouse(){
+        return new ModelAndView("manage/manage-house-apply-list").addObject("applyList",manageService.getApplyList());
+    }
+
+    @ApiOperation("修改看房信息")
+    @PostMapping(value = "/updateApply")
+    @ResponseBody
+    public ServerResponse<String> updateApply(@RequestParam Integer id){
+        return manageService.updateApply(id);
+    }
 }

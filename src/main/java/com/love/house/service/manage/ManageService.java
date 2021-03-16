@@ -1,9 +1,13 @@
 package com.love.house.service.manage;
 
 import com.love.house.common.ServerResponse;
+import com.love.house.entity.HouseApplyUser;
 import com.love.house.entity.HouseFood;
+import com.love.house.entity.HouseRepair;
 import com.love.house.entity.HouseRoom;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: wy
@@ -70,5 +74,36 @@ public interface ManageService {
      */
     public ServerResponse<String> deleteDiscount(Integer id);
 
+    /**
+     * 获取报修列表
+     * @return list
+     */
+    public List<HouseRepair> getRepairList();
 
+    /**
+     * 修改报修
+     * @param id id
+     * @return 结果
+     */
+    public ServerResponse<String> updateRepair(Integer id);
+
+    /**
+     * 申请看房
+     * @param roomId roomId
+     * @return 结果
+     */
+    public ServerResponse<String> applyHouse(Integer roomId);
+
+    /**
+     * 获取申请看房列表
+     * @return list
+     */
+    public List<HouseApplyUser> getApplyList();
+
+    /**
+     * 修改申请看房信息
+     * @param id id
+     * @return 结果
+     */
+    public ServerResponse<String> updateApply(Integer id);
 }

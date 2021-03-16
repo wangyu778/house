@@ -96,6 +96,11 @@ public class HouseRoom implements Serializable {
      */
     private int isCollection;
 
+    /**
+     * 申请看房
+     */
+    private HouseApplyUser houseApplyUser;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getRoomId() {
@@ -232,5 +237,13 @@ public class HouseRoom implements Serializable {
 
     public void setIsCollection(int isCollection) {
         this.isCollection = isCollection;
+    }
+
+    public HouseApplyUser getHouseApplyUser() {
+        return houseApplyUser;
+    }
+
+    public void setHouseApplyUser(HouseApplyUser houseApplyUser) {
+        this.houseApplyUser = houseApplyUser;
     }
 }

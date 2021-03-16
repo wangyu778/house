@@ -233,4 +233,13 @@
       </if>
     </where>
   </select>
+  <select id="selectByUserId" resultType="com.love.house.entity.HouseRoom">
+    select <include refid="Base_Column_List" />
+    from house_room
+    where roomId = (
+        select  roomId
+        from house_room_user
+        where userId = #{userId}
+    )
+  </select>
 </mapper>

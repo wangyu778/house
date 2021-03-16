@@ -1,6 +1,6 @@
 <div id="user" class="user bageColor" th:fragment="userInfo" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="headImg" style="margin-left: 1%">
-        <img src="/static/image/headImg.jpg" alt="头像" class="rounded-circle" style="width: 100%">
+        <img src="/static/image/headImg.png" alt="头像" class="rounded-circle" style="width: 100%">
     </div>
     <div class="personInfo">
         <div class="userName">
@@ -12,6 +12,8 @@
             <span class="marLeaf">身份证号：</span><span th:text="${user.idCardNumber}"/>
             <span class="marLeaf">创建日期：</span><span th:text="${#dates.format(user.createDate,'yyyy-MM-dd HH:mm:ss')}"/>
             <span class="marLeaf">电子邮箱：</span><span th:text="${user.email}"/>
+            <span class="marLeaf">看房时间：</span><span th:if="${user.applyUser != null}" th:text="${'自 '+ #dates.format(user.applyUser.applyDate,'yyyy-MM-dd')+' 起7日内'}"/>
+            <span th:if="${user.applyUser == null}" th:text="暂无"/>
         </div>
         <div class="personSign">
             简介：<span th:text="${user.personSign}"/>

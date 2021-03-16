@@ -2,14 +2,8 @@ package com.love.house.service.mine.impl;
 
 import com.love.house.common.ResponseCode;
 import com.love.house.common.ServerResponse;
-import com.love.house.entity.HouseCollection;
-import com.love.house.entity.HouseFood;
-import com.love.house.entity.HouseRoom;
-import com.love.house.entity.User;
-import com.love.house.mapper.mysqlMapper.HouseCollectionMapper;
-import com.love.house.mapper.mysqlMapper.HouseFoodMapper;
-import com.love.house.mapper.mysqlMapper.HouseRoomMapper;
-import com.love.house.mapper.mysqlMapper.UserMapping;
+import com.love.house.entity.*;
+import com.love.house.mapper.mysqlMapper.*;
 import com.love.house.model.Constant;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.mine.MineService;
@@ -38,6 +32,10 @@ public class MineServiceImpl implements MineService {
     private HouseFoodMapper houseFoodMapper;
     @Resource
     private HouseRoomMapper houseRoomMapper;
+    @Resource
+    private HouseRepairMapper repairMapper;
+    @Resource
+    private HouseApplyUserMapper applyUserMapper;
 
     @Override
     public ServerResponse<ResponseCode> saveUser(User user) {
@@ -56,7 +54,9 @@ public class MineServiceImpl implements MineService {
 
     @Override
     public HouseRoom getRentalDetails() {
-        return new HouseRoom();
+        HouseRoom houseRoom = houseRoomMapper.selectByUserId(baseService.getUserId());
+        houseRoom.setHouseApplyUser(applyUserMapper.selectByPrimaryKey(baseService.getUserId()));
+        return houseRoom;
     }
 
     @Override
@@ -77,6 +77,24 @@ public class MineServiceImpl implements MineService {
             }
         }
         return collectionList;
+    }
+
+    @Override
+    public ServerResponse<String> newRepair(HouseRepair repairInfo) {
+        try {
+            repairInfo.setIsSolve(0);
+            repairInfo.setRepairDate(new Date());
+            repairInfo.setUserId(baseService.getUserId());
+            repairMapper.insertSelective(repairInfo);
+            return ServerResponse.createBySuccessMessage("新建报修成功");
+        } catch (Exception e) {
+            return ServerResponse.createByErrorMessage("新建报修失败");
+        }
+    }
+
+    @Override
+    public List<HouseRepair> getRepairList() {
+        return repairMapper.getListByUserId(baseService.getUserId());
     }
 
 }

@@ -2,14 +2,20 @@
     <div class="row" style="margin-top: 30px">
         <div class="col-md-8" style=" padding: 0 30px 20px 30px">
             <div class="row" style=" font-size: 20px; font-weight: bolder;">
-                整租~2013 2室一厅 南/北
+                <span th:if="${houseRoom.roomType == 1}">普通房型</span>
+                <span th:if="${houseRoom.roomType == 2}">豪华精装</span>
+                <span th:if="${houseRoom.roomType == 3}">家庭套房</span> &nbsp;/&nbsp;
+                <span th:if="${houseRoom.roomDirection == 1}">朝东</span>
+                <span th:if="${houseRoom.roomDirection == 2}">朝西</span>
+                <span th:if="${houseRoom.roomDirection == 3}">朝南</span>
+                <span th:if="${houseRoom.roomDirection == 4}">朝北</span>
             </div>
-            <div class="row">
-                房屋维护时间: 202-01-19
+            <div class="row" style="margin-top: 10px">
+              <span th:text="  房屋维护时间：+${#dates.format(houseRoom.updateDate,'yyyy-MM-dd')}"/>
             </div>
         </div>
         <div class="col-md-4">
-            投诉电话 ： 10109666
+            投诉电话 ： 123456789
         </div>
     </div>
     <div class="row" style="width: 100%;">
@@ -18,7 +24,7 @@
         </div>
         <div class="col-md-6" style="border: solid 1px #f2f2f2; padding: 5px 10px">
             <div>
-                <span style="margin-left: 15px; color: red; font-weight: bolder; font-size: 35px"> 2000 </span>
+                <span style="margin-left: 15px; color: red; font-weight: bolder; font-size: 35px" th:text="${houseRoom.roomPrice}"/>
                 <span style="margin-left: 5px;color: red; font-size: 15px; margin-top: 20px">元/月(季付价)</span>
             </div>
             <div>
@@ -27,23 +33,38 @@
                 <span class="badge badge-info" style="margin-left: 5px;">优先看房</span>
             </div>
             <div><hr></div>
-            <div style="float: left; margin-left: 15px; width: 60%">
-                <span style="color: #95999c">租赁方式:</span><span style="margin-left: 10px">租赁方式</span><br>
-                <span style="color: #95999c">房屋类型:</span><span style="margin-left: 5px">2室一厅一卫/57平方米</span><br>
-                <span style="color: #95999c">朝向楼层:</span><span style="margin-left: 5px">南/北 6层</span>
-            </div>
-            <div style="float: left;width: 30%">
-                123
+            <div style="float: left; margin-left: 15px; width: 100%">
+                <span style="color: #95999c">房屋类型:</span>
+                    <span style="margin-left: 10px" th:if="${houseRoom.roomType == 1}">普通房型</span>
+                    <span style="margin-left: 10px" th:if="${houseRoom.roomType == 2}">豪华精装</span>
+                    <span style="margin-left: 10px" th:if="${houseRoom.roomType == 3}">家庭套房</span>
+                <br>
+
+                <span style="color: #95999c">房屋大小:</span>
+                    <span style="margin-left: 5px" th:text="${houseRoom.roomSize}"/>m<sup>2</sup>
+                <br>
+                <span style="color: #95999c">房屋朝向:</span>
+                    <span style="margin-left: 10px" th:if="${houseRoom.roomDirection == 1}">东</span>
+                    <span style="margin-left: 10px" th:if="${houseRoom.roomDirection == 2}">西</span>
+                    <span style="margin-left: 10px" th:if="${houseRoom.roomDirection == 3}">南</span>
+                    <span style="margin-left: 10px" th:if="${houseRoom.roomDirection == 4}">北</span>
+
+                <br>
+                <button type="button"  class="btn btn-info" style="float: right; margin: 60px 40px 0 0" onclick="applyRepairWin()">申请报修</button>
             </div>
         </div>
-<!--    <div style="padding: 15px 10%; width: 100%; height: 50px">-->
-<!--        头像-->
-<!--    </div>-->
-<!--    <div th:if="${HouseRoom == null}" th:include="common/tips::tips"></div>-->
     </div>
 </div>
 <script type="text/javascript">
     $().ready(function () {
         $("#infoText").text("您暂时还未租房！")
-    })
+    });
+
+    function applyRepairWin() {
+        function success(o) {
+            $("#content").html(o);
+        }
+        function error() {}
+        $.baseAjax("/mine/applyRepairWin","POST",{},success,error);
+    }
 </script>

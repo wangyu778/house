@@ -89,6 +89,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           "/mine/repairInfo",
           "/mine/foodOrder",
           "/mine/collection",
+          "/mine/applyRepairWin",
+          "/mine/newRepair",
 
             //forum
           "/forum/index",
@@ -120,6 +122,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/manage/newFoodWin",
             "/manage/newFood",
             "/manage/deleteDiscount",
+            "/manage/getRepairList",
+            "/manage/updateRepair",
+            "/manage/applyHouse",
+            "/manage/updateApply",
+            "/manage/getApplyHouse",
+
 
     };
 

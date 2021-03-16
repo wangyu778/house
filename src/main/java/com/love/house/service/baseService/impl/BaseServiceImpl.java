@@ -22,7 +22,6 @@ public class BaseServiceImpl implements BaseService {
 
     @Resource
     private UserMapping userMapping;
-
     @Override
     public String getUserId() {
         HttpServletRequest request =  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
