@@ -12,6 +12,11 @@ function navBinding() {
         let dataId = $(this);
         function success(o) {
             $("#content").html(o);
+            if("/overview/index" === dataId.attr("data-to")){
+                $("#content").removeClass("content");
+            }else {
+                $("#content").addClass("content");
+            }
         }
         function error() {}
         $.baseAjax(dataId.attr("data-to"),"post","",success,error)

@@ -15,7 +15,7 @@ public class OverViewController {
 
     @RequestMapping(value = "/index",method = RequestMethod.POST)
     public String index(){
-        return "overview/overview-index";
+        return "index/index";
     }
 
 
