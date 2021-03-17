@@ -5,7 +5,7 @@
             <legend >注册账号</legend>
         </fieldset>
         <hr>
-        <form novalidate name="registerForm" method="post" action="/mine/saveUser" onsubmit="return checkRegisterForm()">
+        <form novalidate id="registerForm" class="needs-validation" name="registerForm" onsubmit="return checkRegisterForm()">
             <div class="form-group row" style="margin-top: 20px">
                 <label for="userId" class="col-sm-3 col-form-label">* 用户名</label>
                 <div class="col-sm-9">
@@ -89,7 +89,7 @@
             </div>
             <hr>
             <button type="submit" class="btn btn-primary" style="float: right; margin-left: 20px">立即注册</button>
-            <button type="button" class="btn btn-secondary" style="float: right" onclick="fff()">立即登陆</button>
+            <button type="button" class="btn btn-secondary" style="float: right" onclick="login()">立即登陆</button>
         </form>
     </div>
 </div>
@@ -172,7 +172,22 @@
             personSign.addClass("is-valid").removeClass("is-invalid");
         }
 
-
-        return true;
+        let fromJson = $('#registerForm').serializeArray();
+        let dataJson = {};
+        $.each(fromJson, function(index, field) {
+            dataJson[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+        });
+        $.ajax({
+            url:"/mine/saveUser",
+            type:"POST",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType:"application/json",
+            success:function(o){
+                debugger
+                toastInfo(o.status,o.msg);
+                login();
+            }
+        });
     }
 </script>

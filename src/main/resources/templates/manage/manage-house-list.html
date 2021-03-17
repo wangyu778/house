@@ -16,18 +16,27 @@
             <div class="col-xl-4 price">
                 <span th:text="${houseList.roomPrice}"/>元/月（季付价）
             </div>
-            <div class="col-xl-8" style="padding: 10px 15px">
-                <span th:text="房间号：+${houseList.roomNumber}"/>&emsp;/&emsp;
-                <span th:text="${houseList.roomLocation}+单元"/>&emsp;/&emsp;
-                <span th:text="${houseList.roomSize}"/>m<sup>2</sup>&emsp;/&emsp;
-                <span th:if="${houseList.roomDirection == 1}">朝东</span>
-                <span th:if="${houseList.roomDirection == 2}">朝西</span>
-                <span th:if="${houseList.roomDirection == 3}">朝南</span>
-                <span th:if="${houseList.roomDirection == 4}">朝北</span>
-                &emsp;/&emsp;
-                <span th:if="${houseList.roomType == 1}">普通房型</span>
-                <span th:if="${houseList.roomType == 2}">豪华精装</span>
-                <span th:if="${houseList.roomType == 3}">家庭套房</span>
+            <div class="col-xl-12" style="padding: 10px 15px">
+                <div  style="float: left">
+                    <span th:text="房间号：+${houseList.roomNumber}"/>&emsp;/&emsp;
+                    <span th:text="${houseList.roomLocation}+单元"/>&emsp;/&emsp;
+                    <span th:text="${houseList.roomSize}"/>m<sup>2</sup>&emsp;/&emsp;
+                    <span th:if="${houseList.roomDirection == 1}">朝东</span>
+                    <span th:if="${houseList.roomDirection == 2}">朝西</span>
+                    <span th:if="${houseList.roomDirection == 3}">朝南</span>
+                    <span th:if="${houseList.roomDirection == 4}">朝北</span>
+                    &emsp;/&emsp;
+                    <span th:if="${houseList.roomType == 1}">普通房型</span>
+                    <span th:if="${houseList.roomType == 2}">豪华精装</span>
+                    <span th:if="${houseList.roomType == 3}">家庭套房</span>
+                </div>
+                <div th:if="${houseList.user != null}" style="float: left">
+                    &emsp;/&emsp;
+                    <span th:text="${'居住人: '+houseList.user.userName}"/> &emsp;/&emsp;
+                    <span th:text="${'联系电话: '+houseList.user.phone}"/> &emsp;/&emsp;
+                    <span th:text="${'出租时间: '+#dates.format(houseList.leaseDate,'yyyy-MM-dd')}"/>
+                </div>
+
             </div>
             <div class="col-xl-8">
                 <span class="badge badge-info tag">优选</span>

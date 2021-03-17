@@ -109,7 +109,7 @@ public class ManageController {
         return new ModelAndView("manage/manage-food-new");
     }
 
-    @ApiOperation("返回-新增House-房屋列表")
+    @ApiOperation("新增美食商家")
     @PostMapping(value = "/newFood")
     @ResponseBody
     public ServerResponse<String> newFood(@RequestBody HouseFood houseFood){

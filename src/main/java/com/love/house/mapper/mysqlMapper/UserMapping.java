@@ -57,4 +57,5 @@ public interface UserMapping {
     List<SecuritySysPermission> getPermissionList(@Param("filterMap") Map<String,Object> filterMap);
 
 
+    List<User> getListUser();
 }

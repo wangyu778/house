@@ -1,5 +1,4 @@
-<div style="width: 100%; height: 100%; float: left; overflow: scroll" xmlns:th="http://www.w3.org/1999/xhtml">
-    <!--美食-->
+<div  id="collectionDetails" class="ContainerCss bageColor" xmlns:th="http://www.w3.org/1999/xhtml">
     <div th:each="collection : ${collectionList}" style="width: 48%; margin: 10px 1%; height: 250px; background-color: beige" >
         <div style="width: 40%; height: 100%; margin-top: 30px; text-align: center;">
             <img th:if="${collection.collectionType == 1}" src="/static/image/house001.jpg" style="width: 85%" class="rounded" alt="图片">
@@ -23,4 +22,10 @@
         </div>
 
     </div>
+    <div th:if="${#lists.isEmpty(collectionList)}">
+        <div th:insert="/common/tips::tips"></div>
+    </div>
 </div>
+<script type="text/javascript">
+    $("#infoText").text("您暂时还没有收藏信息！")
+</script>

@@ -1,6 +1,7 @@
 <div id="houseManage" style="width: 100%; height: 900px; padding: 80px 30px" xmlns:th="http://www.w3.org/1999/xhtml">
     <div style="width: 100%; height: 30px; text-align: center; line-height: 25px; font-size: 40px; font-weight: bolder">管理House</div>
     <form id="formDome" style="margin-top: 20px" class="needs-validation" novalidate onsubmit="return false">
+        <input type="hidden" class="form-control" id="roomId" name="roomId" th:value="${houseRoom.roomId}" required>
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label for="roomNumber">房间号</label>
@@ -29,9 +30,13 @@
                 <label for="roomDirection">朝向</label>
                 <select class="custom-select" id="roomDirection" name="roomDirection">
                     <option value="1" th:if="${houseRoom.roomDirection == 1}" th:selected="selected">东</option>
+                    <option value="1" th:if="${houseRoom.roomDirection != 1}">东</option>
                     <option value="2" th:if="${houseRoom.roomDirection == 2}" th:selected="selected">南</option>
+                    <option value="2" th:if="${houseRoom.roomDirection != 2}">南</option>
                     <option value="3" th:if="${houseRoom.roomDirection == 3}" th:selected="selected">西</option>
+                    <option value="3" th:if="${houseRoom.roomDirection != 3}">西</option>
                     <option value="4" th:if="${houseRoom.roomDirection == 4}" th:selected="selected">北</option>
+                    <option value="4" th:if="${houseRoom.roomDirection != 4}">北</option>
                 </select>
                 <div class="valid-feedback">
                     格式正确！
@@ -43,13 +48,21 @@
                 <label for="roomLocation">单元</label>
                 <select class="custom-select" id="roomLocation" name="roomLocation">
                     <option value="1" th:if="${houseRoom.roomLocation == 1}" th:selected="selected">一单元</option>
-                    <option value="2" th:if="${houseRoom.roomLocation == 2}" th:selected="selected">三单元</option>
-                    <option value="3" th:if="${houseRoom.roomLocation == 3}" th:selected="selected">四单元</option>
-                    <option value="4" th:if="${houseRoom.roomLocation == 4}" th:selected="selected">五单元</option>
-                    <option value="5" th:if="${houseRoom.roomLocation == 5}" th:selected="selected">六单元</option>
-                    <option value="6" th:if="${houseRoom.roomLocation == 6}" th:selected="selected">七单元</option>
-                    <option value="7" th:if="${houseRoom.roomLocation == 7}" th:selected="selected">八单元</option>
+                    <option value="1" th:if="${houseRoom.roomLocation != 1}">一单元</option>
+                    <option value="2" th:if="${houseRoom.roomLocation == 2}" th:selected="selected">二单元</option>
+                    <option value="2" th:if="${houseRoom.roomLocation != 2}">二单元</option>
+                    <option value="3" th:if="${houseRoom.roomLocation == 3}" th:selected="selected">三单元</option>
+                    <option value="3" th:if="${houseRoom.roomLocation != 3}">三单元</option>
+                    <option value="4" th:if="${houseRoom.roomLocation == 4}" th:selected="selected">四单元</option>
+                    <option value="4" th:if="${houseRoom.roomLocation != 4}">四单元</option>
+                    <option value="5" th:if="${houseRoom.roomLocation == 5}" th:selected="selected">五单元</option>
+                    <option value="5" th:if="${houseRoom.roomLocation != 5}">五单元</option>
+                    <option value="6" th:if="${houseRoom.roomLocation == 6}" th:selected="selected">六单元</option>
+                    <option value="6" th:if="${houseRoom.roomLocation != 6}">六单元</option>
+                    <option value="7" th:if="${houseRoom.roomLocation == 7}" th:selected="selected">七单元</option>
+                    <option value="7" th:if="${houseRoom.roomLocation != 7}">七单元</option>
                     <option value="8" th:if="${houseRoom.roomLocation == 8}" th:selected="selected">八单元</option>
+                    <option value="8" th:if="${houseRoom.roomLocation != 8}">八单元</option>
                 </select>
                 <div class="valid-feedback">
                     格式正确！
@@ -59,12 +72,42 @@
                 <label for="roomType">房间类型</label>
                 <select class="custom-select" id="roomType" name="roomType">
                     <option value="1" th:if="${houseRoom.roomType == 1}" th:selected="selected">普通房型</option>
+                    <option value="1" th:if="${houseRoom.roomType != 1}">普通房型</option>
                     <option value="2" th:if="${houseRoom.roomType == 2}" th:selected="selected">豪华精装</option>
+                    <option value="2" th:if="${houseRoom.roomType != 2}">豪华精装</option>
                     <option value="3" th:if="${houseRoom.roomType == 3}" th:selected="selected">家庭套房</option>
+                    <option value="3" th:if="${houseRoom.roomType != 3}">家庭套房</option>
                 </select>
                 <div class="valid-feedback">
                     格式正确！
                 </div>
+            </div>
+        </div>
+        <div class="form-row" th:if="${houseRoom.user == null}">
+            <div class="col-md-6 mb-3">
+                <label for="userId">分配房间</label>
+                <select class="custom-select" id="userId" name="userId">
+                    <option selected disabled style="display: none" value="">请选择住户</option>
+                    <option th:each="user : ${houseRoom.userList}" th:value="${user.userId}"><span th:text="${user.userName}"/></option>
+                </select>
+                <div class="valid-feedback">
+                    格式正确！
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row" th:if="${houseRoom.user != null}">
+            <div class="col-md-6 mb-3">
+                <label for="userName">租住人</label>
+                <input type="text" class="form-control" id="userName" th:value="${houseRoom.user.userName}" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="phone">联系电话</label>
+                <input type="text" class="form-control" id="phone" th:value="${houseRoom.user.phone}" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="leaseDate">出租时间</label>
+                <input type="text" class="form-control" id="leaseDate" th:value="${#dates.format(houseRoom.leaseDate,'yyyy-MM-dd')}" disabled>
             </div>
         </div>
 

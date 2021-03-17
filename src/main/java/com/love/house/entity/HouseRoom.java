@@ -1,9 +1,11 @@
 package com.love.house.entity;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * house_room
@@ -30,6 +32,11 @@ public class HouseRoom implements Serializable {
      * 房间图片
      */
     private String roomImage;
+
+    /**
+     * 文件
+     */
+    private MultipartFile file;
 
     /**
      * 房间价格/月
@@ -101,7 +108,24 @@ public class HouseRoom implements Serializable {
      */
     private HouseApplyUser houseApplyUser;
 
+    /**
+     * 居住人
+     */
+    private User user;
+
+    private String userId;
+
+    private List<User> userList;
+
     private static final long serialVersionUID = 1L;
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
     public Integer getRoomId() {
         return roomId;
@@ -245,5 +269,29 @@ public class HouseRoom implements Serializable {
 
     public void setHouseApplyUser(HouseApplyUser houseApplyUser) {
         this.houseApplyUser = houseApplyUser;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.love.house.mapper.mysqlMapper.HouseRoomUserMapper">
+  <resultMap id="BaseResultMap" type="com.love.house.entity.HouseRoomUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="roomId" jdbcType="INTEGER" property="roomId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, roomId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from house_room_user
+    where userId = #{userId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house_room_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseRoomUser" useGeneratedKeys="true">
+    insert into house_room_user (userId, roomId)
+    values (#{userId,jdbcType=VARCHAR}, #{roomId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.love.house.entity.HouseRoomUser" useGeneratedKeys="true">
+    insert into house_room_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="roomId != null">
+        roomId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        #{roomId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.love.house.entity.HouseRoomUser">
+    update house_room_user
+    <set>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        roomId = #{roomId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.love.house.entity.HouseRoomUser">
+    update house_room_user
+    set userId = #{userId,jdbcType=VARCHAR},
+      roomId = #{roomId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

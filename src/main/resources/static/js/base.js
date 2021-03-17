@@ -77,3 +77,11 @@ function rentingIndex() {
     function error() {}
     $.baseAjax("/renting/index","post","",success,error)
 }
+
+function login() {
+    function success(o) {
+        $("#content").html(o);
+    }
+    function error() {}
+    $.baseAjax("/mine/index","post","",success,error)
+}

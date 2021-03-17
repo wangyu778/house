@@ -1,6 +1,4 @@
-<div th:fragment="tips" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="tips">
-        <span id="infoText" th:if="${ServerResponse == null}">对不起，找不到您要检索的信息！</span>
-        <span id="infoText"  th:if="${ServerResponse != null}" th:text="${ServerResponse.msg}"/>
-    </div>
+<div th:fragment="tips" class="tips" xmlns:th="http://www.w3.org/1999/xhtml">
+    <span id="infoText" th:if="${ServerResponse == null}">对不起，找不到您要检索的信息！</span>
+    <span id="infoText"  th:if="${ServerResponse != null}" th:text="${ServerResponse.msg}"/>
 </div>

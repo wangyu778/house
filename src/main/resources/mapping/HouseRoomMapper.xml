@@ -242,4 +242,13 @@
         where userId = #{userId}
     )
   </select>
+    <select id="getUser" resultType="com.love.house.entity.User">
+      select *
+      from user
+      where userId = (
+        select userId
+        from house_room_user
+        where roomId = #{roomId}
+      )
+    </select>
 </mapper>

@@ -54,14 +54,10 @@ public class MineController {
 
     @ApiOperation("保存新建用户")
     @ApiImplicitParam(name = "user", value = "用户实体", required = true)
-    @PutMapping(value = "/saveUser")
-    public ModelAndView saveUser(User user){
-        ServerResponse<ResponseCode> responseCodeServerResponse = mineService.saveUser(user);
-        if(responseCodeServerResponse.getStatus() == ResponseCode.SUCCESS.getCode()){
-            return new ModelAndView("index").addObject("ServerResponse",responseCodeServerResponse);
-        }else {
-            return new ModelAndView("mine/user-register").addObject("ServerResponse",responseCodeServerResponse);
-        }
+    @PostMapping(value = "/saveUser")
+    @ResponseBody
+    public ServerResponse<String> saveUser(@RequestBody User user){
+        return mineService.saveUser(user);
     }
 
     @ApiOperation("返回租房详情界面")

@@ -38,7 +38,7 @@ public class MineServiceImpl implements MineService {
     private HouseApplyUserMapper applyUserMapper;
 
     @Override
-    public ServerResponse<ResponseCode> saveUser(User user) {
+    public ServerResponse<String> saveUser(User user) {
         try {
             Md5.stringToMd51(user.getPassword());
             user.setPassWord(Md5.stringToMd51(user.getPassword()));
@@ -55,7 +55,10 @@ public class MineServiceImpl implements MineService {
     @Override
     public HouseRoom getRentalDetails() {
         HouseRoom houseRoom = houseRoomMapper.selectByUserId(baseService.getUserId());
-        houseRoom.setHouseApplyUser(applyUserMapper.selectByPrimaryKey(baseService.getUserId()));
+        HouseApplyUser houseApplyUser = applyUserMapper.selectByPrimaryKey(baseService.getUserId());
+        if(ObjectUtils.isNotEmpty(houseApplyUser)){
+            houseRoom.setHouseApplyUser(houseApplyUser);
+        }
         return houseRoom;
     }
 

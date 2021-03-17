@@ -75,6 +75,10 @@
     </where>
     order by m.id desc
   </select>
+  <select id="getListUser" resultType="com.love.house.entity.User">
+    select *
+    from user
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
     delete from user
     where id = #{id,jdbcType=TINYINT}
@@ -89,7 +93,7 @@
       <if test="userId != null">
         userId,
       </if>
-      <if test="username != null">
+      <if test="userName != null">
         userName,
       </if>
       <if test="passWord != null">
@@ -121,8 +125,8 @@
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
       <if test="passWord != null">
         #{passWord,jdbcType=VARCHAR},

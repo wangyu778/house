@@ -40,6 +40,8 @@ public class ManageServiceImpl implements ManageService {
     private HouseApplyUserMapper applyUserMapper;
     @Resource
     private UserMapping userMapper;
+    @Resource
+    private HouseRoomUserMapper roomUserMapper;
 
     @Override
     public ServerResponse<String> newHouse(HouseRoom houseRoom) {
@@ -62,7 +64,10 @@ public class ManageServiceImpl implements ManageService {
 
     @Override
     public HouseRoom getHouse(Integer roomId) {
-        return houseRoomMapper.selectByPrimaryKey(roomId);
+        HouseRoom houseRoom = houseRoomMapper.selectByPrimaryKey(roomId);
+        houseRoom.setUserList(userMapper.getListUser());
+        houseRoom.setUser(houseRoomMapper.getUser(houseRoom.getRoomId()));
+        return houseRoom;
     }
 
     @Override
@@ -80,9 +85,17 @@ public class ManageServiceImpl implements ManageService {
         try {
             houseRoom.setUpdateUser(baseService.getUserId());
             houseRoom.setUpdateDate(new Date());
+            if(ObjectUtils.isNotEmpty(houseRoom.getUserId())){
+                houseRoom.setLeaseDate(new Date());
+                HouseRoomUser houseRoomUser = new HouseRoomUser();
+                houseRoomUser.setRoomId(houseRoom.getRoomId());
+                houseRoomUser.setUserId(houseRoom.getUserId());
+                roomUserMapper.insertSelective(houseRoomUser);
+            }
             houseRoomMapper.updateByPrimaryKeySelective(houseRoom);
             return ServerResponse.createBySuccessMessage("修改成功");
         } catch (Exception e) {
+            LOG.error("修改失败",e);
             return ServerResponse.createByErrorMessage("修改失败");
         }
     }

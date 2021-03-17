@@ -68,6 +68,15 @@
             </div>
         </div>
 
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label for="file">房屋图片</label>
+                    <input type="file" class="form-control-file" id="file" name="file">
+                </div>
+            </div>
+        </div>
+
         <button class="btn btn-primary" type="submit" style="float: right">提交</button>
         <button class="btn btn-info" type="button" style="float: right; margin-right: 15px" onclick="manageHouseIndex()">返回</button>
     </form>
@@ -82,22 +91,25 @@
                     event.stopPropagation();
                 }else {
                     $(':submit').on('click',function(){
+                        // var files = $("")
+
                         let fromJson = $('#formDome').serializeArray();
                         let dataJson = {};
                         $.each(fromJson, function(index, field) {
                             dataJson[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
                         });
-                        $.ajax({
-                            url:"/manage/newHouse",
-                            type:"POST",
-                            data: JSON.stringify(dataJson),
-                            dataType: "json",
-                            contentType:"application/json",
-                            success:function(o){
-                                toastInfo(o.status,o.msg);
-                                manageHouseIndex();
-                            }
-                        });
+                        debugger
+                        // $.ajax({
+                        //     url:"/manage/newHouse",
+                        //     type:"POST",
+                        //     data: JSON.stringify(dataJson),
+                        //     dataType: "json",
+                        //     contentType:"application/json",
+                        //     success:function(o){
+                        //         toastInfo(o.status,o.msg);
+                        //         manageHouseIndex();
+                        //     }
+                        // });
                     });
                 }
                 form.classList.add('was-validated');

@@ -1,6 +1,7 @@
 package com.love.house.mapper.mysqlMapper;
 
 import com.love.house.entity.HouseRoom;
+import com.love.house.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,5 +32,7 @@ public interface HouseRoomMapper {
      * @return list
      */
     List<HouseRoom> getHouseList(@Param(value = "filterMap") Map<String, Object> filterMap);
+
+    User getUser(Integer roomId);
 
 }

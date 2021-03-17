@@ -23,7 +23,7 @@ public interface MineService {
      * @param user user
      * @return 保存结果
      */
-    public ServerResponse<ResponseCode> saveUser(User user);
+    public ServerResponse<String> saveUser(User user);
 
     /**
      * 获取用户住房信息
