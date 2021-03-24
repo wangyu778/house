@@ -192,21 +192,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.love.house.entity.HouseRoom">
     update house_room
-    set roomNumber = #{roomNumber,jdbcType=INTEGER},
-      roomImage = #{roomImage,jdbcType=VARCHAR},
-      roomPrice = #{roomPrice,jdbcType=INTEGER},
-      roomDirection = #{roomDirection,jdbcType=INTEGER},
-      roomLocation = #{roomLocation,jdbcType=INTEGER},
-      roomType = #{roomType,jdbcType=INTEGER},
-      isLease = #{isLease,jdbcType=INTEGER},
-      isRepair = #{isRepair,jdbcType=INTEGER},
-      leaseDate = #{leaseDate,jdbcType=TIMESTAMP},
-      repairDate = #{repairDate,jdbcType=TIMESTAMP},
-      `createUser` = #{createUser,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      updateUser = #{updateUser,jdbcType=VARCHAR},
-      updateDate = #{updateDate,jdbcType=TIMESTAMP}
-    where roomId = #{roomId,jdbcType=INTEGER}
+    set roomImage = #{roomImage,jdbcType=VARCHAR}
+    where roomNumber = #{roomNumber,jdbcType=INTEGER}
   </update>
 
   <select id="getHouseList" resultType="com.love.house.entity.HouseRoom">

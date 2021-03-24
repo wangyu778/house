@@ -6,6 +6,7 @@ import com.love.house.entity.HouseFood;
 import com.love.house.entity.HouseRepair;
 import com.love.house.entity.HouseRoom;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -106,4 +107,12 @@ public interface ManageService {
      * @return 结果
      */
     public ServerResponse<String> updateApply(Integer id);
+
+    /**
+     * 保存房屋图片
+     * @param headImg 房屋图片
+     * @param roomNumber 房间号
+     * @return 结果
+     */
+    public ServerResponse<String> saveRoomImg(MultipartFile headImg, String roomNumber);
 }

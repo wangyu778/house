@@ -9,8 +9,15 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +53,11 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public ServerResponse<String> newHouse(HouseRoom houseRoom) {
         try {
+            Map<String, Object> filterMap = new HashMap<>();
+            filterMap.put("roomNumber",houseRoom.getRoomNumber());
+            if(houseRoomMapper.getHouseList(filterMap).size() > 0){
+                return ServerResponse.createByErrorMessage("已有该房间号,请输入新的房间号！");
+            }
             houseRoom.setCreateDate(new Date());
             houseRoom.setCreateUser(baseService.getUserId());
             houseRoom.setIsLease(0);
@@ -208,5 +220,28 @@ public class ManageServiceImpl implements ManageService {
         }
     }
 
+    @Override
+    public ServerResponse<String> saveRoomImg(MultipartFile headImg, String roomNumber) {
+        String imgPath = null;
+        try {
+            imgPath = ResourceUtils.getURL("classpath:").getPath()+"/static/image/roomImg/";
+            File imgFile = new File(imgPath+roomNumber+".jpg");
+            headImg.transferTo(imgFile);
+            HouseRoom houseRoom = new HouseRoom();
+            houseRoom.setRoomNumber(Integer.parseInt(roomNumber));
+            houseRoom.setRoomImage(imgFile.getPath());
+            houseRoomMapper.updateByPrimaryKey(houseRoom);
+            return ServerResponse.createBySuccessMessage("上传图片成功");
+        } catch (Exception e) {
+            LOG.error("上传图片失败",e);
+            return ServerResponse.createByErrorMessage("上传图片失败");
+        }
+    }
+
+    public static void main(String[] args) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String format = sdf.format(new Date());
+        System.out.println(sdf.parse(format).getTime());
+    }
 
 }

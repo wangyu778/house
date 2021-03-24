@@ -10,10 +10,13 @@ import com.love.house.service.renting.RentingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.io.*;
 
 /**
  * @Author: wy
@@ -161,4 +164,12 @@ public class ManageController {
     public ServerResponse<String> updateApply(@RequestParam Integer id){
         return manageService.updateApply(id);
     }
+
+    @ApiOperation("上传头像")
+    @PostMapping(value = "/importHeadImg")
+    @ResponseBody
+    public ServerResponse<String> importHeadImg(@RequestParam("headImg") MultipartFile headImg, @RequestParam("roomNumber") String roomNumber) throws FileNotFoundException {
+        return manageService.saveRoomImg(headImg, roomNumber);
+    }
+
 }

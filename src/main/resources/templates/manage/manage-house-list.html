@@ -1,7 +1,7 @@
 <div class="house" th:each="houseList : ${properties.list}"  xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="row">
         <div class="col-xl-3 img">
-            <img src="/static/image/house001.jpg" class="rounded" alt="图片">
+            <img src="/static/image/house001.jpg" onerror="this.src='/static/image/imgErrorLoading.jpg'" class="rounded" alt="图片">
         </div>
         <div class="col-xl-9 row" style="height: 100%">
             <div class="col-xl-8 houseInfo">

@@ -127,6 +127,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/manage/applyHouse",
             "/manage/updateApply",
             "/manage/getApplyHouse",
+            "/manage/importHeadImg",
 
 
     };
