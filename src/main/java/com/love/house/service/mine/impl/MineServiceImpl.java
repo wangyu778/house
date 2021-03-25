@@ -36,6 +36,8 @@ public class MineServiceImpl implements MineService {
     private HouseRepairMapper repairMapper;
     @Resource
     private HouseApplyUserMapper applyUserMapper;
+    @Resource
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public ServerResponse<String> saveUser(User user) {
@@ -45,6 +47,10 @@ public class MineServiceImpl implements MineService {
             user.setCreateDate(new Date());
             user.setIsLock(0);
             userMapping.insertSelective(user);
+            UserRole userRole = new UserRole();
+            userRole.setUserId(user.getUserId());
+            userRole.setRoleId(2L);
+            userRoleMapper.insert(userRole);
             return ServerResponse.createBySuccessMessage("新建用户成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,9 +61,11 @@ public class MineServiceImpl implements MineService {
     @Override
     public HouseRoom getRentalDetails() {
         HouseRoom houseRoom = houseRoomMapper.selectByUserId(baseService.getUserId());
-        HouseApplyUser houseApplyUser = applyUserMapper.selectByPrimaryKey(baseService.getUserId());
-        if(ObjectUtils.isNotEmpty(houseApplyUser)){
-            houseRoom.setHouseApplyUser(houseApplyUser);
+        if(ObjectUtils.isNotEmpty(houseRoom)){
+            HouseApplyUser houseApplyUser = applyUserMapper.selectByPrimaryKey(baseService.getUserId());
+            if(ObjectUtils.isNotEmpty(houseApplyUser)){
+                houseRoom.setHouseApplyUser(houseApplyUser);
+            }
         }
         return houseRoom;
     }

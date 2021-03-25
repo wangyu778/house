@@ -5,6 +5,7 @@ import com.love.house.entity.*;
 import com.love.house.mapper.mysqlMapper.*;
 import com.love.house.service.baseService.BaseService;
 import com.love.house.service.manage.ManageService;
+import io.swagger.models.auth.In;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -136,7 +137,7 @@ public class ManageServiceImpl implements ManageService {
                 foodDiscount.setFoodName(houseFood.getFoodName());
                 discountMapper.insertSelective(foodDiscount);
             }
-            return ServerResponse.createBySuccessMessage("新建商家成功");
+            return ServerResponse.createBySuccess(houseFood.getId().toString());
         } catch (Exception e) {
             LOG.error("新建商家失败",e);
             return ServerResponse.createByErrorMessage("新建商家失败");
@@ -229,7 +230,7 @@ public class ManageServiceImpl implements ManageService {
             headImg.transferTo(imgFile);
             HouseRoom houseRoom = new HouseRoom();
             houseRoom.setRoomNumber(Integer.parseInt(roomNumber));
-            houseRoom.setRoomImage(imgFile.getPath());
+            houseRoom.setRoomImage("/static/image/roomImg/"+roomNumber+".jpg");
             houseRoomMapper.updateByPrimaryKey(houseRoom);
             return ServerResponse.createBySuccessMessage("上传图片成功");
         } catch (Exception e) {
@@ -238,10 +239,22 @@ public class ManageServiceImpl implements ManageService {
         }
     }
 
-    public static void main(String[] args) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String format = sdf.format(new Date());
-        System.out.println(sdf.parse(format).getTime());
+    @Override
+    public ServerResponse<String> saveFoodImg(MultipartFile headImg, String foodId) {
+        String imgPath = null;
+        try {
+            imgPath = ResourceUtils.getURL("classpath:").getPath()+"/static/image/foodImg/";
+            File imgFile = new File(imgPath+foodId+".jpg");
+            headImg.transferTo(imgFile);
+            HouseFood houseFood = new HouseFood();
+            houseFood.setId(Integer.parseInt(foodId));
+            houseFood.setBusinessImg("/static/image/foodImg/"+foodId+".jpg");
+            foodMapper.updateByPrimaryKeySelective(houseFood);
+            return ServerResponse.createBySuccessMessage("上传图片成功");
+        } catch (Exception e) {
+            LOG.error("上传图片失败",e);
+            return ServerResponse.createByErrorMessage("上传图片失败");
+        }
     }
 
 }

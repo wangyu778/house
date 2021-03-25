@@ -115,4 +115,13 @@ public interface ManageService {
      * @return 结果
      */
     public ServerResponse<String> saveRoomImg(MultipartFile headImg, String roomNumber);
+
+    /**
+     * 保存商家图片
+     * @param headImg 商家图片
+     * @param foodId 商家Id
+     * @return 结果
+     */
+    public ServerResponse<String> saveFoodImg(MultipartFile headImg, String foodId);
+
 }

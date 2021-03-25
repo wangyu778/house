@@ -31,9 +31,6 @@ public class DeliciousFoodController {
     @ApiOperation("返回-周边美食-主界面")
     @PostMapping(value = "/index")
     public ModelAndView index(){
-        if(null == baseService.getUserId()){
-            return new ModelAndView("login");
-        }
         return new ModelAndView("deliciousFood/index");
     }
 
@@ -47,6 +44,9 @@ public class DeliciousFoodController {
     @PostMapping(value = "/collectionFood")
     @ResponseBody
     public ServerResponse<String> collectionFood(@RequestParam("foodId") int foodId){
+        if(null == baseService.getUserId()){
+            return ServerResponse.createByErrorMessage("请先登陆");
+        }
         return deliciousFoodService.collectionFood(foodId);
     }
 }

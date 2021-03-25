@@ -1,7 +1,7 @@
 <div class="house" th:each="houseList : ${properties.list}"  xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="row">
         <div class="col-xl-3 img">
-            <img src="/static/image/house001.jpg" class="rounded" alt="图片">
+            <img th:src="${houseList.roomImage}" class="rounded" alt="图片">
         </div>
         <div class="col-xl-9 row" style="height: 100%">
             <div class="col-xl-8 houseInfo">
@@ -41,8 +41,10 @@
             </div>
         </div>
     </div>
+    <div th:if="${#lists.isEmpty(properties.list)}" th:insert="/common/tips::tips"></div>
 </div>
 <script>
+    $("#infoText").text("房间暂时为空！");
     function applyHouse(roomId) {
         function success(o) {
             toastInfo(o.status,o.msg);

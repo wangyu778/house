@@ -30,9 +30,6 @@ public class RentingController {
     @ApiOperation("返回-租房-主界面")
     @PostMapping(value = "/index")
     public ModelAndView index(){
-        if(null == baseService.getUserId()){
-            return new ModelAndView("login");
-        }
         return new ModelAndView("renting/index");
     }
 
@@ -43,10 +40,13 @@ public class RentingController {
     }
 
 
-    @ApiOperation("收藏美食")
+    @ApiOperation("收藏房间")
     @PostMapping(value = "/collectionHouse")
     @ResponseBody
     public ServerResponse<String> collectionHouse(@RequestParam("roomId") int roomId){
+        if(null == baseService.getUserId()){
+            return ServerResponse.createByErrorMessage("请先登陆");
+        }
         return rentingService.collectionHouse(roomId);
     }
 }

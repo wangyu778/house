@@ -81,8 +81,12 @@ public class RentingServiceImpl implements RentingService {
         for (HouseRoom houseRoom : houseList) {
             filterMap.put("collectionId", houseRoom.getRoomId());
             filterMap.put("userId", baseService.getUserId());
-            if(ObjectUtils.isNotEmpty(houseCollectionMapper.getCollection(filterMap))){
-                houseRoom.setIsCollection(1);
+            if(null == baseService.getUserId()){
+                houseRoom.setIsCollection(0);
+            }else {
+                if(ObjectUtils.isNotEmpty(houseCollectionMapper.getCollection(filterMap))){
+                    houseRoom.setIsCollection(1);
+                }
             }
         }
         properties.setList(houseList);

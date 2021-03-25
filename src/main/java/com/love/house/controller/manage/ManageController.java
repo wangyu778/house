@@ -4,6 +4,7 @@ import com.love.house.common.ServerResponse;
 import com.love.house.entity.HouseFood;
 import com.love.house.entity.HouseRoom;
 import com.love.house.model.PageProperties;
+import com.love.house.service.baseService.BaseService;
 import com.love.house.service.deliciousFood.DeliciousFoodService;
 import com.love.house.service.manage.ManageService;
 import com.love.house.service.renting.RentingService;
@@ -34,6 +35,8 @@ public class ManageController {
     private ManageService manageService;
     @Resource
     private DeliciousFoodService foodService;
+    @Resource
+    private BaseService baseService;
 
     @ApiOperation("返回-公寓管理-主界面")
     @PostMapping(value = "/houseManageIndex")
@@ -149,6 +152,9 @@ public class ManageController {
     @PostMapping(value = "/applyHouse")
     @ResponseBody
     public ServerResponse<String> applyHouse(@RequestParam Integer roomId){
+        if(null == baseService.getUserId()){
+            return ServerResponse.createByErrorMessage("请先登陆");
+        }
         return manageService.applyHouse(roomId);
     }
 
@@ -170,6 +176,13 @@ public class ManageController {
     @ResponseBody
     public ServerResponse<String> importHeadImg(@RequestParam("headImg") MultipartFile headImg, @RequestParam("roomNumber") String roomNumber) throws FileNotFoundException {
         return manageService.saveRoomImg(headImg, roomNumber);
+    }
+
+    @ApiOperation("上传头像")
+    @PostMapping(value = "/importFoodHeadImg")
+    @ResponseBody
+    public ServerResponse<String> importFoodHeadImg(@RequestParam("headImg") MultipartFile headImg, @RequestParam("foodId") String foodId) throws FileNotFoundException {
+        return manageService.saveFoodImg(headImg, foodId);
     }
 
 }

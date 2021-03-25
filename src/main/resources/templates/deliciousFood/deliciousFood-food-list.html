@@ -37,3 +37,7 @@
         </div>
     </div>
 </div>
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:if="${#lists.isEmpty(properties.list)}" th:insert="/common/tips::tips"></div>
+<script>
+    $("#infoText").text("美食推荐暂时为空！");
+</script>

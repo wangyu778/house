@@ -105,6 +105,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             //renting
             "/renting/index",
             "/renting/getHouseList",
+            "/renting/collectionHouse",
 
             //manage
             "/manage/houseManageIndex",
@@ -128,6 +129,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/manage/updateApply",
             "/manage/getApplyHouse",
             "/manage/importHeadImg",
+            "manage/importFoodHeadImg",
 
 
     };

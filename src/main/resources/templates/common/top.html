@@ -8,8 +8,8 @@
         </button>
         <div class="collapse navbar-collapse" style="display: flex !important" id="navbarSupportedContent" >
             <ul class="navbar-nav mr-auto">
-                <li  class="nav-item" id="mine" data-to="/mine/index" data-id="2" data-title="我的">
-                    <a class="nav-link" href="#">我的</a>
+                <li  class="nav-item" id="mine" th:if="${@resourceService.isRl('/mine')}"  data-to="/mine/index" data-id="2" data-title="我的">
+                    <a class="nav-link"  href="#">我的</a>
                 </li>
                 <li class="nav-item" id="renting" data-to="/renting/index" data-id="3" data-title="租房">
                     <a class="nav-link" href="#">租房</a>
@@ -17,7 +17,7 @@
                 <li class="nav-item" id="deliciousFood" data-to="/deliciousFood/index" data-id="4" data-title="周边美食">
                     <a class="nav-link" href="#">周边美食</a>
                 </li>
-                <li class="nav-item" id="forum" data-to="/forum/index" data-id="5" data-title="论坛">
+                <li class="nav-item" th:if="${@resourceService.isRl('/forum')}" id="forum" data-to="/forum/index" data-id="5" data-title="论坛">
                     <a class="nav-link" href="#">聊天室</a>
                 </li>
                 <li class="dropdown" th:if="${@resourceService.isRl('/houseManage')}">

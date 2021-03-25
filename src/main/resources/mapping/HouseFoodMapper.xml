@@ -111,6 +111,9 @@
       <if test="businessLocation != null">
         businessLocation = #{businessLocation,jdbcType=VARCHAR},
       </if>
+      <if test="businessImg != null">
+        businessImg = #{businessImg,jdbcType=VARCHAR},
+      </if>
       <if test="businessDistance != null">
         businessDistance = #{businessDistance,jdbcType=INTEGER},
       </if>
